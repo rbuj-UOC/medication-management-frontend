@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+@use 'sass:color' as color;
+
+mat-card {
+  margin: 16px 0;
+  @include mat.card-overrides((elevated-container-color: color.adjust(#90fc9e, $lightness: 12%),
+      elevated-container-elevation: var(--mat-sys-level0),
+      elevated-container-shape: var(--mat-sys-shape-rectangle)));
+}
+
+mat-card-content {
+  vertical-align: baseline;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+  }
+}

@@ -1,0 +1,70 @@
+@use 'sass:color' as color;
+
+h1 {
+  margin-bottom: 16px;
+}
+
+h2 {
+  margin: 16px 0 8px 0;
+}
+
+p {
+  margin: 16px 0;
+}
+
+ul {
+  list-style-type: circle;
+}
+
+li {
+  display: list-item;
+  padding-left: 1rem;
+  list-style-position: inside;
+}
+
+blockquote {
+  margin: 16px 24px;
+  padding: 16px;
+  border-left: 4px solid color.adjust(#d2e1dd, $lightness: -40%);
+  background-color: color.adjust(#d2e1dd, $lightness: 11%);
+  max-width: 600px;
+
+  p {
+    margin: 0;
+  }
+
+  footer {
+    text-align: right;
+    font-style: italic;
+    color: color.adjust(#d2e1dd, $lightness: -60%);
+    margin-top: 8px;
+  }
+
+  @media screen and (min-width: 600px) {
+    margin: 16px auto;
+  }
+}
+
+mat-card-title {
+  font-size: 1.2rem;
+  color: color.adjust(#d2e1dd, $lightness: -50%);
+  ;
+}
+
+.testimonial-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  padding: 0 16px;
+  justify-items: center;
+  align-items: start;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.testimonial-card .card-body {
+  padding: 16px;
+}

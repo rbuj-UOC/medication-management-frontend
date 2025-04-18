@@ -1,0 +1,13 @@
+<div class="main-container">
+  <h1>Contacts</h1>
+  <div class="contact-line">
+    <button mat-flat-button color="primary" (click)="addContact()" class="add-button">
+      ADD
+    </button>
+  </div>
+  <div *ngIf="contacts.length > 0">
+    <app-contact-card [contact]="contact" (removeUserContactRequest)="removeUserContact($event)"
+      *ngFor="let contact of contacts"></app-contact-card>
+  </div>
+  <div *ngIf="contacts.length === 0">No contacts</div>
+</div>

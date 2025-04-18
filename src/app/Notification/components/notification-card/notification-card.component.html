@@ -1,0 +1,11 @@
+<mat-card class="notification-card" appearance="outlined">
+  <mat-card-content>
+    <div class="title">
+      <h2>{{ notification.title }}</h2>
+      <button mat-icon-button color="primary" (click)="removeNotification(notification.id)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    {{ notification.body }}
+  </mat-card-content>
+</mat-card>

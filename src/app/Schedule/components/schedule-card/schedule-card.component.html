@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-content>
+    <div class="details">
+      {{ schedule.start_date | date:'shortTime'}}
+    </div>
+    <div class="actions">
+      <button mat-icon-button (click)="editSchedule()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deleteSchedule()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,8 @@
+<div class="main-container">
+  <h1>User List</h1>
+  <div *ngIf="users.length > 0">
+    <app-user-card [user]="user" (deleteUserRequest)="deleteUser($event)" (editUserRequest)="editUser($event)"
+      *ngFor="let user of users"></app-user-card>
+  </div>
+  <div *ngIf="users.length === 0">No contacts</div>
+</div>

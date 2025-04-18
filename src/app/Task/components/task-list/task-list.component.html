@@ -1,0 +1,5 @@
+<div style="margin-left: auto; margin-right: auto">
+  <p id="TaskListFeedback"></p>
+</div>
+
+<app-task-table [tasks]="(selectTasks$ | async)" (deleteTaskRequest)="deleteTask($event)">

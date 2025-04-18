@@ -1,0 +1,21 @@
+<div style="margin-left: auto; margin-right: auto">
+  <p id="scheduleEditFeedback"></p>
+</div>
+<div class="main-container">
+  <h1>Schedule Form</h1>
+  <form *ngIf="scheduleForm" [formGroup]="scheduleForm" (ngSubmit)="saveSchedule()">
+    <div class="schedule-line">
+      <mat-form-field>
+        <mat-label>Pick a time</mat-label>
+        <input matInput [formControl]="start_date" [matTimepicker]="picker">
+        <mat-timepicker-toggle matIconSuffix [for]="picker" />
+        <mat-timepicker interval="5min" #picker />
+      </mat-form-field>
+    </div>
+
+    <div class="schedule-line">
+      <button mat-flat-button color="primary" type="submit">SAVE</button>
+      <button mat-flat-button color="primary" type="button" (click)="cancelSchedule()">CANCEL</button>
+    </div>
+  </form>
+</div>

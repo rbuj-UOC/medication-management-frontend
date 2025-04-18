@@ -1,0 +1,43 @@
+#userListFeedback {
+  opacity: 0;
+  display: none;
+  text-align: center;
+  padding: 16px;
+  z-index: 1;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#userListFeedback.fade-in {
+  display: block;
+  animation: fade-in 0.7s ease-in forwards;
+}
+
+#userListFeedback.fade-out {
+  animation: fade-out 0.7s ease-out forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+
+  100% {
+    opacity: 1;
+    display: block;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}

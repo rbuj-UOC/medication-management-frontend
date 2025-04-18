@@ -1,0 +1,7 @@
+<div style="margin-left: auto; margin-right: auto">
+  <p id="contactListFeedback"></p>
+</div>
+<app-contact-table [contacts]="contacts$ | async" (removeUserContactRequest)="removeUserContact($event)"
+  *ngIf="(isMobile$ | async) === false"></app-contact-table>
+<app-contact-grid [contacts]="contacts$ | async" (removeUserContactRequest)="removeUserContact($event)"
+  *ngIf="(isMobile$ | async) === true"></app-contact-grid>

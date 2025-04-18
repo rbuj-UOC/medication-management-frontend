@@ -1,0 +1,71 @@
+#loginFeedback {
+  opacity: 0;
+  display: none;
+  text-align: center;
+  padding: 16px;
+  z-index: 1;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loginFeedback.fade-in {
+  display: block;
+  animation: fade-in 0.7s ease-in forwards;
+}
+
+#loginFeedback.fade-out {
+  animation: fade-out 0.7s ease-out forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+
+  100% {
+    opacity: 1;
+    display: block;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.error {
+  color: var(--mat-sys-error);
+}
+
+.login-container {
+  margin: 8px 16px 0 16px;
+
+  @media screen and (min-width: 600px) {
+    margin: 16px auto 0 auto;
+    width: 400px;
+  }
+
+}
+
+.login-line {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+}
+
+button {
+  margin: 8px 0;
+}
+
+h1 {
+  margin-bottom: 16px;
+}

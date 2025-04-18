@@ -1,0 +1,31 @@
+@use '@angular/material' as mat;
+
+mat-card {
+  margin: 16px;
+
+  @media screen and (min-width: 600px) {
+    max-width: 600px;
+  }
+
+  @include mat.card-overrides((elevated-container-elevation: var(--mat-sys-level4),
+    ));
+}
+
+.medication-title {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  font-family: var(--mat-card-title-text-font, var(--mat-sys-title-large-font));
+  line-height: var(--mat-card-title-text-line-height, var(--mat-sys-title-large-line-height));
+  font-size: var(--mat-card-title-text-size, var(--mat-sys-title-large-size));
+  letter-spacing: var(--mat-card-title-text-tracking, var(--mat-sys-title-large-tracking));
+  font-weight: var(--mat-card-title-text-weight, var(--mat-sys-title-large-weight));
+}
+
+ul {
+  list-style-type: none;
+}
+
+mat-icon {
+  vertical-align: middle;
+}

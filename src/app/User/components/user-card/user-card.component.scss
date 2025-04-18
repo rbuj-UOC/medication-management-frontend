@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+
+mat-card {
+  margin: 16px 0;
+  @include mat.card-overrides((elevated-container-color: var(--mat-sys-tertiary-container),
+      elevated-container-elevation: var(--mat-sys-level0),
+      elevated-container-shape: var(--mat-sys-shape-rectangle)));
+}
+
+mat-card-content {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 8px;
+}
+
+.actions {
+  display: grid;
+  grid-template-rows: auto auto;
+  align-content: space-between;
+}

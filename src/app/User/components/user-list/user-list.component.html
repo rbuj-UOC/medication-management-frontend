@@ -1,0 +1,7 @@
+<div style="margin-left: auto; margin-right: auto">
+  <p id="userListFeedback"></p>
+</div>
+<app-user-table [users]="selectUsers$ | async" (deleteUserRequest)="deleteUser($event)"
+  (editUserRequest)="editUser($event)" *ngIf="(isMobile$ | async) === false"></app-user-table>
+<app-user-grid [users]="selectUsers$ | async" (deleteUserRequest)="deleteUser($event)"
+  (editUserRequest)="editUser($event)" *ngIf="(isMobile$ | async) === true"></app-user-grid>

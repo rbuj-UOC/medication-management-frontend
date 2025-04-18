@@ -1,0 +1,44 @@
+@use 'sass:color' as color;
+
+h1 {
+  margin-bottom: 16px;
+}
+
+h2 {
+  margin: 16px 0 8px 0;
+}
+
+p {
+  margin: 16px 0;
+}
+
+ul {
+  list-style-type: circle;
+}
+
+li {
+  display: list-item;
+  padding-left: 1rem;
+  list-style-position: inside;
+}
+
+a {
+  color: color.adjust(#d2e1dd, $lightness: -50%);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &:hover {
+    color: color.adjust(#d2e1dd, $lightness: -30%);
+  }
+}
+
+.contact {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: color.adjust(#d2e1dd, $lightness: 11%);
+  border-left: 4px solid color.adjust(#d2e1dd, $lightness: -40%);
+
+  p {
+    margin: 0;
+  }
+}

@@ -1,0 +1,165 @@
+@use 'sass:color' as color;
+
+#appFeedback {
+  opacity: 0;
+  display: none;
+  text-align: center;
+  padding: 16px;
+  z-index: 1;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#appFeedback.fade-in {
+  display: block;
+  animation: fade-in 0.7s ease-in forwards;
+}
+
+#appFeedback.fade-out {
+  animation: fade-out 0.7s ease-out forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+
+  100% {
+    opacity: 1;
+    display: block;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.error {
+  color: var(--mat-sys-error);
+}
+
+mat-toolbar {
+  background: var(--mat-sys-secondary);
+  color: var(--mat-sys-on-secondary);
+  position: fixed;
+  top: 0;
+  z-index: 2;
+
+  button {
+    background: var(--mat-sys-secondary);
+    color: var(--mat-sys-on-secondary);
+  }
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav {
+  padding-top: 3.5rem;
+  transition: width 0.3s ease;
+  background: var(--mat-sys-secondary);
+  color: var(--mat-sys-on-secondary);
+
+  @media screen and (min-width: 600px) {
+    padding-top: 4rem;
+  }
+
+  .entry {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: var(--mat-sys-secondary);
+    color: var(--mat-sys-on-secondary);
+  }
+}
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav-content {
+  padding-top: 3.5rem;
+
+  @media screen and (min-width: 600px) {
+    padding-top: 4rem;
+  }
+}
+
+.expanded {
+  width: 250px;
+}
+
+.collapsed {
+  width: 80px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.router-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+.footer-content {
+  padding-bottom: 56px;
+  text-align: center;
+  margin: 16px auto;
+
+  @media screen and (min-width: 600px) {
+    padding-bottom: 64px;
+  }
+}
+
+ul.footer-menu {
+  list-style-type: none;
+
+  li {
+    display: block;
+
+    @media screen and (min-width: 600px) {
+      display: inline-block;
+    }
+  }
+
+  li+li {
+    margin: 8px 0;
+  }
+
+  li+li:before {
+    @media screen and (min-width: 600px) {
+      content: '|';
+      padding: 0 8px;
+    }
+  }
+}
+
+a {
+  color: color.adjust(#d2e1dd, $lightness: -50%);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &:hover {
+    color: color.adjust(#d2e1dd, $lightness: -30%);
+  }
+}
+
+.footer-link-active {
+  color: var(--mat-sys-error);
+}

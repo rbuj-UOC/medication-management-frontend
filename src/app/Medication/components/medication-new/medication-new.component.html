@@ -1,0 +1,23 @@
+<div style="margin-left: auto; margin-right: auto">
+  <p id="medicationNewFeedback"></p>
+</div>
+<div class="main-container">
+  <h1>New Medication</h1>
+  <form *ngIf="medicationForm" [formGroup]="medicationForm" (ngSubmit)="saveMedication()">
+    <div class="medication-line">
+      <mat-form-field>
+        <mat-label for="name">Name:</mat-label>
+        <input matInput type="text" [formControl]="name" />
+        <mat-error *ngIf="name.hasError('required')">Name is required</mat-error>
+        <mat-error *ngIf="name.hasError('maxlength')">
+          Name can be max 55 characters long.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="medication-line">
+      <button mat-flat-button color="primary" type="submit">SAVE</button>
+      <button mat-flat-button color="primary" type="button" (click)="cancelMedication()">CANCEL</button>
+    </div>
+  </form>
+</div>

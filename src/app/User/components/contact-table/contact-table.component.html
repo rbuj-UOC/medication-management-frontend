@@ -1,0 +1,60 @@
+<div class="main-container">
+  <div class="title">
+    <h1>Contacts</h1>
+    <button mat-icon-button color="primary" (click)="addContact()" aria-label="Add a user contact">
+      <mat-icon style="transform: scale(1.5);">add_circle</mat-icon>
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="contacts" class="mat-elevation-z8" *ngIf="contacts.length > 0">
+    <!-- surname_1 Column -->
+    <ng-container matColumnDef="contact-surname_1">
+      <th mat-header-cell *matHeaderCellDef>1st Surname</th>
+      <td mat-cell *matCellDef="let contact">{{ contact.surname_1 }}</td>
+    </ng-container>
+
+    <!-- surname_1 Column -->
+    <ng-container matColumnDef="contact-surname_2">
+      <th mat-header-cell *matHeaderCellDef>2nd Surname</th>
+      <td mat-cell *matCellDef="let contact">{{ contact.surname_2 }}</td>
+    </ng-container>
+
+    <!-- name Column -->
+    <ng-container matColumnDef="contact-name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let contact">{{ contact.name }}</td>
+    </ng-container>
+
+    <!-- alias Column -->
+    <ng-container matColumnDef="contact-alias">
+      <th mat-header-cell *matHeaderCellDef>Alias</th>
+      <td mat-cell *matCellDef="let contact">{{ contact.alias }}</td>
+    </ng-container>
+
+    <!-- birth_date Column -->
+    <ng-container matColumnDef="contact-birth_date">
+      <th mat-header-cell *matHeaderCellDef>Birth Date</th>
+      <td mat-cell *matCellDef="let contact">{{ contact.birth_date | date:'shortDate' }}</td>
+    </ng-container>
+
+    <!-- email Column -->
+    <ng-container matColumnDef="contact-email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let contact">{{ contact.email }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="contact-actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let contact">
+        <button mat-icon-button (click)="removeUserContact(contact.email)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <div *ngIf="contacts.length === 0">No contacts</div>
+</div>

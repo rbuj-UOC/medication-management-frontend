@@ -1,0 +1,111 @@
+<!-- loading spinners-->
+<app-spinner *ngIf="showLoadingAuth$ | async"></app-spinner>
+<app-spinner *ngIf="showLoadingUser$ | async"></app-spinner>
+<app-spinner *ngIf="showLoadingMedication$ | async"></app-spinner>
+<app-spinner *ngIf="showLoadingSchedule$ | async"></app-spinner>
+<app-spinner *ngIf="showLoadingTask$ | async"></app-spinner>
+
+<!-- UPPER TOOLBAR: NOT LOGGED -->
+<mat-toolbar *ngIf="user_role !== 'admin' && user_role !== 'user'" color="primary">
+  <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="toolbar-spacer"></span>
+  <button mat-flat-button color="primary" (click)="login()">Login</button>
+  <button mat-flat-button color="primary" (click)="register()">Register</button>
+</mat-toolbar>
+<!-- UPPER TOOLBAR: LOGGED -->
+<mat-toolbar *ngIf="user_role === 'admin' || user_role === 'user'" color="primary">
+  <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="toolbar-spacer"></span>
+  <button mat-flat-button color="primary" (click)="profile()">Profile</button>
+  <button mat-flat-button color="primary" (click)="logout()">Logout</button>
+</mat-toolbar>
+
+<!-- SIDENAV -->
+<mat-sidenav-container autosize="true">
+  <mat-sidenav [ngClass]="!isCollapsed ? 'expanded' : 'collapsed'" [mode]="isMobile ? 'over' : 'side'"
+    [opened]="isMobile ? 'false' : 'true'">
+    <mat-nav-list>
+      <a mat-list-item routerLinkActive (click)="landing()" (keydown.enter)="landing()" tabindex="0"
+        *ngIf="user_role !== 'admin' && user_role !== 'user'">
+        <span class="entry">
+          <mat-icon>home</mat-icon>
+          <span *ngIf="!isCollapsed">Home</span>
+        </span>
+      </a>
+      <a mat-list-item routerLinkActive (click)="userToday()" (keydown.enter)="userToday()" tabindex="0"
+        *ngIf="user_role === 'user'">
+        <span class="entry">
+          <mat-icon>home</mat-icon>
+          <span *ngIf="!isCollapsed">Today</span>
+        </span>
+      </a>
+      <a mat-list-item routerLinkActive (click)="adminDashboard()" (keydown.enter)="adminDashboard()" tabindex="0"
+        *ngIf="user_role === 'admin'">
+        <span class="entry">
+          <mat-icon>home</mat-icon>
+          <span *ngIf="!isCollapsed">Dashboard</span>
+        </span>
+      </a>
+      <a mat-list-item routerLinkActive (click)="userMedications()" (keydown.enter)="userMedications()" tabindex="0"
+        *ngIf="user_role === 'user'">
+        <span class="entry">
+          <mat-icon>medication</mat-icon>
+          <span *ngIf="!isCollapsed">Medications</span>
+        </span>
+      </a>
+      <a mat-list-item routerLinkActive (click)="userHistory()" (keydown.enter)="userHistory()" tabindex="0"
+        *ngIf="user_role === 'user'">
+        <span class="entry">
+          <mat-icon>history</mat-icon>
+          <span *ngIf="!isCollapsed">History</span>
+        </span>
+      </a>
+      <a mat-list-item routerLinkActive (click)="userContacts()" (keydown.enter)="userContacts()" tabindex="0"
+        *ngIf="user_role === 'user'">
+        <span class="entry">
+          <mat-icon>perm_contact_cal</mat-icon>
+          <span *ngIf="!isCollapsed">Contacts</span>
+        </span>
+      </a>
+      <a mat-list-item routerLinkActive (click)="adminUsers()" (keydown.enter)="adminUsers()" tabindex="0"
+        *ngIf="user_role === 'admin'">
+        <span class="entry">
+          <mat-icon>supervised_user_circle</mat-icon>
+          <span *ngIf="!isCollapsed">User List</span>
+        </span>
+      </a>
+      <a mat-list-item routerLinkActive (click)="adminTasks()" (keydown.enter)="adminTasks()" tabindex="0"
+        *ngIf="user_role === 'admin'">
+        <span class="entry">
+          <mat-icon>task_alt</mat-icon>
+          <span *ngIf="!isCollapsed">Task List</span>
+        </span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="router-content">
+    <div class="main-content">
+      <!-- Feedback -->
+      <div style="margin-left: auto; margin-right: auto">
+        <p id="appFeedback"></p>
+      </div>
+      <!-- Notification List -->
+      <app-notification-list></app-notification-list>
+      <!-- Main content -->
+      <router-outlet></router-outlet>
+    </div>
+    <!-- FOOTER -->
+    <div class="footer-content">
+      <ul class="footer-menu">
+        <li>© 2025 Robert Buj</li>
+        <li><a routerLink="/privacy" routerLinkActive="footer-link-active">Privacy Policy</a></li>
+        <li><a routerLink="/terms" routerLinkActive="footer-link-active">Terms of Service</a></li>
+        <li><a routerLink="/help" routerLinkActive="footer-link-active">Help</a></li>
+      </ul>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

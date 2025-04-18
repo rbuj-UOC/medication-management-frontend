@@ -1,0 +1,17 @@
+.contact-line {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+
+  @media screen and (min-width: 740px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1240px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.add-button {
+  margin: 16px 0;
+}

@@ -1,0 +1,91 @@
+@use '@angular/material' as mat;
+@use 'sass:color' as color;
+
+:root {
+  @include mat.button-overrides((filled-container-shape: 8px));
+  @include mat.sidenav-overrides((container-shape: 0px));
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  box-sizing: border-box;
+  font-family: var(--mat-sys-body-medium-font);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 200;
+  color: var(--mat-sys-on-surface);
+}
+
+html {
+  color-scheme: light dark;
+  @include mat.theme((color: mat.$spring-green-palette,
+      typography: Roboto,
+      density: 0));
+}
+
+body {
+  margin: 0;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}
+
+h1,
+h2,
+h3 {
+  color: color.adjust(#d2e1dd, $lightness: -40%);
+}
+
+strong {
+  font-weight: 600;
+  color: color.adjust(#d2e1dd, $lightness: -50%);
+
+}
+
+li+li {
+  margin: 8px 0;
+}
+
+.warn {
+  @include mat.theme((color: mat.$red-palette));
+}
+
+.accent {
+  @include mat.theme((color: mat.$magenta-palette));
+}
+
+.requestOk {
+  color: white;
+  background-color: green;
+}
+
+.requestKo {
+  color: var(--mat-sys-on-error);
+  background-color: var(--mat-sys-error);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.main-container {
+  width: auto;
+  margin: 8px 16px 0 16px;
+  overflow: auto;
+
+  @media screen and (min-width: 600px) {
+    margin: 16px 32px 0 32px;
+    width: auto;
+    padding-bottom: 0;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: 1080px;
+    margin: 16px auto 0 auto;
+  }
+}

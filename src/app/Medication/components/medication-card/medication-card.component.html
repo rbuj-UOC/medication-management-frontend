@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-content (click)="editMedication(medication.id)">
+    <div class="medication-info">
+      <div class="medication-title">
+        <div>{{ medication.name }}</div>
+        <div><mat-icon *ngIf="medication.disabled">pause</mat-icon></div>
+      </div>
+      <div>
+        <ul *ngFor="let schedule of medication.schedules" class="schedule-list">
+          <li>{{ schedule.start_date | date: 'shortTime' }}</li>
+        </ul>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

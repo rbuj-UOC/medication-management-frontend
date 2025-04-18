@@ -1,0 +1,10 @@
+{
+  "material-icon-theme.activeIconPack": "angular",
+  "cSpell.language": "en",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
+    "source.fixAll.eslint": "always"
+  },
+  "emmet.triggerExpansionOnTab": true
+}

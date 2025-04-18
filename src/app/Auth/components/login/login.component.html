@@ -1,0 +1,33 @@
+<div style="margin-left: auto; margin-right: auto">
+  <p id="loginFeedback"></p>
+</div>
+<div class="login-container">
+  <h1>Login</h1>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+    <div class="login-line">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [formControl]="email" />
+        <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="email.hasError('pattern')">Email not a valid format.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="login-line">
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [formControl]="password" />
+        <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="password.hasError('minlength')">Password must be greater tha 8 characters</mat-error>
+        <mat-error *ngIf="password.hasError('maxlength')">Password can be max 16 characters long</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="login-line">
+      <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">
+        Login
+      </button>
+    </div>
+  </form>
+</div>
