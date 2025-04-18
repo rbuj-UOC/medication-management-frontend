@@ -1,0 +1,17 @@
+.posts-container {
+  padding: 8px;
+  display: grid;
+  grid-gap: 10px;
+  margin-bottom: 60px;
+  justify-content: space-around;
+
+  @media screen and (min-width: 740px) {
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 300px);
+  }
+
+  @media screen and (min-width: 1240px) {
+    margin: 32px;
+    justify-content: start;
+  }
+}

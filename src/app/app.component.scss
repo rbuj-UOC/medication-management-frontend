@@ -1,0 +1,56 @@
+mat-toolbar {
+  background: var(--mat-sys-secondary);
+  color: var(--mat-sys-on-secondary);
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  button {
+    background: var(--mat-sys-secondary);
+    color: var(--mat-sys-on-secondary);
+  }
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav {
+  padding-top: 3.5rem;
+  transition: width 0.3s ease;
+  background: var(--mat-sys-secondary);
+  color: var(--mat-sys-on-secondary);
+
+  @media screen and (min-width: 600px) {
+    padding-top: 4rem;
+  }
+
+  .entry {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: var(--mat-sys-secondary);
+    color: var(--mat-sys-on-secondary);
+  }
+}
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav-content {
+  padding-top: 3.5rem;
+  @media screen and (min-width: 600px) {
+    padding-top: 4rem;
+  }
+}
+
+.expanded {
+  width: 250px;
+}
+
+.collapsed {
+  width: 80px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}

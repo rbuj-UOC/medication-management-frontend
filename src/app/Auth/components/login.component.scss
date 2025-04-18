@@ -1,0 +1,66 @@
+.error {
+  color: red;
+}
+
+#loginFeedback {
+  visibility: hidden;
+  min-width: 250px;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  z-index: 1;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loginFeedback.requestOk {
+  background-color: green;
+}
+
+#loginFeedback.requestKo {
+  background-color: red;
+}
+
+#loginFeedback.show {
+  visibility: visible;
+  animation:
+    fadein 0.5s,
+    fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+.login-container-card {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.login-form > mat-form-field {
+  display: inline;
+}
+
+.button-login {
+  display: block;
+  margin: 8px auto 0;
+}
