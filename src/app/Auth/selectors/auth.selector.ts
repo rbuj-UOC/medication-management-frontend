@@ -21,3 +21,7 @@ export const selectCredentials = createSelector(selectAuthState, (state) => {
 export const selectUserId = createSelector(selectAuthState, (state) => {
   return state.credentials.user_id;
 });
+
+export const selectUserRole = createSelector(selectAuthState, (state) => {
+  return state.credentials.user_role;
+});

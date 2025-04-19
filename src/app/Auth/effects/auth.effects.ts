@@ -34,6 +34,7 @@ export class AuthEffects {
                 username: credentials.username,
                 password: credentials.password,
                 user_id: userToken.user_id,
+                user_role: userToken.user_role,
                 access_token: userToken.access_token
               };
 

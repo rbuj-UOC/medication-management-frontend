@@ -47,6 +47,7 @@ export class LoginComponent {
       username: this.email.value,
       password: this.password.value,
       user_id: '',
+      user_role: '',
       access_token: ''
     };
 
