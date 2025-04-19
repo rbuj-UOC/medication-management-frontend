@@ -4,7 +4,11 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as AuthAction from './Auth/actions';
-import { selectAccessToken, selectAuthStateLoading } from './Auth/selectors';
+import {
+  selectAccessToken,
+  selectAuthStateLoading,
+  selectUserRole
+} from './Auth/selectors';
 import { selectCategoriesStateLoading } from './Category/selectors';
 import { selectPostsStateLoading } from './Post/selectors';
 import { selectUserStateLoading } from './User/selectors';
@@ -28,6 +32,8 @@ export class AppComponent implements OnInit {
   showLoadingCategories$: any;
   showLoadingPosts$: any;
   showLoadingUser$: any;
+  showAdminSection: boolean;
+  showUserSection: boolean;
 
   constructor(
     private observer: BreakpointObserver,
@@ -51,12 +57,27 @@ export class AppComponent implements OnInit {
         this.isMobile = false;
       }
     });
+
     this.store.select(selectAccessToken).subscribe((access_token) => {
-      this.showAuthSection = false;
-      this.showNoAuthSection = true;
       if (access_token) {
         this.showAuthSection = true;
         this.showNoAuthSection = false;
+      } else {
+        this.showAuthSection = false;
+        this.showNoAuthSection = true;
+      }
+    });
+
+    this.store.select(selectUserRole).subscribe((user_role) => {
+      if (user_role === 'admin') {
+        this.showAdminSection = true;
+        this.showUserSection = false;
+      } else if (user_role === 'user') {
+        this.showAdminSection = false;
+        this.showUserSection = true;
+      } else {
+        this.showAdminSection = false;
+        this.showUserSection = false;
       }
     });
   }
