@@ -8,6 +8,7 @@ export class UserDTO {
   birth_date: Date;
   email: string;
   password: string;
+  role?: string;
 
   constructor(
     name: string,
