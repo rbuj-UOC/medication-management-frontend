@@ -11,9 +11,7 @@
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input matInput type="text" [formControl]="name" />
-          <mat-error *ngIf="name.hasError('required')"
-            >Name is required</mat-error
-          >
+          <mat-error *ngIf="name.hasError('required')">Name is required</mat-error>
           <mat-error *ngIf="name.hasError('minlength')">
             Name must be at least 3 characters long.
           </mat-error>
@@ -91,6 +89,17 @@
           <mat-error *ngIf="password.hasError('minlength')">
             Password must be at least 8 characters long.
           </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="login-line">
+        <mat-form-field class="full-width">
+          <mat-label>Choose a role</mat-label>
+          <mat-select [formControl]="role">
+            <mat-option>Clear</mat-option>
+            <mat-option *ngFor="let option of roles" [value]="option.value">{{ option.label }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="role.hasError('required')">Role is required</mat-error>
         </mat-form-field>
       </div>
 
