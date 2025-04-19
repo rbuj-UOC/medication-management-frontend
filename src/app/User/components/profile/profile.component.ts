@@ -28,9 +28,11 @@ export class ProfileComponent implements OnInit {
   birth_date: FormControl;
   email: FormControl;
   password: FormControl;
+  role: FormControl;
 
   profileForm: FormGroup;
   isValidForm: boolean | null;
+  roles: { value: string; label: string }[];
 
   private userId: string;
 
@@ -81,6 +83,13 @@ export class ProfileComponent implements OnInit {
       Validators.minLength(8)
     ]);
 
+    this.role = new FormControl(this.profileUser.role, [Validators.required]);
+    this.role.disable();
+    this.roles = [
+      { value: 'admin', label: 'Admin' },
+      { value: 'user', label: 'User' }
+    ];
+
     this.profileForm = this.formBuilder.group({
       name: this.name,
       surname_1: this.surname_1,
@@ -108,6 +117,7 @@ export class ProfileComponent implements OnInit {
         formatDate(this.profileUser.birth_date, 'yyyy-MM-dd', 'en')
       );
       this.email.setValue(this.profileUser.email);
+      this.role.setValue(this.profileUser.role);
 
       this.profileForm = this.formBuilder.group({
         name: this.name,
@@ -116,7 +126,8 @@ export class ProfileComponent implements OnInit {
         alias: this.alias,
         birth_date: this.birth_date,
         email: this.email,
-        password: this.password
+        password: this.password,
+        role: this.role
       });
     });
   }
