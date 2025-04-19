@@ -42,6 +42,8 @@ export class AppComponent implements OnInit {
   ) {
     this.showAuthSection = false;
     this.showNoAuthSection = true;
+    this.showUserSection = false;
+    this.showAdminSection = false;
     this.showLoadingAuth$ = this.store.select(selectAuthStateLoading);
     this.showLoadingCategories$ = this.store.select(
       selectCategoriesStateLoading
