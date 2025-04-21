@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { throwError } from 'rxjs';
 import * as AuthAction from './Auth/actions';
 import {
   selectAccessToken,
@@ -112,11 +111,11 @@ export class AppComponent implements OnInit {
   }
 
   userContacts(): void {
-    throwError(() => new Error('Not implemented'));
+    this.router.navigateByUrl('user/contacts');
   }
 
   userHistory(): void {
-    throwError(() => new Error('Not implemented'));
+    this.router.navigateByUrl('user/history');
   }
 
   userToday(): void {

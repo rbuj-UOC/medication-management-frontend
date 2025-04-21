@@ -7,7 +7,9 @@ import { MedicationListComponent } from './Medication/components/medication-list
 import { AuthGuard } from './Shared/Guards/auth.guard';
 import { ProfileComponent } from './User/components/profile/profile.component';
 import { RegisterComponent } from './User/components/register/register.component';
+import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HistoryListComponent } from './components/history-list/history-list.component';
 import { TodayListComponent } from './components/today-list/today-list.component';
 
 const routes: Routes = [
@@ -36,6 +38,16 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'user/contacts',
+    component: ContactListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/history',
+    component: HistoryListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'user/medication/:id',
