@@ -17,8 +17,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { appReducers, EffectsArray } from './app.reducers';
 import { AuthModule } from './Auth/auth.module';
-import { CategoryModule } from './Category/category.module';
-import { PostModule } from './Post/post.module';
 import { SpinnerComponent } from './Shared/Components/spinner/spinner.component';
 import { AuthInterceptorService } from './Shared/Services/auth-interceptor.service';
 import { UserModule } from './User/user.module';
@@ -33,8 +31,6 @@ import { UserModule } from './User/user.module';
     HttpClientModule,
     AuthModule,
     UserModule,
-    CategoryModule,
-    PostModule,
     MatButtonModule,
     MatIconModule,
     MatListModule,
