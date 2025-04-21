@@ -30,31 +30,31 @@
           <span *ngIf="!isCollapsed">Home</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="adminPosts()" *ngIf="showUserSection">
+      <a mat-list-item routerLinkActive (click)="userMedications()" *ngIf="showUserSection">
         <span class="entry">
           <mat-icon>book</mat-icon>
           <span *ngIf="!isCollapsed">Medications</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="adminPosts()" *ngIf="showUserSection">
+      <a mat-list-item routerLinkActive (click)="userHistory()" *ngIf="showUserSection">
         <span class="entry">
           <mat-icon>book</mat-icon>
           <span *ngIf="!isCollapsed">History</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="adminPosts()" *ngIf="showUserSection">
+      <a mat-list-item routerLinkActive (click)="userContacts()" *ngIf="showUserSection">
         <span class="entry">
           <mat-icon>book</mat-icon>
           <span *ngIf="!isCollapsed">Contacts</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="adminCategories()" *ngIf="showAdminSection">
+      <a mat-list-item routerLinkActive (click)="adminUsers()" *ngIf="showAdminSection">
         <span class="entry">
           <mat-icon>label</mat-icon>
           <span *ngIf="!isCollapsed">Users</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="adminCategories()" *ngIf="showAdminSection">
+      <a mat-list-item routerLinkActive (click)="adminTasks()" *ngIf="showAdminSection">
         <span class="entry">
           <mat-icon>label</mat-icon>
           <span *ngIf="!isCollapsed">Tasks</span>
