@@ -17,14 +17,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { appReducers, EffectsArray } from './app.reducers';
 import { AuthModule } from './Auth/auth.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { TodayListComponent } from './components/today-list/today-list.component';
+import { LandingModule } from './Landing/landing.module';
 import { MedicationModule } from './Medication/medication.module';
 import { SpinnerComponent } from './Shared/Components/spinner/spinner.component';
 import { AuthInterceptorService } from './Shared/Services/auth-interceptor.service';
 import { UserModule } from './User/user.module';
 
 @NgModule({
-  declarations: [AppComponent, SpinnerComponent],
-
+  declarations: [
+    AppComponent,
+    SpinnerComponent,
+    TodayListComponent,
+    DashboardComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,6 +39,7 @@ import { UserModule } from './User/user.module';
     HttpClientModule,
     AuthModule,
     UserModule,
+    LandingModule,
     MedicationModule,
     MatButtonModule,
     MatIconModule,

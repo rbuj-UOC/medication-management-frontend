@@ -19,10 +19,6 @@ import { MedicationListComponent } from './components/medication-list/medication
     MatIconModule,
     MatInputModule
   ],
-  declarations: [
-    MedicationFormComponent,
-    MedicationListComponent,
-    MedicationFormComponent
-  ]
+  declarations: [MedicationListComponent, MedicationFormComponent]
 })
 export class MedicationModule {}

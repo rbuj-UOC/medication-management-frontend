@@ -78,6 +78,10 @@ export class AppComponent implements OnInit {
     });
   }
 
+  adminDashboard(): void {
+    this.router.navigateByUrl('admin/dashboard');
+  }
+
   adminTasks(): void {
     this.router.navigateByUrl('admin/tasks');
   }
@@ -86,8 +90,8 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('admin/users');
   }
 
-  home(): void {
-    throwError(() => new Error('Not implemented'));
+  landing(): void {
+    this.router.navigateByUrl('landing');
   }
 
   login(): void {
@@ -96,7 +100,7 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     this.store.dispatch(AuthAction.logout());
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('landing');
   }
 
   profile(): void {
@@ -113,6 +117,10 @@ export class AppComponent implements OnInit {
 
   userHistory(): void {
     throwError(() => new Error('Not implemented'));
+  }
+
+  userToday(): void {
+    this.router.navigateByUrl('user/today');
   }
 
   userMedications(): void {
