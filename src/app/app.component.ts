@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { throwError } from 'rxjs';
 import * as AuthAction from './Auth/actions';
 import {
   selectAccessToken,
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit {
     this.showLoadingAuth$ = this.store.select(selectAuthStateLoading);
     this.showLoadingUser$ = this.store.select(selectUserStateLoading);
   }
+
   ngOnInit(): void {
     this.observer.observe(['(max-width: 740px)']).subscribe((screenSize) => {
       if (screenSize.matches) {
@@ -76,37 +78,45 @@ export class AppComponent implements OnInit {
     });
   }
 
-  dashboard(): void {
-    this.router.navigateByUrl('dashboard');
+  adminTasks(): void {
+    this.router.navigateByUrl('admin/tasks');
+  }
+
+  adminUsers(): void {
+    this.router.navigateByUrl('admin/users');
   }
 
   home(): void {
-    this.router.navigateByUrl('home');
+    throwError(() => new Error('Not implemented'));
   }
 
   login(): void {
     this.router.navigateByUrl('login');
   }
 
-  register(): void {
-    this.router.navigateByUrl('register');
-  }
-
-  adminPosts(): void {
-    this.router.navigateByUrl('posts');
-  }
-
-  adminCategories(): void {
-    this.router.navigateByUrl('categories');
+  logout(): void {
+    this.store.dispatch(AuthAction.logout());
+    this.router.navigateByUrl('home');
   }
 
   profile(): void {
     this.router.navigateByUrl('profile');
   }
 
-  logout(): void {
-    this.store.dispatch(AuthAction.logout());
-    this.router.navigateByUrl('home');
+  register(): void {
+    this.router.navigateByUrl('register');
+  }
+
+  userContacts(): void {
+    throwError(() => new Error('Not implemented'));
+  }
+
+  userHistory(): void {
+    throwError(() => new Error('Not implemented'));
+  }
+
+  userMedications(): void {
+    this.router.navigateByUrl('user/medications');
   }
 
   toggleMenu() {
