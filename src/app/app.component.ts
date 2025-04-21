@@ -9,8 +9,6 @@ import {
   selectAuthStateLoading,
   selectUserRole
 } from './Auth/selectors';
-import { selectCategoriesStateLoading } from './Category/selectors';
-import { selectPostsStateLoading } from './Post/selectors';
 import { selectUserStateLoading } from './User/selectors';
 
 @Component({
@@ -29,8 +27,6 @@ export class AppComponent implements OnInit {
   isMobile = true;
   isCollapsed = true;
   showLoadingAuth$: any;
-  showLoadingCategories$: any;
-  showLoadingPosts$: any;
   showLoadingUser$: any;
   showAdminSection: boolean;
   showUserSection: boolean;
@@ -45,10 +41,6 @@ export class AppComponent implements OnInit {
     this.showUserSection = false;
     this.showAdminSection = false;
     this.showLoadingAuth$ = this.store.select(selectAuthStateLoading);
-    this.showLoadingCategories$ = this.store.select(
-      selectCategoriesStateLoading
-    );
-    this.showLoadingPosts$ = this.store.select(selectPostsStateLoading);
     this.showLoadingUser$ = this.store.select(selectUserStateLoading);
   }
   ngOnInit(): void {
