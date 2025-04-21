@@ -42,7 +42,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.email.setValue('test@test.org');
+    this.password.setValue('testtest');
+  }
 
   login(): void {
     const credentials: AuthDTO = {
