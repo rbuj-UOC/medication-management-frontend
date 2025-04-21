@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectUserId } from '../../../Auth/selectors';
+import { selectUserId } from '../../Auth/selectors';
 
 @Component({
-  selector: 'app-medication-list',
+  selector: 'app-today-list',
   // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false,
-  templateUrl: './medication-list.component.html',
-  styleUrls: ['./medication-list.component.scss']
+  templateUrl: './today-list.component.html',
+  styleUrls: ['./today-list.component.scss']
 })
-export class MedicationListComponent {
+export class TodayListComponent {
   userId: string;
 
   constructor(
@@ -24,9 +24,5 @@ export class MedicationListComponent {
         this.userId = user_id;
       }
     });
-  }
-
-  createMedication(): void {
-    this.router.navigateByUrl('/user/medication/');
   }
 }

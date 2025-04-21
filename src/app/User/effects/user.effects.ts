@@ -47,7 +47,7 @@ export class UserEffects {
               );
 
               if (this.responseOK) {
-                this.router.navigateByUrl('home');
+                this.router.navigateByUrl('landing');
               }
             })
           )
