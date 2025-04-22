@@ -10,3 +10,10 @@ export const selectMedication = createSelector(
     return state.medication;
   }
 );
+
+export const selectMedications = createSelector(
+  selectMedicationsState,
+  (state) => {
+    return state.medications;
+  }
+);

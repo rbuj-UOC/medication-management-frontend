@@ -13,6 +13,8 @@ export class MedicationsEffects {
   createMedication$: any;
   createMedicationSuccess$: any;
   createMedicationFailure$: any;
+  getMedicationsByUserId$: any;
+  getMedicationsByUserIdFailure$: any;
 
   constructor(
     private actions$: Actions,
@@ -71,6 +73,41 @@ export class MedicationsEffects {
           ofType(MedicationActions.createMedicationFailure),
           map((error) => {
             this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.getMedicationsByUserId$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(MedicationActions.getMedicationsByUserId),
+        exhaustMap(({ user_id }) =>
+          this.medicationService.getMedicationsByUserId(user_id).pipe(
+            map((medications) => {
+              return MedicationActions.getMedicationsByUserIdSuccess({
+                medications: medications
+              });
+            }),
+            catchError((error) => {
+              return of(
+                MedicationActions.getMedicationsByUserIdFailure({
+                  payload: error
+                })
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.getMedicationsByUserIdFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.getMedicationsByUserIdFailure),
+          map((error) => {
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
           })
