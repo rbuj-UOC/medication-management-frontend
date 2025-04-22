@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { selectUserId } from '../../../Auth/selectors';
 import * as MedicationsAction from '../../actions';
 import { MedicationDTO } from '../../models/medication.dto';
 import { selectMedication } from '../../selectors/medication.selector';
@@ -24,6 +25,7 @@ export class MedicationFormComponent implements OnInit {
   isValidForm: boolean | null;
   name: FormControl;
   private isUpdateMode: boolean;
+  private userId: string | null;
   private medicationId: string | null;
 
   constructor(
@@ -45,6 +47,12 @@ export class MedicationFormComponent implements OnInit {
       name: this.name
     });
 
+    this.store.select(selectUserId).subscribe((user_id) => {
+      if (user_id) {
+        this.userId = user_id;
+      }
+    });
+
     this.store.select(selectMedication).subscribe((medication) => {
       this.medication = medication;
       this.name.setValue(this.medication.name);
@@ -54,8 +62,29 @@ export class MedicationFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.medicationId) {
       this.isUpdateMode = true;
+      this.store.dispatch(
+        MedicationsAction.getMedicationById({ id: this.medicationId })
+      );
     } else {
       this.medicationForm.reset();
+    }
+  }
+
+  createMedication() {
+    this.store.dispatch(
+      MedicationsAction.createMedication({ medication: this.medication })
+    );
+  }
+
+  editMedication() {
+    if (this.userId && this.medicationId) {
+      this.medication.user_id = this.userId;
+      this.store.dispatch(
+        MedicationsAction.updateMedication({
+          id: this.medicationId,
+          medication: this.medication
+        })
+      );
     }
   }
 
@@ -74,15 +103,5 @@ export class MedicationFormComponent implements OnInit {
     } else {
       this.createMedication();
     }
-  }
-
-  createMedication() {
-    this.store.dispatch(
-      MedicationsAction.createMedication({ medication: this.medication })
-    );
-  }
-
-  editMedication() {
-    throw new Error('Method not implemented.');
   }
 }

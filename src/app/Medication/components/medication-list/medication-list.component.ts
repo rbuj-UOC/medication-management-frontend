@@ -57,7 +57,6 @@ export class MedicationListComponent {
   }
 
   updateMedication(id: number): void {
-    console.log('updateMedication', id);
-    throw new Error('Method not implemented.');
+    this.router.navigateByUrl('/user/medication/' + id);
   }
 }

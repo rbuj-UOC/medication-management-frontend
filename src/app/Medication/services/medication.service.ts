@@ -31,9 +31,24 @@ export class MedicationService {
       .pipe(catchError(this.sharedService.handleError));
   }
 
+  getMedicationById(id: string): Observable<MedicationDTO> {
+    return this.http
+      .get<MedicationDTO>(this.urlApi + '/medication/' + id)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
   getMedicationsByUserId(userId: string): Observable<MedicationDTO[]> {
     return this.http
       .get<MedicationDTO[]>(this.urlApi + '/user/' + userId)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  updateMedication(
+    id: string,
+    medication: MedicationDTO
+  ): Observable<MedicationDTO> {
+    return this.http
+      .put<MedicationDTO>(this.urlApi + '/' + id, medication)
       .pipe(catchError(this.sharedService.handleError));
   }
 }
