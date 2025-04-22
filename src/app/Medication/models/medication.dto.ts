@@ -1,9 +1,9 @@
 export class MedicationDTO {
-  medicationId!: number;
-  userId!: string;
+  id!: number;
+  user_id!: string;
   disabled!: boolean;
-  createdAt!: Date;
-  updatedAt!: Date;
+  created_at!: Date;
+  updated_at!: Date;
   name: string;
 
   constructor(name: string) {

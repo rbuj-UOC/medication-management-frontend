@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUserId } from '../../../Auth/selectors';
+import * as MedicationsAction from '../../actions';
+import { MedicationDTO } from '../../models/medication.dto';
+import { selectMedications } from '../../selectors/medication.selector';
 
 @Component({
   selector: 'app-medication-list',
@@ -11,22 +14,51 @@ import { selectUserId } from '../../../Auth/selectors';
   styleUrls: ['./medication-list.component.scss']
 })
 export class MedicationListComponent {
-  userId: string;
+  medications: MedicationDTO[];
+  displayedColumns: string[] = ['medication-name', 'medication-actions'];
+  private user_id: string;
 
   constructor(
     private router: Router,
     private store: Store
   ) {
-    this.userId = '';
+    this.user_id = '';
 
     this.store.select(selectUserId).subscribe((user_id) => {
       if (user_id) {
-        this.userId = user_id;
+        this.user_id = user_id;
       }
     });
+
+    this.store.select(selectMedications).subscribe((medications) => {
+      this.medications = medications;
+    });
+
+    this.loadMedications();
+  }
+
+  private loadMedications(): void {
+    if (this.user_id) {
+      this.store.dispatch(
+        MedicationsAction.getMedicationsByUserId({ user_id: this.user_id })
+      );
+    }
   }
 
   createMedication(): void {
     this.router.navigateByUrl('/user/medication/');
+  }
+
+  deleteMedication(id: number, name: string): void {
+    console.log('deleteMedication', id);
+    const result = confirm('Confirm delete medication: ' + name);
+    if (result) {
+      throw new Error('Method not implemented.');
+    }
+  }
+
+  updateMedication(id: number): void {
+    console.log('updateMedication', id);
+    throw new Error('Method not implemented.');
   }
 }

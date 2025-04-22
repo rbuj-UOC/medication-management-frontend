@@ -2,7 +2,10 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   createMedication,
   createMedicationFailure,
-  createMedicationSuccess
+  createMedicationSuccess,
+  getMedicationsByUserId,
+  getMedicationsByUserIdFailure,
+  getMedicationsByUserIdSuccess
 } from '../actions';
 import { MedicationDTO } from '../models/medication.dto';
 
@@ -42,6 +45,25 @@ const _medicationsReducer = createReducer(
     loading: false,
     loaded: false,
     error: payload
+  })),
+  on(getMedicationsByUserId, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(getMedicationsByUserIdSuccess, (state, action) => ({
+    ...state,
+    medications: action.medications,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(getMedicationsByUserIdFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
   }))
 );
 

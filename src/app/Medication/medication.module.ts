@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 import { MedicationFormComponent } from './components/medication-form/medication-form.component';
 import { MedicationListComponent } from './components/medication-list/medication-list.component';
 
@@ -17,7 +18,8 @@ import { MedicationListComponent } from './components/medication-list/medication
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   ],
   declarations: [MedicationListComponent, MedicationFormComponent]
 })
