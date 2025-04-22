@@ -23,6 +23,9 @@
           <button mat-icon-button (click)="updateMedication(medication.id)">
             <mat-icon>edit</mat-icon>
           </button>
+          <button mat-icon-button (click)="scheduleMedication(medication.id)">
+            <mat-icon color="warn">edit_calendar</mat-icon>
+          </button>
           <button mat-icon-button (click)="deleteMedication(medication.id, medication.name)">
             <mat-icon color="warn">delete</mat-icon>
           </button>
