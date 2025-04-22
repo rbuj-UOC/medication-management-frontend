@@ -10,9 +10,15 @@ import { MedicationService } from '../services/medication.service';
 export class MedicationsEffects {
   private responseOK: boolean;
   private errorResponse: any;
+
   createMedication$: any;
   createMedicationSuccess$: any;
   createMedicationFailure$: any;
+
+  deleteMedication$: any;
+  deleteMedicationSuccess$: any;
+  deleteMedicationFailure$: any;
+
   getMedicationsByUserId$: any;
   getMedicationsByUserIdFailure$: any;
 
@@ -71,6 +77,59 @@ export class MedicationsEffects {
       () => {
         return this.actions$.pipe(
           ofType(MedicationActions.createMedicationFailure),
+          map((error) => {
+            this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.deleteMedication$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(MedicationActions.deleteMedication),
+        exhaustMap(({ id }) =>
+          this.medicationService.deleteMedication(id).pipe(
+            map(() => {
+              return MedicationActions.deleteMedicationSuccess({
+                id: id
+              });
+            }),
+            catchError((error) => {
+              return of(
+                MedicationActions.deleteMedicationFailure({ payload: error })
+              );
+            }),
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'medicationListFeedback',
+                this.responseOK,
+                this.errorResponse
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.deleteMedicationSuccess$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.deleteMedicationSuccess),
+          map(() => {
+            this.responseOK = true;
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.deleteMedicationFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.deleteMedicationFailure),
           map((error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;

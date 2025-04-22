@@ -3,6 +3,9 @@ import {
   createMedication,
   createMedicationFailure,
   createMedicationSuccess,
+  deleteMedication,
+  deleteMedicationFailure,
+  deleteMedicationSuccess,
   getMedicationsByUserId,
   getMedicationsByUserIdFailure,
   getMedicationsByUserIdSuccess
@@ -45,6 +48,27 @@ const _medicationsReducer = createReducer(
     loading: false,
     loaded: false,
     error: payload
+  })),
+  on(deleteMedication, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(deleteMedicationSuccess, (state, { id }) => ({
+    ...state,
+    medications: [
+      ...state.medications.filter((medication) => medication.id !== id)
+    ],
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(deleteMedicationFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
   })),
   on(getMedicationsByUserId, (state) => ({
     ...state,

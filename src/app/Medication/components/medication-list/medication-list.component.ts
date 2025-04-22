@@ -50,10 +50,9 @@ export class MedicationListComponent {
   }
 
   deleteMedication(id: number, name: string): void {
-    console.log('deleteMedication', id);
     const result = confirm('Confirm delete medication: ' + name);
     if (result) {
-      throw new Error('Method not implemented.');
+      this.store.dispatch(MedicationsAction.deleteMedication({ id }));
     }
   }
 
