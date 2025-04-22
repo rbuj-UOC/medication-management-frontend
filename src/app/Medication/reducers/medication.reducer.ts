@@ -6,9 +6,15 @@ import {
   deleteMedication,
   deleteMedicationFailure,
   deleteMedicationSuccess,
+  getMedicationById,
+  getMedicationByIdFailure,
+  getMedicationByIdSuccess,
   getMedicationsByUserId,
   getMedicationsByUserIdFailure,
-  getMedicationsByUserIdSuccess
+  getMedicationsByUserIdSuccess,
+  updateMedication,
+  updateMedicationFailure,
+  updateMedicationSuccess
 } from '../actions';
 import { MedicationDTO } from '../models/medication.dto';
 
@@ -70,6 +76,25 @@ const _medicationsReducer = createReducer(
     loaded: false,
     error: { payload }
   })),
+  on(getMedicationById, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(getMedicationByIdSuccess, (state, action) => ({
+    ...state,
+    medication: action.medication,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(getMedicationByIdFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
   on(getMedicationsByUserId, (state) => ({
     ...state,
     loading: true,
@@ -84,6 +109,25 @@ const _medicationsReducer = createReducer(
     error: null
   })),
   on(getMedicationsByUserIdFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
+  on(updateMedication, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(updateMedicationSuccess, (state, action) => ({
+    ...state,
+    medication: action.medication,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(updateMedicationFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,

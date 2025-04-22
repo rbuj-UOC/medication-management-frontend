@@ -19,8 +19,15 @@ export class MedicationsEffects {
   deleteMedicationSuccess$: any;
   deleteMedicationFailure$: any;
 
+  getMedicationById$: any;
+  getMedicationByIdFailure$: any;
+
   getMedicationsByUserId$: any;
   getMedicationsByUserIdFailure$: any;
+
+  updatePostSuccess$: any;
+  updatePostFailure$: any;
+  updateMedication$: any;
 
   constructor(
     private actions$: Actions,
@@ -140,6 +147,39 @@ export class MedicationsEffects {
       { dispatch: false }
     );
 
+    this.getMedicationById$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(MedicationActions.getMedicationById),
+        exhaustMap(({ id }) =>
+          this.medicationService.getMedicationById(id).pipe(
+            map((medication) => {
+              return MedicationActions.getMedicationByIdSuccess({
+                medication: medication
+              });
+            }),
+            catchError((error) => {
+              return of(
+                MedicationActions.getMedicationByIdFailure({ payload: error })
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.getMedicationByIdFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.getMedicationByIdFailure),
+          map((error) => {
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
     this.getMedicationsByUserId$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(MedicationActions.getMedicationsByUserId),
@@ -167,6 +207,64 @@ export class MedicationsEffects {
         return this.actions$.pipe(
           ofType(MedicationActions.getMedicationsByUserIdFailure),
           map((error) => {
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.updateMedication$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(MedicationActions.updateMedication),
+        exhaustMap(({ id, medication }) =>
+          this.medicationService.updateMedication(id, medication).pipe(
+            map((medication) => {
+              return MedicationActions.updateMedicationSuccess({
+                id: id,
+                medication: medication
+              });
+            }),
+            catchError((error) => {
+              return of(
+                MedicationActions.updateMedicationFailure({ payload: error })
+              );
+            }),
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'medicationFeedback',
+                this.responseOK,
+                this.errorResponse
+              );
+
+              if (this.responseOK) {
+                this.router.navigateByUrl('user/medications');
+              }
+            })
+          )
+        )
+      );
+    });
+
+    this.updatePostSuccess$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.updateMedicationSuccess),
+          map(() => {
+            this.responseOK = true;
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.updatePostFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.updateMedicationFailure),
+          map((error) => {
+            this.responseOK = false;
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
           })

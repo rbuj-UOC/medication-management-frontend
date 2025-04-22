@@ -21,6 +21,7 @@ export const deleteMedication = createAction(
   '[MedicationList Page] Delete medication',
   props<{ id: number }>()
 );
+
 export const deleteMedicationSuccess = createAction(
   '[MedicationList Page] Delete medication Success',
   props<{ id: number }>()
@@ -28,6 +29,21 @@ export const deleteMedicationSuccess = createAction(
 
 export const deleteMedicationFailure = createAction(
   '[MedicationList Page] Delete medication Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const getMedicationById = createAction(
+  '[MedicationForm Page] Get medication',
+  props<{ id: string }>()
+);
+
+export const getMedicationByIdSuccess = createAction(
+  '[MedicationForm Page] Get medication Success',
+  props<{ medication: MedicationDTO }>()
+);
+
+export const getMedicationByIdFailure = createAction(
+  '[MedicationForm Page] Get medication Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
@@ -43,5 +59,20 @@ export const getMedicationsByUserIdSuccess = createAction(
 
 export const getMedicationsByUserIdFailure = createAction(
   '[MedicationList Page] Get medication list Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const updateMedication = createAction(
+  '[MedicationForm Page] Update medication',
+  props<{ id: string; medication: MedicationDTO }>()
+);
+
+export const updateMedicationSuccess = createAction(
+  '[MedicationForm Page] Update medication Success',
+  props<{ id: string; medication: MedicationDTO }>()
+);
+
+export const updateMedicationFailure = createAction(
+  '[MedicationForm Page] Update medication Failure',
   props<{ payload: HttpErrorResponse }>()
 );
