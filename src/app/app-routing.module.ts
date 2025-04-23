@@ -4,6 +4,7 @@ import { LoginComponent } from './Auth/components/login.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
 import { TodayListComponent } from './components/today-list/today-list.component';
 import { LandingComponent } from './Landing/components/landing.component';
 import { MedicationFormComponent } from './Medication/components/medication-form/medication-form.component';
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'admin/dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin/task/list',
+    component: TaskListComponent,
     canActivate: [AuthGuard]
   },
   {
