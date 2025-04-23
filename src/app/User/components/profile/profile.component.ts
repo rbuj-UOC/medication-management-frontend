@@ -134,7 +134,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.userId) {
-      this.store.dispatch(UserAction.getUserById({ userId: this.userId }));
+      this.store.dispatch(UserAction.getUser());
     }
   }
 
@@ -149,9 +149,7 @@ export class ProfileComponent implements OnInit {
     this.profileUser = this.profileForm.value;
 
     if (this.userId) {
-      this.store.dispatch(
-        UserAction.updateUser({ userId: this.userId, user: this.profileUser })
-      );
+      this.store.dispatch(UserAction.updateUser({ user: this.profileUser }));
     }
   }
 }

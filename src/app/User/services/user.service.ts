@@ -9,7 +9,7 @@ import { UserDTO } from '../models/user.dto';
   providedIn: 'root'
 })
 export class UserService {
-  private urlBlogUocApi: string;
+  private urlApi: string;
   private controller: string;
 
   constructor(
@@ -17,24 +17,48 @@ export class UserService {
     private sharedService: SharedService
   ) {
     this.controller = 'users';
-    this.urlBlogUocApi = 'http://localhost:3000/' + this.controller;
+    this.urlApi = 'http://localhost:3000/' + this.controller;
+  }
+
+  getUser(): Observable<UserDTO> {
+    return this.http
+      .get<UserDTO>(this.urlApi + '/user')
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  getUserByUserId(userId: string): Observable<UserDTO> {
+    return this.http
+      .get<UserDTO>(this.urlApi + '/user/' + userId)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  getUsers(): Observable<UserDTO[]> {
+    return this.http
+      .get<UserDTO[]>(this.urlApi)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  deleteUser(): Observable<UserDTO> {
+    return this.http
+      .delete<UserDTO>(this.urlApi)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  deleteUserByUserId(userId: string): Observable<UserDTO> {
+    return this.http
+      .delete<UserDTO>(this.urlApi + '/' + userId)
+      .pipe(catchError(this.sharedService.handleError));
   }
 
   register(user: UserDTO): Observable<UserDTO> {
     return this.http
-      .post<UserDTO>(this.urlBlogUocApi, user)
+      .post<UserDTO>(this.urlApi, user)
       .pipe(catchError(this.sharedService.handleError));
   }
 
-  updateUser(userId: string, user: UserDTO): Observable<UserDTO> {
+  updateUser(user: UserDTO): Observable<UserDTO> {
     return this.http
-      .put<UserDTO>(this.urlBlogUocApi + '/' + userId, user)
-      .pipe(catchError(this.sharedService.handleError));
-  }
-
-  getUserById(userId: string): Observable<UserDTO> {
-    return this.http
-      .get<UserDTO>(this.urlBlogUocApi + '/' + userId)
+      .put<UserDTO>(this.urlApi, user)
       .pipe(catchError(this.sharedService.handleError));
   }
 }

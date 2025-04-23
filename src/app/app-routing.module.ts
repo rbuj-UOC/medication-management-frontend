@@ -9,9 +9,11 @@ import { LandingComponent } from './Landing/components/landing.component';
 import { MedicationFormComponent } from './Medication/components/medication-form/medication-form.component';
 import { MedicationListComponent } from './Medication/components/medication-list/medication-list.component';
 import { AuthGuard } from './Shared/Guards/auth.guard';
+import { ScheduleFormComponent } from './Shedule/components/schedule-form/schedule-form.component';
 import { ScheduleListComponent } from './Shedule/components/schedule-list/schedule-list.component';
 import { ProfileComponent } from './User/components/profile/profile.component';
 import { RegisterComponent } from './User/components/register/register.component';
+import { UserListComponent } from './User/components/user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,11 @@ const routes: Routes = [
   {
     path: 'admin/dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin/user/list',
+    component: UserListComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -51,17 +58,22 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'user/medication/:id',
+    path: 'user/medication/form/:id',
     component: MedicationFormComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'user/medications',
+    path: 'user/medication/list',
     component: MedicationListComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'user/schedules/:id',
+    path: 'user/schedule/form/:id',
+    component: ScheduleFormComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/schedule/list/:id',
     component: ScheduleListComponent,
     canActivate: [AuthGuard]
   },

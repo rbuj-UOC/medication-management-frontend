@@ -22,7 +22,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TodayListComponent } from './components/today-list/today-list.component';
-import { UserListComponent } from './components/user-list/user-list.component';
 import { LandingModule } from './Landing/landing.module';
 import { MedicationModule } from './Medication/medication.module';
 import { SpinnerComponent } from './Shared/Components/spinner/spinner.component';
@@ -38,7 +37,6 @@ import { UserModule } from './User/user.module';
     DashboardComponent,
     HistoryListComponent,
     ContactListComponent,
-    UserListComponent,
     TaskListComponent
   ],
   imports: [

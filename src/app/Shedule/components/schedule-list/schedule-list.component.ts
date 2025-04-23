@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUserId } from '../../../Auth/selectors';
-import * as MedicationsAction from '../../../Medication/actions';
 import { MedicationDTO } from '../../../Medication/models/medication.dto';
-import { selectMedication } from '../../../Medication/selectors/medication.selector';
 
 @Component({
   selector: 'app-medication-list',
@@ -13,13 +11,14 @@ import { selectMedication } from '../../../Medication/selectors/medication.selec
   templateUrl: './schedule-list.component.html',
   styleUrls: ['./schedule-list.component.scss']
 })
-export class ScheduleListComponent implements OnInit {
+export class ScheduleListComponent {
   private userId: string | null;
   private medicationId: string | null;
   medication: MedicationDTO;
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private store: Store
   ) {
     this.medicationId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -30,23 +29,9 @@ export class ScheduleListComponent implements OnInit {
         this.userId = user_id;
       }
     });
-
-    this.store.select(selectMedication).subscribe((medication) => {
-      this.medication = medication;
-    });
-  }
-
-  ngOnInit(): void {
-    if (this.medicationId) {
-      this.store.dispatch(
-        MedicationsAction.getMedicationById({ id: this.medicationId })
-      );
-    } else {
-      throw new Error('Method not implemented.');
-    }
   }
 
   createSchedule(): void {
-    throw new Error('Method not implemented.');
+    this.router.navigateByUrl('/user/schedule/form/' + this.medicationId);
   }
 }

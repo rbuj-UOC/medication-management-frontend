@@ -9,9 +9,9 @@ import {
   getMedicationById,
   getMedicationByIdFailure,
   getMedicationByIdSuccess,
-  getMedicationsByUserId,
-  getMedicationsByUserIdFailure,
-  getMedicationsByUserIdSuccess,
+  getMedications,
+  getMedicationsFailure,
+  getMedicationsSuccess,
   updateMedication,
   updateMedicationFailure,
   updateMedicationSuccess
@@ -95,20 +95,20 @@ const _medicationsReducer = createReducer(
     loaded: false,
     error: { payload }
   })),
-  on(getMedicationsByUserId, (state) => ({
+  on(getMedications, (state) => ({
     ...state,
     loading: true,
     loaded: false,
     error: null
   })),
-  on(getMedicationsByUserIdSuccess, (state, action) => ({
+  on(getMedicationsSuccess, (state, action) => ({
     ...state,
     medications: action.medications,
     loading: false,
     loaded: true,
     error: null
   })),
-  on(getMedicationsByUserIdFailure, (state, { payload }) => ({
+  on(getMedicationsFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,

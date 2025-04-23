@@ -7,11 +7,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
-  declarations: [RegisterComponent, ProfileComponent],
+  declarations: [ProfileComponent, RegisterComponent, UserListComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -20,7 +22,8 @@ import { RegisterComponent } from './components/register/register.component';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ]
 })
 export class UserModule {}

@@ -71,6 +71,7 @@ export class MedicationFormComponent implements OnInit {
   }
 
   createMedication() {
+    this.medication.user_id = this.userId;
     this.store.dispatch(
       MedicationsAction.createMedication({ medication: this.medication })
     );

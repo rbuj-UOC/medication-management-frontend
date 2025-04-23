@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatTimepickerModule } from '@angular/material/timepicker';
 import { ScheduleFormComponent } from './components/schedule-form/schedule-form.component';
 import { ScheduleListComponent } from './components/schedule-list/schedule-list.component';
 
@@ -19,7 +21,9 @@ import { ScheduleListComponent } from './components/schedule-list/schedule-list.
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatTimepickerModule,
+    MatNativeDateModule
   ],
   declarations: [ScheduleListComponent, ScheduleFormComponent]
 })

@@ -47,17 +47,16 @@ export const getMedicationByIdFailure = createAction(
   props<{ payload: HttpErrorResponse }>()
 );
 
-export const getMedicationsByUserId = createAction(
-  '[MedicationList Page] Get medication list',
-  props<{ user_id: string }>()
+export const getMedications = createAction(
+  '[MedicationList Page] Get medication list'
 );
 
-export const getMedicationsByUserIdSuccess = createAction(
+export const getMedicationsSuccess = createAction(
   '[MedicationList Page] Get medication list Success',
   props<{ medications: MedicationDTO[] }>()
 );
 
-export const getMedicationsByUserIdFailure = createAction(
+export const getMedicationsFailure = createAction(
   '[MedicationList Page] Get medication list Failure',
   props<{ payload: HttpErrorResponse }>()
 );

@@ -22,8 +22,8 @@ export class MedicationsEffects {
   getMedicationById$: any;
   getMedicationByIdFailure$: any;
 
-  getMedicationsByUserId$: any;
-  getMedicationsByUserIdFailure$: any;
+  getMedications$: any;
+  getMedicationsFailure$: any;
 
   updatePostSuccess$: any;
   updatePostFailure$: any;
@@ -60,7 +60,7 @@ export class MedicationsEffects {
               );
 
               if (this.responseOK) {
-                this.router.navigateByUrl('user/medications');
+                this.router.navigateByUrl('user/medication/list');
               }
             })
           )
@@ -180,19 +180,19 @@ export class MedicationsEffects {
       { dispatch: false }
     );
 
-    this.getMedicationsByUserId$ = createEffect(() => {
+    this.getMedications$ = createEffect(() => {
       return this.actions$.pipe(
-        ofType(MedicationActions.getMedicationsByUserId),
-        exhaustMap(({ user_id }) =>
-          this.medicationService.getMedicationsByUserId(user_id).pipe(
+        ofType(MedicationActions.getMedications),
+        exhaustMap(() =>
+          this.medicationService.getMedications().pipe(
             map((medications) => {
-              return MedicationActions.getMedicationsByUserIdSuccess({
+              return MedicationActions.getMedicationsSuccess({
                 medications: medications
               });
             }),
             catchError((error) => {
               return of(
-                MedicationActions.getMedicationsByUserIdFailure({
+                MedicationActions.getMedicationsFailure({
                   payload: error
                 })
               );
@@ -202,10 +202,10 @@ export class MedicationsEffects {
       );
     });
 
-    this.getMedicationsByUserIdFailure$ = createEffect(
+    this.getMedicationsFailure$ = createEffect(
       () => {
         return this.actions$.pipe(
-          ofType(MedicationActions.getMedicationsByUserIdFailure),
+          ofType(MedicationActions.getMedicationsFailure),
           map((error) => {
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
@@ -239,7 +239,7 @@ export class MedicationsEffects {
               );
 
               if (this.responseOK) {
-                this.router.navigateByUrl('user/medications');
+                this.router.navigateByUrl('user/medication/list');
               }
             })
           )

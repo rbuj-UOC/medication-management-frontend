@@ -39,14 +39,12 @@ export class MedicationListComponent {
 
   private loadMedications(): void {
     if (this.user_id) {
-      this.store.dispatch(
-        MedicationsAction.getMedicationsByUserId({ user_id: this.user_id })
-      );
+      this.store.dispatch(MedicationsAction.getMedications());
     }
   }
 
   createMedication(): void {
-    this.router.navigateByUrl('/user/medication/');
+    this.router.navigateByUrl('/user/medication/form/');
   }
 
   deleteMedication(id: number, name: string): void {
@@ -57,10 +55,10 @@ export class MedicationListComponent {
   }
 
   scheduleMedication(id: number): void {
-    this.router.navigateByUrl('/user/schedules/' + id);
+    this.router.navigateByUrl('/user/schedule/list/' + id);
   }
 
   updateMedication(id: number): void {
-    this.router.navigateByUrl('/user/medication/' + id);
+    this.router.navigateByUrl('/user/medication/form/' + id);
   }
 }
