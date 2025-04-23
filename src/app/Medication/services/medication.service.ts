@@ -37,9 +37,9 @@ export class MedicationService {
       .pipe(catchError(this.sharedService.handleError));
   }
 
-  getMedicationsByUserId(userId: string): Observable<MedicationDTO[]> {
+  getMedications(): Observable<MedicationDTO[]> {
     return this.http
-      .get<MedicationDTO[]>(this.urlApi + '/user/' + userId)
+      .get<MedicationDTO[]>(this.urlApi + '/user')
       .pipe(catchError(this.sharedService.handleError));
   }
 

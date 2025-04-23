@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
   }
 
   adminUsers(): void {
-    this.router.navigateByUrl('admin/users');
+    this.router.navigateByUrl('admin/user/list');
   }
 
   landing(): void {
@@ -123,7 +123,7 @@ export class AppComponent implements OnInit {
   }
 
   userMedications(): void {
-    this.router.navigateByUrl('user/medications');
+    this.router.navigateByUrl('user/medication/list');
   }
 
   toggleMenu() {

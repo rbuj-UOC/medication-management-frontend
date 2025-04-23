@@ -1,8 +1,17 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
-  getUserById,
-  getUserByIdFailure,
-  getUserByIdSuccess,
+  deleteUserByUserId,
+  deleteUserByUserIdFailure,
+  deleteUserByUserIdSuccess,
+  getUser,
+  getUserByUserId,
+  getUserByUserIdFailure,
+  getUserByUserIdSuccess,
+  getUserFailure,
+  getUsers,
+  getUsersFailure,
+  getUsersSuccess,
+  getUserSuccess,
   register,
   registerFailure,
   registerSuccess,
@@ -13,6 +22,7 @@ import {
 import { UserDTO } from '../models/user.dto';
 
 export interface UserState {
+  users: UserDTO[];
   user: UserDTO;
   loading: boolean;
   loaded: boolean;
@@ -20,6 +30,7 @@ export interface UserState {
 }
 
 export const initialState: UserState = {
+  users: new Array<UserDTO>(),
   user: new UserDTO('', '', '', '', new Date(), '', ''),
   loading: false,
   loaded: false,
@@ -28,6 +39,27 @@ export const initialState: UserState = {
 
 const _userReducer = createReducer(
   initialState,
+
+  on(deleteUserByUserId, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(deleteUserByUserIdSuccess, (state, { userId }) => ({
+    ...state,
+    users: [...state.users.filter((user) => user.id !== userId)],
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(deleteUserByUserIdFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
+
   on(register, (state) => ({
     ...state,
     loading: true,
@@ -47,6 +79,7 @@ const _userReducer = createReducer(
     loaded: false,
     error: { payload }
   })),
+
   on(updateUser, (state) => ({
     ...state,
     loading: true,
@@ -66,20 +99,61 @@ const _userReducer = createReducer(
     loaded: false,
     error: { payload }
   })),
-  on(getUserById, (state) => ({
+
+  on(getUser, (state) => ({
     ...state,
     loading: true,
     loaded: false,
     error: null
   })),
-  on(getUserByIdSuccess, (state, action) => ({
+  on(getUserSuccess, (state, action) => ({
     ...state,
     user: action.user,
     loading: false,
     loaded: true,
     error: null
   })),
-  on(getUserByIdFailure, (state, { payload }) => ({
+  on(getUserFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
+
+  on(getUserByUserId, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(getUserByUserIdSuccess, (state, action) => ({
+    ...state,
+    user: action.user,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(getUserByUserIdFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
+
+  on(getUsers, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(getUsersSuccess, (state, action) => ({
+    ...state,
+    users: action.users,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(getUsersFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,
