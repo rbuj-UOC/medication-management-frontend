@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
   }
 
   adminTasks(): void {
-    this.router.navigateByUrl('admin/tasks');
+    this.router.navigateByUrl('admin/task/list');
   }
 
   adminUsers(): void {
