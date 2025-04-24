@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, finalize, map } from 'rxjs/operators';
 import { AuthService } from '../../Auth/services/auth.service';
@@ -46,6 +47,7 @@ export class UserEffects {
     private actions$: Actions,
     private userService: UserService,
     private router: Router,
+    private store: Store,
     private sharedService: SharedService,
     private authService: AuthService
   ) {

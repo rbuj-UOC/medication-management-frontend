@@ -7,7 +7,7 @@ import {
   Validators
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { selectUserId } from '../../../Auth/selectors';
+import { selectUserId, selectUserRole } from '../../../Auth/selectors';
 import * as UserAction from '../../actions';
 import { UserDTO } from '../../models/user.dto';
 import { selectUser } from '../../selectors';
@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup;
   isValidForm: boolean | null;
+  isUser: boolean | null;
   roles: { value: string; label: string }[];
 
   private userId: string;
@@ -103,6 +104,12 @@ export class ProfileComponent implements OnInit {
     this.store.select(selectUserId).subscribe((user_id) => {
       if (user_id) {
         this.userId = user_id;
+      }
+    });
+
+    this.store.select(selectUserRole).subscribe((user_role) => {
+      if (user_role) {
+        this.isUser = user_role === 'user';
       }
     });
 

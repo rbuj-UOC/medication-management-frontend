@@ -107,7 +107,7 @@
         <button mat-flat-button color="primary" type="submit">Update User</button>
       </div>
 
-      <div class="login-line">
+      <div class="login-line" *ngIf="isUser">
         <button mat-flat-button color="primary" type="button" (click)="onDelete()">Delete User Account</button>
       </div>
     </form>
