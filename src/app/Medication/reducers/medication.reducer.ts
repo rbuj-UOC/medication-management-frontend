@@ -12,6 +12,7 @@ import {
   getMedications,
   getMedicationsFailure,
   getMedicationsSuccess,
+  logout,
   updateMedication,
   updateMedicationFailure,
   updateMedicationSuccess
@@ -55,6 +56,7 @@ const _medicationsReducer = createReducer(
     loaded: false,
     error: payload
   })),
+
   on(deleteMedication, (state) => ({
     ...state,
     loading: true,
@@ -76,6 +78,7 @@ const _medicationsReducer = createReducer(
     loaded: false,
     error: { payload }
   })),
+
   on(getMedicationById, (state) => ({
     ...state,
     loading: true,
@@ -95,6 +98,7 @@ const _medicationsReducer = createReducer(
     loaded: false,
     error: { payload }
   })),
+
   on(getMedications, (state) => ({
     ...state,
     loading: true,
@@ -114,6 +118,9 @@ const _medicationsReducer = createReducer(
     loaded: false,
     error: { payload }
   })),
+
+  on(logout, () => initialState),
+
   on(updateMedication, (state) => ({
     ...state,
     loading: true,

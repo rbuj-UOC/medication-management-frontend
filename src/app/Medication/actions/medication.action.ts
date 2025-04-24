@@ -61,6 +61,8 @@ export const getMedicationsFailure = createAction(
   props<{ payload: HttpErrorResponse }>()
 );
 
+export const logout = createAction('[Medication Service] Logout');
+
 export const updateMedication = createAction(
   '[MedicationForm Page] Update medication',
   props<{ id: string; medication: MedicationDTO }>()

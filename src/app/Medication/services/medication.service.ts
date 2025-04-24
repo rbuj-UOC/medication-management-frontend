@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { catchError, Observable } from 'rxjs';
 import { SharedService } from '../../Shared/Services/shared.service';
+import * as MedicationAction from '../actions';
 import { MedicationDTO } from '../models/medication.dto';
 
 @Injectable({
@@ -13,7 +15,8 @@ export class MedicationService {
 
   constructor(
     private http: HttpClient,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private store: Store
   ) {
     this.controller = 'medications';
     this.urlApi = 'http://localhost:3000/' + this.controller;
@@ -41,6 +44,10 @@ export class MedicationService {
     return this.http
       .get<MedicationDTO[]>(this.urlApi + '/user')
       .pipe(catchError(this.sharedService.handleError));
+  }
+
+  logout() {
+    this.store.dispatch(MedicationAction.logout());
   }
 
   updateMedication(

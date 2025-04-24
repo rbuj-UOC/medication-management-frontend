@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SharedService } from '../../Shared/Services/shared.service';
+import * as UserAction from '../actions';
 import { UserDTO } from '../models/user.dto';
 
 @Injectable({
@@ -14,7 +16,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private store: Store
   ) {
     this.controller = 'users';
     this.urlApi = 'http://localhost:3000/' + this.controller;
@@ -48,6 +51,10 @@ export class UserService {
     return this.http
       .delete<UserDTO>(this.urlApi + '/' + userId)
       .pipe(catchError(this.sharedService.handleError));
+  }
+
+  logout() {
+    this.store.dispatch(UserAction.logout());
   }
 
   register(user: UserDTO): Observable<UserDTO> {

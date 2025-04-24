@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, finalize, map } from 'rxjs/operators';
+import { MedicationService } from '../../Medication/services/medication.service';
 import { SharedService } from '../../Shared/Services/shared.service';
+import { UserService } from '../../User/services/user.service';
 import * as AuthActions from '../actions';
 import { AuthDTO } from '../models/auth.dto';
 import { AuthService } from '../services/auth.service';
@@ -15,12 +17,15 @@ export class AuthEffects {
   loginFailure$: any;
   loginSuccess$: any;
   login$: any;
+  logout$: any;
 
   constructor(
     private actions$: Actions,
     private authService: AuthService,
     private router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private userService: UserService,
+    private medicationService: MedicationService
   ) {
     this.responseOK = false;
 
@@ -79,6 +84,19 @@ export class AuthEffects {
             this.responseOK = false;
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.logout$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(AuthActions.logout),
+          map(() => {
+            this.userService.logout();
+            this.medicationService.logout();
           })
         );
       },
