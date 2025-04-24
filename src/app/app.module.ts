@@ -19,8 +19,11 @@ import { appReducers, EffectsArray } from './app.reducers';
 import { AuthModule } from './Auth/auth.module';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HelpComponent } from './components/help/help.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { TermsComponent } from './components/terms/terms.component';
 import { TodayListComponent } from './components/today-list/today-list.component';
 import { LandingModule } from './Landing/landing.module';
 import { MedicationModule } from './Medication/medication.module';
@@ -37,7 +40,10 @@ import { UserModule } from './User/user.module';
     DashboardComponent,
     HistoryListComponent,
     ContactListComponent,
-    TaskListComponent
+    TaskListComponent,
+    PrivacyComponent,
+    TermsComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

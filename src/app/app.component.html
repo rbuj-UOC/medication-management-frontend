@@ -74,7 +74,17 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
+  <mat-sidenav-content class="router-content">
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="footer-content">
+      <ul class="footer-menu">
+        <li>© 2025 Robert Buj</li>
+        <li><a routerLink="/privacy">Privacy Policy</a></li>
+        <li><a routerLink="/terms">Terms of Service</a></li>
+        <li><a routerLink="/help">Help</a></li>
+      </ul>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
