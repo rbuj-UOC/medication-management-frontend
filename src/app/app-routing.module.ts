@@ -3,8 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Auth/components/login.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HelpComponent } from './components/help/help.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { TermsComponent } from './components/terms/terms.component';
 import { TodayListComponent } from './components/today-list/today-list.component';
 import { LandingComponent } from './Landing/components/landing.component';
 import { MedicationFormComponent } from './Medication/components/medication-form/medication-form.component';
@@ -37,12 +40,20 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'help',
+    component: HelpComponent
+  },
+  {
     path: 'landing',
     component: LandingComponent
   },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'privacy',
+    component: PrivacyComponent
   },
   {
     path: 'profile',
@@ -52,6 +63,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'terms',
+    component: TermsComponent
   },
   {
     path: 'user/contacts',

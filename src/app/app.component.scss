@@ -4,6 +4,7 @@ mat-toolbar {
   position: fixed;
   top: 0;
   z-index: 2;
+
   button {
     background: var(--mat-sys-secondary);
     color: var(--mat-sys-on-secondary);
@@ -38,6 +39,7 @@ mat-sidenav {
 // Move the content down so that it won't be hidden by the toolbar
 mat-sidenav-content {
   padding-top: 3.5rem;
+
   @media screen and (min-width: 600px) {
     padding-top: 4rem;
   }
@@ -53,4 +55,43 @@ mat-sidenav-content {
 
 .toolbar-spacer {
   flex: 1 1 auto;
+}
+
+.router-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+.footer-content {
+  padding-bottom: 56px;
+  text-align: center;
+  margin: 16px auto;
+
+  @media screen and (min-width: 600px) {
+    padding-bottom: 64px;
+  }
+}
+
+ul.footer-menu {
+  list-style-type: none;
+
+  li {
+    display: block;
+
+    @media screen and (min-width: 600px) {
+      display: inline-block;
+    }
+  }
+
+  li+li:before {
+    @media screen and (min-width: 600px) {
+      content: '|';
+      padding: 0 8px;
+    }
+  }
 }
