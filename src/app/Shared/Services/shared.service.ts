@@ -24,12 +24,12 @@ export class SharedService {
     const toastMsg = document.getElementById(element);
     if (toastMsg) {
       if (validRequest) {
-        toastMsg.className = 'show requestOk';
+        toastMsg.className = 'fade-in requestOk';
         toastMsg.textContent = 'Form submitted successfully.';
         await this.wait(2500);
-        toastMsg.className = toastMsg.className.replace('show', '');
+        toastMsg.className = toastMsg.className.replace('fade-in', 'fade-out');
       } else {
-        toastMsg.className = 'show requestKo';
+        toastMsg.className = 'fade-in requestKo';
         if (error?.messageDetail) {
           toastMsg.textContent =
             'Error on form submitted, show logs. Message: ' +
@@ -46,8 +46,8 @@ export class SharedService {
             error?.statusCode;
         }
 
-        await this.wait(2500);
-        toastMsg.className = toastMsg.className.replace('show', '');
+        await this.wait(7500);
+        toastMsg.className = toastMsg.className.replace('fade-in', 'fade-out');
       }
     }
   }

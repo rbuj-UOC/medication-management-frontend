@@ -1,27 +1,38 @@
 @use '@angular/material' as mat;
 
 :root {
-  @include mat.button-overrides(
-    (
-      filled-container-shape: 8px
-    )
-  );
-  @include mat.sidenav-overrides(
-    (
-      container-shape: 0px
-    )
-  );
+  @include mat.button-overrides((filled-container-shape: 8px));
+  @include mat.sidenav-overrides((container-shape: 0px));
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
 html {
   color-scheme: light dark;
-  @include mat.theme(
-    (
-      color: mat.$blue-palette,
+  @include mat.theme((color: mat.$blue-palette,
       typography: Roboto,
-      density: 0
-    )
-  );
+      density: 0));
+}
+
+.warn {
+  @include mat.theme((color: mat.$red-palette));
+}
+
+.accent {
+  @include mat.theme((color: mat.$magenta-palette));
+}
+
+.requestOk {
+  color: white;
+  background-color: green;
+}
+
+.requestKo {
+  color: var(--mat-sys-on-error);
+  background-color: var(--mat-sys-error);
 }
 
 html,
