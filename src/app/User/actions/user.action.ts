@@ -2,10 +2,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { UserDTO } from '../models/user.dto';
 
-export const deleteUser = createAction('[??? Page] Delete user');
-export const deleteUserSuccess = createAction('[??? Page] Delete user Success');
+export const deleteUser = createAction('[Profile Page] Delete user');
+export const deleteUserSuccess = createAction(
+  '[Profile Page] Delete user Success'
+);
 export const deleteUserFailure = createAction(
-  '[??? Page] Delete user Failure',
+  '[Profile Page] Delete user Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 

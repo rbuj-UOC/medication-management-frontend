@@ -138,7 +138,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  updateUser(): void {
+  onSubmit(): void {
     this.isValidForm = false;
 
     if (this.profileForm.invalid) {
@@ -150,6 +150,13 @@ export class ProfileComponent implements OnInit {
 
     if (this.userId) {
       this.store.dispatch(UserAction.updateUser({ user: this.profileUser }));
+    }
+  }
+
+  onDelete(): void {
+    const result = confirm('Confirm delete usr account');
+    if (result) {
+      this.store.dispatch(UserAction.deleteUser());
     }
   }
 }

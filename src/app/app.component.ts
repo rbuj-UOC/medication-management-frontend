@@ -3,12 +3,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as AuthAction from './Auth/actions';
 import {
   selectAccessToken,
   selectAuthStateLoading,
   selectUserRole
 } from './Auth/selectors';
+import { AuthService } from './Auth/services/auth.service';
 import { selectUserStateLoading } from './User/selectors';
 
 @Component({
@@ -34,7 +34,8 @@ export class AppComponent implements OnInit {
   constructor(
     private observer: BreakpointObserver,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private authService: AuthService
   ) {
     this.showAuthSection = false;
     this.showNoAuthSection = true;
@@ -98,8 +99,7 @@ export class AppComponent implements OnInit {
   }
 
   logout(): void {
-    this.store.dispatch(AuthAction.logout());
-    this.router.navigateByUrl('landing');
+    this.authService.logout();
   }
 
   profile(): void {

@@ -1,8 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
+  deleteUser,
   deleteUserByUserId,
   deleteUserByUserIdFailure,
   deleteUserByUserIdSuccess,
+  deleteUserFailure,
+  deleteUserSuccess,
   getUser,
   getUserByUserId,
   getUserByUserIdFailure,
@@ -39,6 +42,27 @@ export const initialState: UserState = {
 
 const _userReducer = createReducer(
   initialState,
+
+  on(deleteUser, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(deleteUserSuccess, (state) => ({
+    ...state,
+    users: new Array<UserDTO>(),
+    user: new UserDTO('', '', '', '', new Date(), '', ''),
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(deleteUserFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
 
   on(deleteUserByUserId, (state) => ({
     ...state,
