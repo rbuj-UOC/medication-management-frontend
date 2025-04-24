@@ -15,6 +15,7 @@ import {
   getUsersFailure,
   getUsersSuccess,
   getUserSuccess,
+  logout,
   register,
   registerFailure,
   registerSuccess,
@@ -51,8 +52,6 @@ const _userReducer = createReducer(
   })),
   on(deleteUserSuccess, (state) => ({
     ...state,
-    users: new Array<UserDTO>(),
-    user: new UserDTO('', '', '', '', new Date(), '', ''),
     loading: false,
     loaded: true,
     error: null
@@ -78,46 +77,6 @@ const _userReducer = createReducer(
     error: null
   })),
   on(deleteUserByUserIdFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(register, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(registerSuccess, (state, action) => ({
-    ...state,
-    user: action.user,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(registerFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(updateUser, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(updateUserSuccess, (state, action) => ({
-    ...state,
-    user: action.user,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(updateUserFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,
@@ -178,6 +137,48 @@ const _userReducer = createReducer(
     error: null
   })),
   on(getUsersFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
+
+  on(logout, () => initialState),
+
+  on(register, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(registerSuccess, (state, action) => ({
+    ...state,
+    user: action.user,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(registerFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
+
+  on(updateUser, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(updateUserSuccess, (state, action) => ({
+    ...state,
+    user: action.user,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(updateUserFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,

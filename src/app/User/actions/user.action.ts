@@ -57,6 +57,8 @@ export const getUsersFailure = createAction(
   props<{ payload: HttpErrorResponse }>()
 );
 
+export const logout = createAction('[User Service] Logout');
+
 export const register = createAction(
   '[Register Page] Register new user',
   props<{ user: UserDTO }>()
