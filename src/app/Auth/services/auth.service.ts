@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SharedService } from '../../Shared/Services/shared.service';
+import * as AuthAction from '../actions';
 import { AuthDTO } from '../models/auth.dto';
 
 export interface AuthToken {
@@ -20,7 +23,9 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private router: Router,
+    private store: Store
   ) {
     this.controller = 'auth';
     this.urlBlogUocApi = 'http://localhost:3000/' + this.controller;
@@ -30,5 +35,10 @@ export class AuthService {
     return this.http
       .post<AuthToken>(this.urlBlogUocApi, auth)
       .pipe(catchError(this.sharedService.handleError));
+  }
+
+  logout(): void {
+    this.store.dispatch(AuthAction.logout());
+    this.router.navigateByUrl('landing');
   }
 }

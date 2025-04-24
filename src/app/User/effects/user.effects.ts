@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, finalize, map } from 'rxjs/operators';
+import { AuthService } from '../../Auth/services/auth.service';
 import { SharedService } from '../../Shared/Services/shared.service';
 import * as UserActions from '../actions';
 import { UserService } from '../services/user.service';
@@ -45,7 +46,8 @@ export class UserEffects {
     private actions$: Actions,
     private userService: UserService,
     private router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private authService: AuthService
   ) {
     this.responseOK = false;
 
@@ -62,10 +64,13 @@ export class UserEffects {
             }),
             finalize(async () => {
               await this.sharedService.managementToast(
-                '???Feedback',
+                'profileFeedback',
                 this.responseOK,
                 this.errorResponse
               );
+              if (this.responseOK) {
+                this.authService.logout();
+              }
             })
           )
         )
