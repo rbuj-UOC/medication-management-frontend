@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup;
   isValidForm: boolean | null;
-  isUser: boolean | null;
+  isAdmin: boolean | null;
   roles: { value: string; label: string }[];
 
   private userId: string;
@@ -109,7 +109,7 @@ export class ProfileComponent implements OnInit {
 
     this.store.select(selectUserRole).subscribe((user_role) => {
       if (user_role) {
-        this.isUser = user_role === 'user';
+        this.isAdmin = user_role === 'admin';
       }
     });
 
