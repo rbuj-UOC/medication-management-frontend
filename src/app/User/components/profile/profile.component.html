@@ -7,7 +7,7 @@
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <div class="login-line">
+      <div class="profile-line">
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input matInput type="text" [formControl]="name" />
@@ -68,7 +68,7 @@
         </mat-form-field>
       </div>
 
-      <div class="login-line">
+      <div class="profile-line">
         <mat-form-field>
           <mat-label>Email</mat-label>
           <input matInput type="email" [formControl]="email" />
@@ -92,7 +92,7 @@
         </mat-form-field>
       </div>
 
-      <div class="login-line">
+      <div class="profile-line">
         <mat-form-field class="full-width">
           <mat-label>Choose a role</mat-label>
           <mat-select [formControl]="role">
@@ -103,12 +103,12 @@
         </mat-form-field>
       </div>
 
-      <div class="login-line">
+      <div class="profile-line">
         <button mat-flat-button color="primary" type="submit">Update User</button>
       </div>
 
-      <div class="login-line" *ngIf="isUser">
-        <button mat-flat-button color="primary" type="button" (click)="onDelete()">Delete User Account</button>
+      <div class="profile-line" *ngIf="isUser">
+        <button mat-flat-button color="warn" type="button" (click)="onDelete()">Delete User Account</button>
       </div>
     </form>
   </mat-card-content>

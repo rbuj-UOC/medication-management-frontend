@@ -34,6 +34,7 @@
     bottom: 0;
     opacity: 0;
   }
+
   to {
     bottom: 30px;
     opacity: 1;
@@ -45,6 +46,7 @@
     bottom: 30px;
     opacity: 1;
   }
+
   to {
     bottom: 0;
     opacity: 0;
@@ -52,15 +54,21 @@
 }
 
 .login-container-card {
-  width: 300px;
-  margin: 0 auto;
+  margin: 0 32px;
+
+  @media screen and (min-width: 600px) {
+    margin: 0 auto;
+    width: 400px;
+  }
+
 }
 
-.login-form > mat-form-field {
-  display: inline;
+.login-line {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
 }
 
-.button-login {
-  display: block;
-  margin: 8px auto 0;
+button {
+  margin: 8px 0;
 }
