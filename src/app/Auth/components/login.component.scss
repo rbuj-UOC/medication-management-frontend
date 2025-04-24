@@ -1,11 +1,6 @@
-.error {
-  color: red;
-}
-
 #loginFeedback {
-  visibility: hidden;
-  min-width: 250px;
-  color: #fff;
+  opacity: 0;
+  display: none;
   text-align: center;
   padding: 16px;
   z-index: 1;
@@ -14,43 +9,41 @@
   margin-right: auto;
 }
 
-#loginFeedback.requestOk {
-  background-color: green;
+#loginFeedback.fade-in {
+  display: block;
+  animation: fade-in 0.7s ease-in forwards;
 }
 
-#loginFeedback.requestKo {
-  background-color: red;
+#loginFeedback.fade-out {
+  animation: fade-out 0.7s ease-out forwards;
 }
 
-#loginFeedback.show {
-  visibility: visible;
-  animation:
-    fadein 0.5s,
-    fadeout 0.5s 2.5s;
-}
-
-@keyframes fadein {
-  from {
-    bottom: 0;
+@keyframes fade-in {
+  0% {
     opacity: 0;
+    display: none;
   }
 
-  to {
-    bottom: 30px;
+  100% {
     opacity: 1;
+    display: block;
   }
 }
 
-@keyframes fadeout {
-  from {
-    bottom: 30px;
+@keyframes fade-out {
+  0% {
     opacity: 1;
+    display: block;
   }
 
-  to {
-    bottom: 0;
+  100% {
     opacity: 0;
+    display: none;
   }
+}
+
+.error {
+  color: var(--mat-sys-error);
 }
 
 .login-container-card {
@@ -71,4 +64,8 @@
 
 button {
   margin: 8px 0;
+}
+
+h1 {
+  margin-bottom: 16px;
 }

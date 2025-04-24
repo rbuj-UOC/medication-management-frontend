@@ -6,9 +6,11 @@
     <h1>Medications</h1>
   </mat-card-header>
   <mat-card-content>
-    <button mat-flat-button color="primary" (click)="createMedication()" class="add-button">
-      ADD
-    </button>
+    <div class="medication-line">
+      <button mat-flat-button color="primary" (click)="createMedication()" class="add-button">
+        ADD
+      </button>
+    </div>
     <table mat-table [dataSource]="medications" class="mat-elevation-z8">
       <!-- Title Column -->
       <ng-container matColumnDef="medication-name">

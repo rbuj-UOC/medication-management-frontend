@@ -1,7 +1,6 @@
 #profileFeedback {
-  visibility: hidden;
-  min-width: 250px;
-  color: #fff;
+  opacity: 0;
+  display: none;
   text-align: center;
   padding: 16px;
   z-index: 1;
@@ -10,47 +9,41 @@
   margin-right: auto;
 }
 
-#profileFeedback.requestOk {
-  background-color: green;
+#profileFeedback.fade-in {
+  display: block;
+  animation: fade-in 0.7s ease-in forwards;
 }
 
-#profileFeedback.requestKo {
-  background-color: red;
+#profileFeedback.fade-out {
+  animation: fade-out 0.7s ease-out forwards;
 }
 
-#profileFeedback.show {
-  visibility: visible;
-  animation:
-    fadein 0.5s,
-    fadeout 0.5s 2.5s;
-}
-
-@keyframes fadein {
-  from {
-    bottom: 0;
+@keyframes fade-in {
+  0% {
     opacity: 0;
+    display: none;
   }
 
-  to {
-    bottom: 30px;
+  100% {
     opacity: 1;
+    display: block;
   }
 }
 
-@keyframes fadeout {
-  from {
-    bottom: 30px;
+@keyframes fade-out {
+  0% {
     opacity: 1;
+    display: block;
   }
 
-  to {
-    bottom: 0;
+  100% {
     opacity: 0;
+    display: none;
   }
 }
 
 .error {
-  color: red;
+  color: var(--mat-sys-error);
 }
 
 .profile-line {
@@ -69,4 +62,8 @@
 
 button {
   margin: 8px 0;
+}
+
+h1 {
+  margin-bottom: 16px;
 }

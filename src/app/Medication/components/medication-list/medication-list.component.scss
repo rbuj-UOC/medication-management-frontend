@@ -1,7 +1,6 @@
 #medicationListFeedback {
-  visibility: hidden;
-  min-width: 250px;
-  color: #fff;
+  opacity: 0;
+  display: none;
   text-align: center;
   padding: 16px;
   z-index: 1;
@@ -10,47 +9,61 @@
   margin-right: auto;
 }
 
-#medicationListFeedback.requestOk {
-  background-color: green;
+#medicationListFeedback.fade-in {
+  display: block;
+  animation: fade-in 0.7s ease-in forwards;
 }
 
-#medicationListFeedback.requestKo {
-  background-color: red;
+#medicationListFeedback.fade-out {
+  animation: fade-out 0.7s ease-out forwards;
 }
 
-#medicationListFeedback.show {
-  visibility: visible;
-  animation:
-    fadein 0.5s,
-    fadeout 0.5s 2.5s;
-}
-
-@keyframes fadein {
-  from {
-    bottom: 0;
+@keyframes fade-in {
+  0% {
     opacity: 0;
+    display: none;
   }
-  to {
-    bottom: 30px;
+
+  100% {
     opacity: 1;
+    display: block;
   }
 }
 
-@keyframes fadeout {
-  from {
-    bottom: 30px;
+@keyframes fade-out {
+  0% {
     opacity: 1;
+    display: block;
   }
-  to {
-    bottom: 0;
+
+  100% {
     opacity: 0;
+    display: none;
   }
 }
 
 .error {
-  color: red;
+  color: var(--mat-sys-error);
 }
 
 .add-button {
+  margin-bottom: 16px;
+}
+
+.medication-line {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+
+  @media screen and (min-width: 740px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1240px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+h1 {
   margin-bottom: 16px;
 }
