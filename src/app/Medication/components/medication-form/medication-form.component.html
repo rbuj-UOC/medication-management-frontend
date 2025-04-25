@@ -20,7 +20,8 @@
 
       <div class="medication-line">
         <button mat-flat-button color="primary" type="submit">SAVE</button>
-        <button mat-flat-button color="primary" type="button" (click)="cancelMedication()">CANCEL</button>
+        <button mat-flat-button color="primary" type="button" (click)="cancelMedication()"
+          *ngIf="!isUpdateMode">CANCEL</button>
       </div>
     </form>
 
