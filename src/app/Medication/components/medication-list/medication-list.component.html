@@ -11,7 +11,8 @@
         ADD
       </button>
     </div>
-    <table mat-table [dataSource]="medications" class="mat-elevation-z8">
+    <div *ngIf="medications.length === 0">No Medications</div>
+    <table mat-table [dataSource]="medications" class="mat-elevation-z8" *ngIf="medications.length > 0">
       <!-- Name Column -->
       <ng-container matColumnDef="medication-name">
         <th mat-header-cell *matHeaderCellDef>Name</th>

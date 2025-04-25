@@ -5,7 +5,9 @@
   </button>
 </div>
 
-<table mat-table [dataSource]="schedules" class="mat-elevation-z8">
+<div *ngIf="schedules.length === 0">No Schedules</div>
+
+<table mat-table [dataSource]="schedules" class="mat-elevation-z8" *ngIf="schedules.length > 0">
   <!-- Name Column -->
   <ng-container matColumnDef="schedule-start_date">
     <th mat-header-cell *matHeaderCellDef>Time</th>
