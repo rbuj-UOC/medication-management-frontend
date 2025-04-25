@@ -48,7 +48,9 @@ export class SchedulesEffects {
               );
 
               if (this.responseOK) {
-                this.router.navigateByUrl('user/schedule/list');
+                this.router.navigateByUrl(
+                  'user/medication/form/' + schedule.medication_id
+                );
               }
             })
           )
