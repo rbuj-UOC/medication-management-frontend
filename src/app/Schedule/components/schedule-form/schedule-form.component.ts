@@ -19,7 +19,6 @@ export class ScheduleFormComponent implements OnInit {
   isValidForm: boolean;
   isUpdateMode: boolean;
   schedule: ScheduleDTO;
-  private medication_id: number | null;
   private scheduleId: number | null;
   private medicationId: number | null;
 
@@ -59,8 +58,11 @@ export class ScheduleFormComponent implements OnInit {
 
     this.isValidForm = true;
     this.schedule = this.scheduleForm.value;
+    this.schedule.medication_id = this.medicationId;
     this.schedule.hour = this.schedule.start_date.getHours();
     this.schedule.minute = this.schedule.start_date.getMinutes();
+    this.schedule.cron_expression = '* * * * *';
+    this.schedule.frequency = 'daily';
 
     if (this.isUpdateMode) {
       this.editSchedule();
@@ -70,7 +72,6 @@ export class ScheduleFormComponent implements OnInit {
   }
 
   createSchedule() {
-    this.schedule.medication_id = this.medication_id;
     this.store.dispatch(
       ScheduleAction.createSchedule({ schedule: this.schedule })
     );
