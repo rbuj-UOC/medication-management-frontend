@@ -15,7 +15,11 @@ import { selectMedications } from '../../selectors/medication.selector';
 })
 export class MedicationListComponent {
   medications: MedicationDTO[];
-  displayedColumns: string[] = ['medication-name', 'medication-actions'];
+  displayedColumns: string[] = [
+    'medication-name',
+    'medication-schedules',
+    'medication-actions'
+  ];
   private user_id: string;
 
   constructor(
