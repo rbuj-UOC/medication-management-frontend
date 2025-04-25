@@ -61,7 +61,7 @@ export class ScheduleFormComponent implements OnInit {
     this.schedule.medication_id = this.medicationId;
     this.schedule.hour = this.schedule.start_date.getHours();
     this.schedule.minute = this.schedule.start_date.getMinutes();
-    this.schedule.cron_expression = '* * * * *';
+    this.schedule.cron_expression = `${this.schedule.minute} ${this.schedule.hour} * * *`;
     this.schedule.frequency = 'daily';
 
     if (this.isUpdateMode) {
