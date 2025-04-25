@@ -28,6 +28,12 @@ export class ScheduleService {
       .pipe(catchError(this.sharedService.handleError));
   }
 
+  deleteSchedule(id: number): Observable<ScheduleDTO> {
+    return this.http
+      .delete<ScheduleDTO>(this.urlApi + '/' + id)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
   getSchedulesByMedicationId(id: string): Observable<ScheduleDTO[]> {
     return this.http
       .get<ScheduleDTO[]>(this.urlApi + '/medication/' + id)
