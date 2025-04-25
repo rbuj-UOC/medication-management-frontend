@@ -58,10 +58,6 @@ export class MedicationListComponent {
     }
   }
 
-  scheduleMedication(id: number): void {
-    this.router.navigateByUrl('/user/schedule/list/' + id);
-  }
-
   updateMedication(id: number): void {
     this.router.navigateByUrl('/user/medication/form/' + id);
   }

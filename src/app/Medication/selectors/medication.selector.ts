@@ -11,6 +11,13 @@ export const selectMedication = createSelector(
   }
 );
 
+export const selectMedicationId = createSelector(
+  selectMedicationsState,
+  (state) => {
+    return state.medication.id;
+  }
+);
+
 export const selectMedications = createSelector(
   selectMedicationsState,
   (state) => {

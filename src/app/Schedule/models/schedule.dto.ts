@@ -1,6 +1,6 @@
 export class ScheduleDTO {
   id!: number;
-  medication_id!: string;
+  medication_id!: number;
   start_date: Date;
   end_date: Date;
   frequency!: string;

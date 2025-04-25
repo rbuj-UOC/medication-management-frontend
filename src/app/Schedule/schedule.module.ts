@@ -25,6 +25,7 @@ import { ScheduleListComponent } from './components/schedule-list/schedule-list.
     MatTimepickerModule,
     MatNativeDateModule
   ],
-  declarations: [ScheduleListComponent, ScheduleFormComponent]
+  declarations: [ScheduleListComponent, ScheduleFormComponent],
+  exports: [ScheduleListComponent]
 })
 export class ScheduleModule {}

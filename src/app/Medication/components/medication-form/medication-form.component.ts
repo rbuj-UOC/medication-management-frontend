@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUserId } from '../../../Auth/selectors';
 import * as MedicationsAction from '../../actions';
@@ -24,13 +24,14 @@ export class MedicationFormComponent implements OnInit {
   medicationForm: FormGroup;
   isValidForm: boolean | null;
   name: FormControl;
-  private isUpdateMode: boolean;
+  isUpdateMode: boolean;
   private userId: string | null;
   private medicationId: string | null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
+    private router: Router,
     private store: Store
   ) {
     this.isValidForm = null;
@@ -68,6 +69,10 @@ export class MedicationFormComponent implements OnInit {
     } else {
       this.medicationForm.reset();
     }
+  }
+
+  cancelMedication() {
+    this.router.navigateByUrl('/user/medication/list');
   }
 
   createMedication() {
