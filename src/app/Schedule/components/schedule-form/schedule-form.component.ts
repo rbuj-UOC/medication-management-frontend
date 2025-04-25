@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { selectMedicationId } from '../../../Medication/selectors/medication.selector';
 import * as ScheduleAction from '../../actions';
 import { ScheduleDTO } from '../../models/schedule.dto';
+import { selectSchedule } from '../../selectors';
 
 @Component({
   selector: 'app-schedule-form',
@@ -19,7 +20,7 @@ export class ScheduleFormComponent implements OnInit {
   isValidForm: boolean;
   isUpdateMode: boolean;
   schedule: ScheduleDTO;
-  private scheduleId: number | null;
+  private scheduleId: string | null;
   private medicationId: number | null;
 
   constructor(
@@ -28,22 +29,29 @@ export class ScheduleFormComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store
   ) {
+    this.scheduleId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.isUpdateMode = false;
+    this.start_date = new FormControl();
+    this.scheduleForm = this.fb.group({
+      start_date: this.start_date
+    });
     this.store.select(selectMedicationId).subscribe((medicationId) => {
       if (medicationId) {
         this.medicationId = medicationId;
       }
     });
-    this.isUpdateMode = false;
-    this.start_date = new FormControl();
-
-    this.scheduleForm = this.fb.group({
-      start_date: this.start_date
+    this.store.select(selectSchedule).subscribe((schedule) => {
+      this.schedule = schedule;
+      this.start_date.setValue(this.schedule.start_date);
     });
   }
 
   ngOnInit(): void {
     if (this.scheduleId) {
       this.isUpdateMode = true;
+      this.store.dispatch(
+        ScheduleAction.getScheduleById({ id: this.scheduleId })
+      );
     } else {
       this.scheduleForm.reset();
     }

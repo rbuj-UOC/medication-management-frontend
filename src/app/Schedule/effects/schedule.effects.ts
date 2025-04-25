@@ -20,6 +20,8 @@ export class SchedulesEffects {
   ScheduleActions: any;
   deleteScheduleSuccess$: any;
   deleteScheduleFailure$: any;
+  getScheduleById$: any;
+  getScheduleByIdFailure$: any;
 
   constructor(
     private actions$: Actions,
@@ -133,6 +135,39 @@ export class SchedulesEffects {
           ofType(ScheduleActions.deleteScheduleFailure),
           map((error) => {
             this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.getScheduleById$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(ScheduleActions.getScheduleById),
+        exhaustMap(({ id }) =>
+          this.scheduleService.getScheduleById(id).pipe(
+            map((schedule) => {
+              return ScheduleActions.getScheduleByIdSuccess({
+                schedule: schedule
+              });
+            }),
+            catchError((error) => {
+              return of(
+                ScheduleActions.getScheduleByIdFailure({ payload: error })
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.getScheduleByIdFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(ScheduleActions.getScheduleByIdFailure),
+          map((error) => {
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
           })

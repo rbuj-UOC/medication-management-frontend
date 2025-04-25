@@ -6,6 +6,9 @@ import {
   deleteSchedule,
   deleteScheduleFailure,
   deleteScheduleSuccess,
+  getScheduleById,
+  getScheduleByIdFailure,
+  getScheduleByIdSuccess,
   getSchedulesByMedicationId,
   getSchedulesByMedicationIdFailure,
   getSchedulesByMedicationIdSuccess,
@@ -65,6 +68,26 @@ const _schedulesReducer = createReducer(
     error: null
   })),
   on(deleteScheduleFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
+
+  on(getScheduleById, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(getScheduleByIdSuccess, (state, action) => ({
+    ...state,
+    schedule: action.schedule,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(getScheduleByIdFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,

@@ -32,6 +32,21 @@ export const deleteScheduleFailure = createAction(
   props<{ payload: HttpErrorResponse }>()
 );
 
+export const getScheduleById = createAction(
+  '[ScheduleForm Page] Get Schedule',
+  props<{ id: string }>()
+);
+
+export const getScheduleByIdSuccess = createAction(
+  '[ScheduleForm Page] Get Schedule Success',
+  props<{ schedule: ScheduleDTO }>()
+);
+
+export const getScheduleByIdFailure = createAction(
+  '[ScheduleForm Page] Get Schedule Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
 export const getSchedulesByMedicationId = createAction(
   '[MedicationForm Page] Get Schedule List By Medication Id',
   props<{ medicationId: string }>()
