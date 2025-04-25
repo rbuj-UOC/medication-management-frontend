@@ -22,6 +22,9 @@ export class SchedulesEffects {
   deleteScheduleFailure$: any;
   getScheduleById$: any;
   getScheduleByIdFailure$: any;
+  updateSchedule$: any;
+  updateScheduleSuccess$: any;
+  updateScheduleFailure$: any;
 
   constructor(
     private actions$: Actions,
@@ -203,6 +206,64 @@ export class SchedulesEffects {
         return this.actions$.pipe(
           ofType(ScheduleActions.getSchedulesByMedicationIdFailure),
           map((error) => {
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.updateSchedule$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(ScheduleActions.updateSchedule),
+        exhaustMap(({ id, schedule }) =>
+          this.scheduleService.updateMedication(id, schedule).pipe(
+            map((schedule) => {
+              return ScheduleActions.updateScheduleSuccess({
+                id: id,
+                schedule: schedule
+              });
+            }),
+            catchError((error) => {
+              return of(
+                ScheduleActions.updateScheduleFailure({ payload: error })
+              );
+            }),
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'medicationFeedback',
+                this.responseOK,
+                this.errorResponse
+              );
+
+              if (this.responseOK) {
+                this.router.navigateByUrl('user/medication/list');
+              }
+            })
+          )
+        )
+      );
+    });
+
+    this.updateScheduleSuccess$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(ScheduleActions.updateScheduleSuccess),
+          map(() => {
+            this.responseOK = true;
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.updateScheduleFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(ScheduleActions.updateScheduleFailure),
+          map((error) => {
+            this.responseOK = false;
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
           })

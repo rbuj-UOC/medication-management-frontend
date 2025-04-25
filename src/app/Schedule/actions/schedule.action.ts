@@ -63,3 +63,18 @@ export const getSchedulesByMedicationIdFailure = createAction(
 );
 
 export const logout = createAction('[Schedule Service] Logout');
+
+export const updateSchedule = createAction(
+  '[ScheduleForm Page] Update Schedules',
+  props<{ id: string; schedule: ScheduleDTO }>()
+);
+
+export const updateScheduleSuccess = createAction(
+  '[ScheduleForm Page] Update Schedules Success',
+  props<{ id: string; schedule: ScheduleDTO }>()
+);
+
+export const updateScheduleFailure = createAction(
+  '[ScheduleForm Page] Update Schedules Failure',
+  props<{ payload: HttpErrorResponse }>()
+);

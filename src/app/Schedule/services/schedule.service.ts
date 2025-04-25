@@ -49,4 +49,10 @@ export class ScheduleService {
   logout() {
     this.store.dispatch(ScheduleAction.logout());
   }
+
+  updateMedication(id: string, schedule: ScheduleDTO): Observable<ScheduleDTO> {
+    return this.http
+      .put<ScheduleDTO>(this.urlApi + '/' + id, schedule)
+      .pipe(catchError(this.sharedService.handleError));
+  }
 }
