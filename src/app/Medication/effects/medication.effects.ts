@@ -25,9 +25,9 @@ export class MedicationsEffects {
   getMedications$: any;
   getMedicationsFailure$: any;
 
-  updatePostSuccess$: any;
-  updatePostFailure$: any;
   updateMedication$: any;
+  updateMedicationSuccess$: any;
+  updateMedicationFailure$: any;
 
   constructor(
     private actions$: Actions,
@@ -247,7 +247,7 @@ export class MedicationsEffects {
       );
     });
 
-    this.updatePostSuccess$ = createEffect(
+    this.updateMedicationSuccess$ = createEffect(
       () => {
         return this.actions$.pipe(
           ofType(MedicationActions.updateMedicationSuccess),
@@ -259,7 +259,7 @@ export class MedicationsEffects {
       { dispatch: false }
     );
 
-    this.updatePostFailure$ = createEffect(
+    this.updateMedicationFailure$ = createEffect(
       () => {
         return this.actions$.pipe(
           ofType(MedicationActions.updateMedicationFailure),

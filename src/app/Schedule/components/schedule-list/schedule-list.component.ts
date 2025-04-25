@@ -30,7 +30,7 @@ export class ScheduleListComponent {
   }
 
   createSchedule(): void {
-    this.router.navigateByUrl('/user/schedule/form');
+    this.router.navigateByUrl('/user/schedule/form/');
   }
 
   deleteSchedule(id: number): void {

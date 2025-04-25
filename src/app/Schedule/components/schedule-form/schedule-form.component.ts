@@ -57,6 +57,25 @@ export class ScheduleFormComponent implements OnInit {
     }
   }
 
+  cancelSchedule() {
+    this.router.navigateByUrl('/user/medication/form/' + this.medicationId);
+  }
+
+  createSchedule() {
+    this.store.dispatch(
+      ScheduleAction.createSchedule({ schedule: this.schedule })
+    );
+  }
+
+  editSchedule() {
+    this.store.dispatch(
+      ScheduleAction.updateSchedule({
+        id: this.scheduleId,
+        schedule: this.schedule
+      })
+    );
+  }
+
   saveSchedule(): void {
     this.isValidForm = false;
 
@@ -67,8 +86,9 @@ export class ScheduleFormComponent implements OnInit {
     this.isValidForm = true;
     this.schedule = this.scheduleForm.value;
     this.schedule.medication_id = this.medicationId;
-    this.schedule.hour = this.schedule.start_date.getHours();
-    this.schedule.minute = this.schedule.start_date.getMinutes();
+    const start_date = new Date(this.schedule.start_date);
+    this.schedule.hour = start_date.getHours();
+    this.schedule.minute = start_date.getMinutes();
     this.schedule.cron_expression = `${this.schedule.minute} ${this.schedule.hour} * * *`;
     this.schedule.frequency = 'daily';
 
@@ -77,19 +97,5 @@ export class ScheduleFormComponent implements OnInit {
     } else {
       this.createSchedule();
     }
-  }
-
-  createSchedule() {
-    this.store.dispatch(
-      ScheduleAction.createSchedule({ schedule: this.schedule })
-    );
-  }
-
-  editSchedule() {
-    throw new Error('Method not implemented.');
-  }
-
-  cancelSchedule() {
-    this.router.navigateByUrl('/user/medication/form/' + this.medicationId);
   }
 }
