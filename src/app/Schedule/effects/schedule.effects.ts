@@ -16,6 +16,10 @@ export class SchedulesEffects {
   createScheduleFailure$: any;
   getSchedulesByMedicationId$: any;
   getSchedulesByMedicationIdFailure$: any;
+  deleteSchedule$: any;
+  ScheduleActions: any;
+  deleteScheduleSuccess$: any;
+  deleteScheduleFailure$: any;
 
   constructor(
     private actions$: Actions,
@@ -74,6 +78,59 @@ export class SchedulesEffects {
       () => {
         return this.actions$.pipe(
           ofType(ScheduleActions.createScheduleFailure),
+          map((error) => {
+            this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.deleteSchedule$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(ScheduleActions.deleteSchedule),
+        exhaustMap(({ id }) =>
+          this.scheduleService.deleteSchedule(id).pipe(
+            map(() => {
+              return ScheduleActions.deleteScheduleSuccess({
+                id: id
+              });
+            }),
+            catchError((error) => {
+              return of(
+                ScheduleActions.deleteScheduleFailure({ payload: error })
+              );
+            }),
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'medicationFeedback',
+                this.responseOK,
+                this.errorResponse
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.deleteScheduleSuccess$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(ScheduleActions.deleteScheduleSuccess),
+          map(() => {
+            this.responseOK = true;
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.deleteScheduleFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(ScheduleActions.deleteScheduleFailure),
           map((error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;

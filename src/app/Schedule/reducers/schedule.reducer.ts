@@ -3,6 +3,9 @@ import {
   createSchedule,
   createScheduleFailure,
   createScheduleSuccess,
+  deleteSchedule,
+  deleteScheduleFailure,
+  deleteScheduleSuccess,
   getSchedulesByMedicationId,
   getSchedulesByMedicationIdFailure,
   getSchedulesByMedicationIdSuccess,
@@ -46,6 +49,26 @@ const _schedulesReducer = createReducer(
     loading: false,
     loaded: false,
     error: payload
+  })),
+
+  on(deleteSchedule, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(deleteScheduleSuccess, (state, { id }) => ({
+    ...state,
+    schedules: [...state.schedules.filter((schedule) => schedule.id !== id)],
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(deleteScheduleFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
   })),
 
   on(getSchedulesByMedicationId, (state) => ({

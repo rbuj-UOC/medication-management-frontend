@@ -33,8 +33,11 @@ export class ScheduleListComponent {
     this.router.navigateByUrl('/user/schedule/form/' + this.medicationId);
   }
 
-  deleteSchedule(scheduleId: number): void {
-    throw new Error('Method not implemented.');
+  deleteSchedule(id: number): void {
+    const result = confirm('Confirm delete medication');
+    if (result) {
+      this.store.dispatch(SchedulesAction.deleteSchedule({ id }));
+    }
   }
 
   private loadSchedules(): void {
