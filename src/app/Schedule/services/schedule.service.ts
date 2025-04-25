@@ -34,6 +34,12 @@ export class ScheduleService {
       .pipe(catchError(this.sharedService.handleError));
   }
 
+  getScheduleById(id: string): Observable<ScheduleDTO> {
+    return this.http
+      .get<ScheduleDTO>(this.urlApi + '/schedule/' + id)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
   getSchedulesByMedicationId(id: string): Observable<ScheduleDTO[]> {
     return this.http
       .get<ScheduleDTO[]>(this.urlApi + '/medication/' + id)

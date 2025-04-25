@@ -30,7 +30,7 @@ export class ScheduleListComponent {
   }
 
   createSchedule(): void {
-    this.router.navigateByUrl('/user/schedule/form/' + this.medicationId);
+    this.router.navigateByUrl('/user/schedule/form');
   }
 
   deleteSchedule(id: number): void {
@@ -51,6 +51,6 @@ export class ScheduleListComponent {
   }
 
   updateSchedule(scheduleId: number): void {
-    throw new Error('Method not implemented.');
+    this.router.navigateByUrl('/user/schedule/form/' + scheduleId);
   }
 }
