@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, finalize, map } from 'rxjs/operators';
 import { MedicationService } from '../../Medication/services/medication.service';
+import { ScheduleService } from '../../Schedule/services/schedule.service';
 import { SharedService } from '../../Shared/Services/shared.service';
 import { UserService } from '../../User/services/user.service';
 import * as AuthActions from '../actions';
@@ -25,7 +26,8 @@ export class AuthEffects {
     private router: Router,
     private sharedService: SharedService,
     private userService: UserService,
-    private medicationService: MedicationService
+    private medicationService: MedicationService,
+    private scheduleService: ScheduleService
   ) {
     this.responseOK = false;
 
@@ -97,6 +99,7 @@ export class AuthEffects {
           map(() => {
             this.userService.logout();
             this.medicationService.logout();
+            this.scheduleService.logout();
           })
         );
       },

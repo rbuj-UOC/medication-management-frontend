@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectMedicationId } from '../../../Medication/selectors/medication.selector';
+import * as ScheduleAction from '../../actions';
 import { ScheduleDTO } from '../../models/schedule.dto';
 
 @Component({
-  selector: 'app-medication-list',
+  selector: 'app-schedule-form',
   // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false,
   templateUrl: './schedule-form.component.html',
@@ -15,13 +18,22 @@ export class ScheduleFormComponent implements OnInit {
   start_date: FormControl;
   isValidForm: boolean;
   isUpdateMode: boolean;
-  medicationId: string | null;
   schedule: ScheduleDTO;
+  private medication_id: number | null;
+  private scheduleId: number | null;
+  private medicationId: number | null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private router: Router,
+    private fb: FormBuilder,
+    private store: Store
   ) {
+    this.store.select(selectMedicationId).subscribe((medicationId) => {
+      if (medicationId) {
+        this.medicationId = medicationId;
+      }
+    });
     this.isUpdateMode = false;
     this.start_date = new FormControl();
 
@@ -31,7 +43,7 @@ export class ScheduleFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.medicationId) {
+    if (this.scheduleId) {
       this.isUpdateMode = true;
     } else {
       this.scheduleForm.reset();
@@ -58,11 +70,17 @@ export class ScheduleFormComponent implements OnInit {
   }
 
   createSchedule() {
-    console.log('Editing schedule:', this.schedule);
-    throw new Error('Method not implemented.');
+    this.schedule.medication_id = this.medication_id;
+    this.store.dispatch(
+      ScheduleAction.createSchedule({ schedule: this.schedule })
+    );
   }
 
   editSchedule() {
     throw new Error('Method not implemented.');
+  }
+
+  cancelSchedule() {
+    this.router.navigateByUrl('/user/medication/form/' + this.medicationId);
   }
 }

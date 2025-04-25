@@ -1,4 +1,4 @@
-import { ScheduleDTO } from '../../Shedule/models/schedule.dto';
+import { ScheduleDTO } from '../../Schedule/models/schedule.dto';
 
 export class MedicationDTO {
   id!: number;

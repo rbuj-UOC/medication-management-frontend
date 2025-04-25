@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { ScheduleModule } from '../Schedule/schedule.module';
 import { MedicationFormComponent } from './components/medication-form/medication-form.component';
 import { MedicationListComponent } from './components/medication-list/medication-list.component';
 
@@ -19,7 +20,8 @@ import { MedicationListComponent } from './components/medication-list/medication
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    ScheduleModule
   ],
   declarations: [MedicationListComponent, MedicationFormComponent]
 })

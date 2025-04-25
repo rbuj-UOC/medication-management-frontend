@@ -12,9 +12,9 @@ import { TodayListComponent } from './components/today-list/today-list.component
 import { LandingComponent } from './Landing/components/landing.component';
 import { MedicationFormComponent } from './Medication/components/medication-form/medication-form.component';
 import { MedicationListComponent } from './Medication/components/medication-list/medication-list.component';
+import { ScheduleFormComponent } from './Schedule/components/schedule-form/schedule-form.component';
+import { ScheduleListComponent } from './Schedule/components/schedule-list/schedule-list.component';
 import { AuthGuard } from './Shared/Guards/auth.guard';
-import { ScheduleFormComponent } from './Shedule/components/schedule-form/schedule-form.component';
-import { ScheduleListComponent } from './Shedule/components/schedule-list/schedule-list.component';
 import { ProfileComponent } from './User/components/profile/profile.component';
 import { RegisterComponent } from './User/components/register/register.component';
 import { UserListComponent } from './User/components/user-list/user-list.component';
