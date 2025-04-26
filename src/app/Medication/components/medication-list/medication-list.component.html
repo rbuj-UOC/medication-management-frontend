@@ -2,15 +2,14 @@
   <p id="medicationListFeedback"></p>
 </div>
 <mat-card class="main-container-card">
-  <mat-card-header>
-    <h1>Medications</h1>
-  </mat-card-header>
   <mat-card-content>
-    <div class="medication-line">
-      <button mat-flat-button color="primary" (click)="createMedication()" class="add-button">
-        ADD
+    <div class="title">
+      <h1>Medications</h1>
+      <button mat-icon-button color="primary" (click)="createMedication()" aria-label="Add a medication">
+        <mat-icon class="icon-display">add_circle</mat-icon>
       </button>
     </div>
+
     <div *ngIf="medications.length === 0">No Medications</div>
     <table mat-table [dataSource]="medications" class="mat-elevation-z8" *ngIf="medications.length > 0">
       <!-- Name Column -->
