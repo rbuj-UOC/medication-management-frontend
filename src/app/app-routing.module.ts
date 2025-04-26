@@ -17,6 +17,7 @@ import { AuthGuard } from './Shared/Guards/auth.guard';
 import { TaskListComponent } from './Task/components/task-list/task-list.component';
 import { ProfileComponent } from './User/components/profile/profile.component';
 import { RegisterComponent } from './User/components/register/register.component';
+import { UserFormComponent } from './User/components/user-form/user-form.component';
 import { UserListComponent } from './User/components/user-list/user-list.component';
 
 const routes: Routes = [
@@ -71,6 +72,11 @@ const routes: Routes = [
   {
     path: 'user/contacts',
     component: ContactListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/edit/:id',
+    component: UserFormComponent,
     canActivate: [AuthGuard]
   },
   {

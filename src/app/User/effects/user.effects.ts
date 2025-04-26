@@ -158,6 +158,106 @@ export class UserEffects {
       { dispatch: false }
     );
 
+    this.getUser$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.getUser),
+        exhaustMap(() =>
+          this.userService.getUser().pipe(
+            map((user) => {
+              return UserActions.getUserSuccess({
+                user: user
+              });
+            }),
+            catchError((error) => {
+              return of(UserActions.getUserFailure({ payload: error }));
+            })
+          )
+        )
+      );
+    });
+
+    this.getUserFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.getUserFailure),
+          map((error) => {
+            this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.getUserByUserId$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.getUserByUserId),
+        exhaustMap(({ userId }) =>
+          this.userService.getUserByUserId(userId).pipe(
+            map((user) => {
+              return UserActions.getUserByUserIdSuccess({
+                userId: userId,
+                user: user
+              });
+            }),
+            catchError((error) => {
+              return of(UserActions.getUserByUserIdFailure({ payload: error }));
+            })
+          )
+        )
+      );
+    });
+
+    this.getUserByUserIdFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.getUserByUserIdFailure),
+          map((error) => {
+            this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.getUsers$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.getUsers),
+        exhaustMap(() =>
+          this.userService.getUsers().pipe(
+            map((users) => {
+              return UserActions.getUsersSuccess({
+                users: users
+              });
+            }),
+            catchError((error) => {
+              return of(
+                UserActions.getUsersFailure({
+                  payload: error
+                })
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.getUsersFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.getUsersFailure),
+          map((error) => {
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
     this.register$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(UserActions.register),
@@ -262,86 +362,27 @@ export class UserEffects {
       { dispatch: false }
     );
 
-    this.getUser$ = createEffect(() => {
+    this.updateUserByUserId$ = createEffect(() => {
       return this.actions$.pipe(
-        ofType(UserActions.getUser),
-        exhaustMap(() =>
-          this.userService.getUser().pipe(
+        ofType(UserActions.updateUserByUserId),
+        exhaustMap(({ userId, user }) =>
+          this.userService.updateUserByUserId(userId, user).pipe(
             map((user) => {
-              return UserActions.getUserSuccess({
-                user: user
-              });
-            }),
-            catchError((error) => {
-              return of(UserActions.getUserFailure({ payload: error }));
-            })
-          )
-        )
-      );
-    });
-
-    this.getUserFailure$ = createEffect(
-      () => {
-        return this.actions$.pipe(
-          ofType(UserActions.getUserFailure),
-          map((error) => {
-            this.responseOK = false;
-            this.errorResponse = error.payload.error;
-            this.sharedService.errorLog(error.payload.error);
-          })
-        );
-      },
-      { dispatch: false }
-    );
-
-    this.getUserByUserId$ = createEffect(() => {
-      return this.actions$.pipe(
-        ofType(UserActions.getUserByUserId),
-        exhaustMap(({ userId }) =>
-          this.userService.getUserByUserId(userId).pipe(
-            map((user) => {
-              return UserActions.getUserByUserIdSuccess({
+              return UserActions.updateUserByUserIdSuccess({
                 userId: userId,
                 user: user
               });
             }),
             catchError((error) => {
-              return of(UserActions.getUserByUserIdFailure({ payload: error }));
-            })
-          )
-        )
-      );
-    });
-
-    this.getUserByUserIdFailure$ = createEffect(
-      () => {
-        return this.actions$.pipe(
-          ofType(UserActions.getUserByUserIdFailure),
-          map((error) => {
-            this.responseOK = false;
-            this.errorResponse = error.payload.error;
-            this.sharedService.errorLog(error.payload.error);
-          })
-        );
-      },
-      { dispatch: false }
-    );
-
-    this.getUsers$ = createEffect(() => {
-      return this.actions$.pipe(
-        ofType(UserActions.getUsers),
-        exhaustMap(() =>
-          this.userService.getUsers().pipe(
-            map((users) => {
-              return UserActions.getUsersSuccess({
-                users: users
-              });
-            }),
-            catchError((error) => {
               return of(
-                UserActions.getUsersFailure({
-                  payload: error
-                })
+                UserActions.updateUserByUserIdFailure({ payload: error })
+              );
+            }),
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'userFormFeedback',
+                this.responseOK,
+                this.errorResponse
               );
             })
           )
@@ -349,11 +390,24 @@ export class UserEffects {
       );
     });
 
-    this.getUsersFailure$ = createEffect(
+    this.updateUserByUserIdSuccess$ = createEffect(
       () => {
         return this.actions$.pipe(
-          ofType(UserActions.getUsersFailure),
+          ofType(UserActions.updateUserByUserIdSuccess),
+          map(() => {
+            this.responseOK = true;
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.updateUserByUserIdFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.updateUserByUserIdFailure),
           map((error) => {
+            this.responseOK = false;
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
           })

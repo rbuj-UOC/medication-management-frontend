@@ -84,3 +84,16 @@ export const updateUserFailure = createAction(
   '[Profile Page] Update User Failure',
   props<{ payload: HttpErrorResponse }>()
 );
+
+export const updateUserByUserId = createAction(
+  '[UserForm Page] Update User By User Id',
+  props<{ userId: string; user: UserDTO }>()
+);
+export const updateUserByUserIdSuccess = createAction(
+  '[UserForm Page] Update User By User Id Success',
+  props<{ userId: string; user: UserDTO }>()
+);
+export const updateUserByUserIdFailure = createAction(
+  '[UserForm Page] Update User By User Id Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
