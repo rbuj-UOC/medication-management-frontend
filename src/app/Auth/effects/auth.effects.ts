@@ -6,6 +6,7 @@ import { catchError, exhaustMap, finalize, map } from 'rxjs/operators';
 import { MedicationService } from '../../Medication/services/medication.service';
 import { ScheduleService } from '../../Schedule/services/schedule.service';
 import { SharedService } from '../../Shared/Services/shared.service';
+import { TaskService } from '../../Task/services/task.service';
 import { UserService } from '../../User/services/user.service';
 import * as AuthActions from '../actions';
 import { AuthDTO } from '../models/auth.dto';
@@ -27,7 +28,8 @@ export class AuthEffects {
     private sharedService: SharedService,
     private userService: UserService,
     private medicationService: MedicationService,
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private taskService: TaskService
   ) {
     this.responseOK = false;
 
@@ -100,6 +102,7 @@ export class AuthEffects {
             this.userService.logout();
             this.medicationService.logout();
             this.scheduleService.logout();
+            this.taskService.logout();
           })
         );
       },

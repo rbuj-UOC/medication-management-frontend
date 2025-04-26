@@ -22,7 +22,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HelpComponent } from './components/help/help.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
-import { TaskListComponent } from './components/task-list/task-list.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { TodayListComponent } from './components/today-list/today-list.component';
 import { LandingModule } from './Landing/landing.module';
@@ -30,6 +29,7 @@ import { MedicationModule } from './Medication/medication.module';
 import { ScheduleModule } from './Schedule/schedule.module';
 import { SpinnerComponent } from './Shared/Components/spinner/spinner.component';
 import { AuthInterceptorService } from './Shared/Services/auth-interceptor.service';
+import { TaskModule } from './Task/task.module';
 import { UserModule } from './User/user.module';
 
 @NgModule({
@@ -40,7 +40,6 @@ import { UserModule } from './User/user.module';
     DashboardComponent,
     HistoryListComponent,
     ContactListComponent,
-    TaskListComponent,
     PrivacyComponent,
     TermsComponent,
     HelpComponent
@@ -55,6 +54,7 @@ import { UserModule } from './User/user.module';
     LandingModule,
     MedicationModule,
     ScheduleModule,
+    TaskModule,
     MatButtonModule,
     MatIconModule,
     MatListModule,
