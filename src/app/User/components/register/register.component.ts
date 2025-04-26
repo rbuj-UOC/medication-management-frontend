@@ -1,9 +1,11 @@
 import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   Validators
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -27,6 +29,7 @@ export class RegisterComponent {
   birth_date: FormControl;
   email: FormControl;
   password: FormControl;
+  confirmPassword: FormControl;
   role: FormControl;
   legal: FormControl;
 
@@ -80,6 +83,11 @@ export class RegisterComponent {
       Validators.minLength(8)
     ]);
 
+    this.confirmPassword = new FormControl('', [
+      Validators.required,
+      this.validateSamePassword
+    ]);
+
     this.legal = new FormControl('', [Validators.requiredTrue]);
 
     this.role = new FormControl(this.registerUser.role, [Validators.required]);
@@ -96,6 +104,7 @@ export class RegisterComponent {
       birth_date: this.birth_date,
       email: this.email,
       password: this.password,
+      confirmPassword: this.confirmPassword,
       role: this.role,
       legal: this.legal
     });
@@ -123,5 +132,15 @@ export class RegisterComponent {
     };
 
     this.store.dispatch(UserAction.register({ user }));
+  }
+
+  private validateSamePassword(
+    control: AbstractControl
+  ): ValidationErrors | null {
+    const password = control.parent?.get('password');
+    const confirmPassword = control.parent?.get('confirmPassword');
+    return password?.value == confirmPassword?.value
+      ? null
+      : { PasswordNoMatch: true };
   }
 }
