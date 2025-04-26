@@ -61,6 +61,7 @@ export class MedicationFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('isUpdateMode', this.isUpdateMode);
     if (this.medicationId) {
       this.isUpdateMode = true;
       this.store.dispatch(
