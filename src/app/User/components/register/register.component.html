@@ -91,6 +91,11 @@
         </mat-form-field>
       </div>
 
+      <mat-checkbox [formControl]="legal">
+        I read and accept the "Privacy Policy" an the "Terms of Service".
+        <span class="error" *ngIf="legal.hasError('required')"> Required</span>
+      </mat-checkbox>
+
       <div class="register-line">
         <button mat-flat-button color="primary" type="submit">Register</button>
       </div>
