@@ -6,7 +6,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HelpComponent } from './components/help/help.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
-import { TaskListComponent } from './components/task-list/task-list.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { TodayListComponent } from './components/today-list/today-list.component';
 import { LandingComponent } from './Landing/components/landing.component';
@@ -15,6 +14,7 @@ import { MedicationListComponent } from './Medication/components/medication-list
 import { ScheduleFormComponent } from './Schedule/components/schedule-form/schedule-form.component';
 import { ScheduleListComponent } from './Schedule/components/schedule-list/schedule-list.component';
 import { AuthGuard } from './Shared/Guards/auth.guard';
+import { TaskListComponent } from './Task/components/task-list/task-list.component';
 import { ProfileComponent } from './User/components/profile/profile.component';
 import { RegisterComponent } from './User/components/register/register.component';
 import { UserListComponent } from './User/components/user-list/user-list.component';

@@ -5,6 +5,8 @@ import { MedicationsEffects } from './Medication/effects';
 import * as MedicationsReducer from './Medication/reducers';
 import { SchedulesEffects } from './Schedule/effects';
 import * as SchedulesReducer from './Schedule/reducers';
+import { TasksEffects } from './Task/effects';
+import * as TaskReducer from './Task/reducers';
 import { UserEffects } from './User/effects/user.effects';
 import * as UserReducer from './User/reducers';
 
@@ -13,18 +15,21 @@ export interface AppState {
   user: UserReducer.UserState;
   medications: MedicationsReducer.MedicationsState;
   schedules: SchedulesReducer.SchedulesState;
+  tasks: TaskReducer.TaskState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
   auth: AuthReducer.authReducer,
   user: UserReducer.userReducer,
   medications: MedicationsReducer.medicationsReducer,
-  schedules: SchedulesReducer.schedulesReducer
+  schedules: SchedulesReducer.schedulesReducer,
+  tasks: TaskReducer.taskReducer
 };
 
 export const EffectsArray: any[] = [
   AuthEffects,
   UserEffects,
   MedicationsEffects,
-  SchedulesEffects
+  SchedulesEffects,
+  TasksEffects
 ];
