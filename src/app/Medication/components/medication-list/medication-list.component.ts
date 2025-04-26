@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUserId } from '../../../Auth/selectors';
@@ -13,7 +14,7 @@ import { selectMedications } from '../../selectors/medication.selector';
   templateUrl: './medication-list.component.html',
   styleUrls: ['./medication-list.component.scss']
 })
-export class MedicationListComponent {
+export class MedicationListComponent implements OnInit {
   medications: MedicationDTO[];
   displayedColumns: string[] = [
     'medication-name',
@@ -21,8 +22,10 @@ export class MedicationListComponent {
     'medication-actions'
   ];
   private user_id: string;
+  isMobile = true;
 
   constructor(
+    private observer: BreakpointObserver,
     private router: Router,
     private store: Store
   ) {
@@ -39,6 +42,16 @@ export class MedicationListComponent {
     });
 
     this.loadMedications();
+  }
+
+  ngOnInit(): void {
+    this.observer.observe(['(max-width: 740px)']).subscribe((screenSize) => {
+      if (screenSize.matches) {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    });
   }
 
   private loadMedications(): void {
