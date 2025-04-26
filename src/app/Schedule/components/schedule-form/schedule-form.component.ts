@@ -76,6 +76,12 @@ export class ScheduleFormComponent implements OnInit {
     );
   }
 
+  private getCronExpression(date: Date): string {
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    return `${minute} ${hour} * * *`;
+  }
+
   saveSchedule(): void {
     this.isValidForm = false;
 
@@ -86,10 +92,9 @@ export class ScheduleFormComponent implements OnInit {
     this.isValidForm = true;
     this.schedule = this.scheduleForm.value;
     this.schedule.medication_id = this.medicationId;
-    const start_date = new Date(this.schedule.start_date);
-    this.schedule.hour = start_date.getHours();
-    this.schedule.minute = start_date.getMinutes();
-    this.schedule.cron_expression = `${this.schedule.minute} ${this.schedule.hour} * * *`;
+    this.schedule.cron_expression = this.getCronExpression(
+      this.schedule.start_date
+    );
     this.schedule.frequency = 'daily';
 
     if (this.isUpdateMode) {
