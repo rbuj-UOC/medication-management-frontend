@@ -53,6 +53,9 @@
       <ng-container matColumnDef="user-actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let user">
+          <button mat-icon-button (click)="editUser(user.id)">
+            <mat-icon color="warn">edit</mat-icon>
+          </button>
           <button mat-icon-button (click)="deleteUser(user.id, user.email)">
             <mat-icon color="warn">delete</mat-icon>
           </button>

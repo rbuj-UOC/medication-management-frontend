@@ -11,10 +11,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
-  declarations: [ProfileComponent, RegisterComponent, UserListComponent],
+  declarations: [
+    ProfileComponent,
+    RegisterComponent,
+    UserFormComponent,
+    UserListComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
