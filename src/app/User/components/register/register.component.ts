@@ -28,6 +28,7 @@ export class RegisterComponent {
   email: FormControl;
   password: FormControl;
   role: FormControl;
+  legal: FormControl;
 
   registerForm: FormGroup;
   isValidForm: boolean | null;
@@ -79,6 +80,8 @@ export class RegisterComponent {
       Validators.minLength(8)
     ]);
 
+    this.legal = new FormControl('', [Validators.requiredTrue]);
+
     this.role = new FormControl(this.registerUser.role, [Validators.required]);
     this.roles = [
       { value: 'admin', label: 'Admin' },
@@ -93,7 +96,8 @@ export class RegisterComponent {
       birth_date: this.birth_date,
       email: this.email,
       password: this.password,
-      role: this.role
+      role: this.role,
+      legal: this.legal
     });
   }
 
