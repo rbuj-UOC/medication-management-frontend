@@ -1,8 +1,8 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUserId } from '../../../Auth/selectors';
+import { selectDisplayIsMobile } from '../../../Display/display.selector';
 import * as MedicationsAction from '../../actions';
 import { MedicationDTO } from '../../models/medication.dto';
 import { selectMedications } from '../../selectors/medication.selector';
@@ -14,7 +14,7 @@ import { selectMedications } from '../../selectors/medication.selector';
   templateUrl: './medication-list.component.html',
   styleUrls: ['./medication-list.component.scss']
 })
-export class MedicationListComponent implements OnInit {
+export class MedicationListComponent {
   medications: MedicationDTO[];
   displayedColumns: string[] = [
     'medication-name',
@@ -23,9 +23,9 @@ export class MedicationListComponent implements OnInit {
   ];
   private user_id: string;
   isMobile = true;
+  isMobile$: any;
 
   constructor(
-    private observer: BreakpointObserver,
     private router: Router,
     private store: Store
   ) {
@@ -41,17 +41,12 @@ export class MedicationListComponent implements OnInit {
       this.medications = medications;
     });
 
-    this.loadMedications();
-  }
-
-  ngOnInit(): void {
-    this.observer.observe(['(max-width: 740px)']).subscribe((screenSize) => {
-      if (screenSize.matches) {
-        this.isMobile = true;
-      } else {
-        this.isMobile = false;
-      }
+    this.isMobile$ = this.store.select(selectDisplayIsMobile);
+    this.isMobile$.subscribe((isMobile: boolean) => {
+      this.isMobile = isMobile;
     });
+
+    this.loadMedications();
   }
 
   private loadMedications(): void {

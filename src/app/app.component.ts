@@ -1,4 +1,4 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
@@ -9,6 +9,11 @@ import {
   selectUserRole
 } from './Auth/selectors';
 import { AuthService } from './Auth/services/auth.service';
+import * as DisplayAction from './Display/display.actions';
+import {
+  selectDisplayIsDesktop,
+  selectDisplayIsMobile
+} from './Display/display.selector';
 import { selectUserStateLoading } from './User/selectors';
 
 @Component({
@@ -24,12 +29,17 @@ export class AppComponent implements OnInit {
   showNoAuthSection: boolean;
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  isMobile = true;
   isCollapsed = true;
   showLoadingAuth$: any;
   showLoadingUser$: any;
   showAdminSection: boolean;
   showUserSection: boolean;
+  isMobile$: any;
+  isMobile = true;
+  isDesktop$: any;
+  isTablet$: any;
+  isDesktop: boolean;
+  isTablet: boolean;
 
   constructor(
     private observer: BreakpointObserver,
@@ -46,13 +56,41 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.observer.observe(['(max-width: 740px)']).subscribe((screenSize) => {
-      if (screenSize.matches) {
-        this.isMobile = true;
-      } else {
-        this.isMobile = false;
+    this.isMobile$ = this.store.select(selectDisplayIsMobile);
+    this.isTablet$ = this.store.select(selectDisplayIsDesktop);
+    this.isDesktop$ = this.store.select(selectDisplayIsDesktop);
+
+    this.isMobile$.subscribe((isMobile: boolean) => {
+      this.isMobile = isMobile;
+    });
+    this.isDesktop$.subscribe((isDesktop: boolean) => {
+      this.isDesktop = isDesktop;
+    });
+    this.isTablet$.subscribe((isTablet: boolean) => {
+      this.isTablet = isTablet;
+    });
+
+    this.observer.observe([Breakpoints.XSmall]).subscribe((result) => {
+      if (result.matches) {
+        this.store.dispatch(DisplayAction.setIsMobile());
       }
     });
+
+    this.observer
+      .observe([Breakpoints.Small, Breakpoints.Medium])
+      .subscribe((result) => {
+        if (result.matches) {
+          this.store.dispatch(DisplayAction.setIsTablet());
+        }
+      });
+
+    this.observer
+      .observe([Breakpoints.Large, Breakpoints.XLarge])
+      .subscribe((result) => {
+        if (result.matches) {
+          this.store.dispatch(DisplayAction.setIsDesktop());
+        }
+      });
 
     this.store.select(selectAccessToken).subscribe((access_token) => {
       if (access_token) {
