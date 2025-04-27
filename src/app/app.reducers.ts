@@ -1,6 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { AuthEffects } from './Auth/effects/auth.effects';
 import * as AuthReducer from './Auth/reducers';
+import * as DisplayReducer from './Display/display.reducer';
 import { MedicationsEffects } from './Medication/effects';
 import * as MedicationsReducer from './Medication/reducers';
 import { SchedulesEffects } from './Schedule/effects';
@@ -16,6 +17,7 @@ export interface AppState {
   medications: MedicationsReducer.MedicationsState;
   schedules: SchedulesReducer.SchedulesState;
   tasks: TaskReducer.TaskState;
+  display: DisplayReducer.DisplayState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -23,7 +25,8 @@ export const appReducers: ActionReducerMap<AppState> = {
   user: UserReducer.userReducer,
   medications: MedicationsReducer.medicationsReducer,
   schedules: SchedulesReducer.schedulesReducer,
-  tasks: TaskReducer.taskReducer
+  tasks: TaskReducer.taskReducer,
+  display: DisplayReducer.displayReducer
 };
 
 export const EffectsArray: any[] = [
