@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -16,7 +16,7 @@ import { AuthDTO } from '../models/auth.dto';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email: FormControl;
   password: FormControl;
   loginForm: FormGroup;
@@ -40,6 +40,11 @@ export class LoginComponent {
       email: this.email,
       password: this.password
     });
+  }
+
+  ngOnInit(): void {
+    this.email.setValue('patient@test.org');
+    this.password.setValue('testtest');
   }
 
   login(): void {
