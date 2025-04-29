@@ -2,73 +2,111 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { UserDTO } from '../models/user.dto';
 
-export const deleteUser = createAction('[Profile Page] Delete user');
+export const addUserContact = createAction(
+  '[ContactForm Page] Add New User Contact',
+  props<{ email: string }>()
+);
+export const addUserContactSuccess = createAction(
+  '[ContactForm Page] Add New User Contact Success',
+  props<{ contacts: UserDTO[] }>()
+);
+export const addUserContactFailure = createAction(
+  '[ContactForm Page] Add New User Contact Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const deleteUser = createAction('[Profile Page] Delete User');
 export const deleteUserSuccess = createAction(
-  '[Profile Page] Delete user Success'
+  '[Profile Page] Delete User Success'
 );
 export const deleteUserFailure = createAction(
-  '[Profile Page] Delete user Failure',
+  '[Profile Page] Delete User Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
 export const deleteUserByUserId = createAction(
-  '[UserList Page] Delete user',
+  '[UserList Page] Delete User',
   props<{ userId: string }>()
 );
 export const deleteUserByUserIdSuccess = createAction(
-  '[UserList Page] Delete user Success',
+  '[UserList Page] Delete User Success',
   props<{ userId: string }>()
 );
 export const deleteUserByUserIdFailure = createAction(
-  '[UserList Page] Delete user Failure',
+  '[UserList Page] Delete User Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
-export const getUser = createAction('[Profile Page] Get user by ID');
+export const getUser = createAction('[Profile Page] Get User');
 export const getUserSuccess = createAction(
-  '[Profile Page] Get user by ID Success',
+  '[Profile Page] Get User Success',
   props<{ user: UserDTO }>()
 );
 export const getUserFailure = createAction(
-  '[Profile Page] Get user by ID Failure',
+  '[Profile Page] Get User Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
 export const getUserByUserId = createAction(
-  '[??? Page] Get user by ID',
+  '[??? Page] Get User By Id',
   props<{ userId: string }>()
 );
 export const getUserByUserIdSuccess = createAction(
-  '[??? Page] Get user by ID Success',
+  '[??? Page] Get User By Id Success',
   props<{ userId: string; user: UserDTO }>()
 );
 export const getUserByUserIdFailure = createAction(
-  '[??? Page] Get user by ID Failure',
+  '[??? Page] Get User By Id Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
-export const getUsers = createAction('[UserList Page] Get user list');
+export const getUserContacts = createAction(
+  '[ContactList Page] Get User Contact List'
+);
+export const getUserContactsSuccess = createAction(
+  '[ContactList Page] Get User Contact List Success',
+  props<{ contacts: UserDTO[] }>()
+);
+export const getUserContactsFailure = createAction(
+  '[ContactList Page] Get User Contact List Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const getUsers = createAction('[UserList Page] Get User List');
 export const getUsersSuccess = createAction(
-  '[UserList Page] Get user list Success',
+  '[UserList Page] Get User List Success',
   props<{ users: UserDTO[] }>()
 );
 export const getUsersFailure = createAction(
-  '[UserList Page] Get user list Failure',
+  '[UserList Page] Get User List Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
 export const logout = createAction('[User Service] Logout');
 
 export const register = createAction(
-  '[Register Page] Register new user',
+  '[Register Page] Register New User',
   props<{ user: UserDTO }>()
 );
 export const registerSuccess = createAction(
-  '[Register Page] Register new user Success',
+  '[Register Page] Register New User Success',
   props<{ user: UserDTO }>()
 );
 export const registerFailure = createAction(
-  '[Register Page] Register new user Failure',
+  '[Register Page] Register New User Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const removeUserContact = createAction(
+  '[ContactForm Page] Remove User Contact',
+  props<{ email: string }>()
+);
+export const removeUserContactSuccess = createAction(
+  '[ContactForm Page] Remove User Contact Success',
+  props<{ email: string; contact: UserDTO }>()
+);
+export const removeUserContactFailure = createAction(
+  '[ContactForm Page] Remove User Contact Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Auth/components/login.component';
-import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HelpComponent } from './components/help/help.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
@@ -15,6 +14,7 @@ import { ScheduleFormComponent } from './Schedule/components/schedule-form/sched
 import { ScheduleListComponent } from './Schedule/components/schedule-list/schedule-list.component';
 import { AuthGuard } from './Shared/Guards/auth.guard';
 import { TaskListComponent } from './Task/components/task-list/task-list.component';
+import { ContactListComponent } from './User/components/contact-list/contact-list.component';
 import { ProfileComponent } from './User/components/profile/profile.component';
 import { RegisterComponent } from './User/components/register/register.component';
 import { UserFormComponent } from './User/components/user-form/user-form.component';

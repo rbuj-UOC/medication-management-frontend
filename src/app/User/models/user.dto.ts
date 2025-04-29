@@ -9,6 +9,7 @@ export class UserDTO {
   email: string;
   password: string;
   role?: string;
+  contacts?: UserDTO[];
 
   constructor(
     name: string,

@@ -1,5 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
+  addUserContact,
+  addUserContactFailure,
+  addUserContactSuccess,
   deleteUser,
   deleteUserByUserId,
   deleteUserByUserIdFailure,
@@ -10,6 +13,9 @@ import {
   getUserByUserId,
   getUserByUserIdFailure,
   getUserByUserIdSuccess,
+  getUserContacts,
+  getUserContactsFailure,
+  getUserContactsSuccess,
   getUserFailure,
   getUsers,
   getUsersFailure,
@@ -19,6 +25,9 @@ import {
   register,
   registerFailure,
   registerSuccess,
+  removeUserContact,
+  removeUserContactFailure,
+  removeUserContactSuccess,
   updateUser,
   updateUserFailure,
   updateUserSuccess
@@ -28,6 +37,7 @@ import { UserDTO } from '../models/user.dto';
 export interface UserState {
   users: UserDTO[];
   user: UserDTO;
+  contacts: UserDTO[];
   loading: boolean;
   loaded: boolean;
   error: any;
@@ -36,6 +46,7 @@ export interface UserState {
 export const initialState: UserState = {
   users: new Array<UserDTO>(),
   user: new UserDTO('', '', '', '', new Date(), '', ''),
+  contacts: new Array<UserDTO>(),
   loading: false,
   loaded: false,
   error: null
@@ -43,6 +54,26 @@ export const initialState: UserState = {
 
 const _userReducer = createReducer(
   initialState,
+
+  on(addUserContact, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(addUserContactSuccess, (state, action) => ({
+    ...state,
+    contacts: action.contacts,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(addUserContactFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
 
   on(deleteUser, (state) => ({
     ...state,
@@ -123,6 +154,26 @@ const _userReducer = createReducer(
     error: { payload }
   })),
 
+  on(getUserContacts, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(getUserContactsSuccess, (state, action) => ({
+    ...state,
+    contacts: action.contacts,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(getUserContactsFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
+
   on(getUsers, (state) => ({
     ...state,
     loading: true,
@@ -159,6 +210,26 @@ const _userReducer = createReducer(
     error: null
   })),
   on(registerFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
+
+  on(removeUserContact, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(removeUserContactSuccess, (state, { email }) => ({
+    ...state,
+    contacts: [...state.contacts.filter((contact) => contact.email !== email)],
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(removeUserContactFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,

@@ -17,7 +17,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { appReducers, EffectsArray } from './app.reducers';
 import { AuthModule } from './Auth/auth.module';
-import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HelpComponent } from './components/help/help.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
@@ -39,7 +38,6 @@ import { UserModule } from './User/user.module';
     TodayListComponent,
     DashboardComponent,
     HistoryListComponent,
-    ContactListComponent,
     PrivacyComponent,
     TermsComponent,
     HelpComponent

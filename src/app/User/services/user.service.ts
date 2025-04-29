@@ -23,21 +23,9 @@ export class UserService {
     this.urlApi = 'http://localhost:3000/' + this.controller;
   }
 
-  getUser(): Observable<UserDTO> {
+  addUserContact(email: string): Observable<UserDTO> {
     return this.http
-      .get<UserDTO>(this.urlApi + '/user')
-      .pipe(catchError(this.sharedService.handleError));
-  }
-
-  getUserByUserId(userId: string): Observable<UserDTO> {
-    return this.http
-      .get<UserDTO>(this.urlApi + '/user/' + userId)
-      .pipe(catchError(this.sharedService.handleError));
-  }
-
-  getUsers(): Observable<UserDTO[]> {
-    return this.http
-      .get<UserDTO[]>(this.urlApi)
+      .post<UserDTO>(this.urlApi + '/contact', email)
       .pipe(catchError(this.sharedService.handleError));
   }
 
@@ -53,6 +41,30 @@ export class UserService {
       .pipe(catchError(this.sharedService.handleError));
   }
 
+  getUser(): Observable<UserDTO> {
+    return this.http
+      .get<UserDTO>(this.urlApi + '/user')
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  getUserByUserId(userId: string): Observable<UserDTO> {
+    return this.http
+      .get<UserDTO>(this.urlApi + '/user/' + userId)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  getUserContacts(): Observable<UserDTO[]> {
+    return this.http
+      .get<UserDTO[]>(this.urlApi + '/contacts')
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  getUsers(): Observable<UserDTO[]> {
+    return this.http
+      .get<UserDTO[]>(this.urlApi)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
   logout() {
     this.store.dispatch(UserAction.logout());
   }
@@ -60,6 +72,14 @@ export class UserService {
   register(user: UserDTO): Observable<UserDTO> {
     return this.http
       .post<UserDTO>(this.urlApi, user)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  removeUserContact(email: string): Observable<UserDTO> {
+    return this.http
+      .delete<UserDTO>(this.urlApi + '/contact', {
+        body: { email }
+      })
       .pipe(catchError(this.sharedService.handleError));
   }
 
