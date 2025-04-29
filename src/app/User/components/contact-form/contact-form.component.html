@@ -1,0 +1,30 @@
+<div style="margin-left: auto; margin-right: auto">
+  <p id="contactFeedback"></p>
+</div>
+<mat-card class="main-container-card">
+  <mat-card-header>
+    <h1>Contact Form</h1>
+  </mat-card-header>
+  <mat-card-content>
+    <form *ngIf="contactForm" [formGroup]="contactForm" (ngSubmit)="saveContact()">
+      <div class="contact-line">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [formControl]="email" />
+          <mat-error *ngIf="email.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="email.hasError('pattern')">
+            Email not a valid format.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="contact-line">
+        <button mat-flat-button color="primary" type="submit">SAVE</button>
+        <button mat-flat-button color="primary" type="button" (click)="cancelContact()"
+          *ngIf="!isUpdateMode">CANCEL</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

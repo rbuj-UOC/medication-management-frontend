@@ -1,4 +1,4 @@
-#userListFeedback {
+#medicationFeedback {
   opacity: 0;
   display: none;
   text-align: center;
@@ -9,12 +9,12 @@
   margin-right: auto;
 }
 
-#userListFeedback.fade-in {
+#medicationFeedback.fade-in {
   display: block;
   animation: fade-in 0.7s ease-in forwards;
 }
 
-#userListFeedback.fade-out {
+#medicationFeedback.fade-out {
   animation: fade-out 0.7s ease-out forwards;
 }
 
@@ -60,20 +60,6 @@
   }
 }
 
-
-.title {
-  margin: 0;
-  padding: 0;
-  vertical-align: baseline;
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-  justify-content: space-between;
+h1 {
   margin-bottom: 16px;
-
-  h1 {
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
-  }
 }

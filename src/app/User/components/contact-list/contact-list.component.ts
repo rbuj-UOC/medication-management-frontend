@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { selectDisplayIsMobile } from '../../../Display/display.selector';
 import * as UserAction from '../../actions';
 import { UserDTO } from '../../models/user.dto';
 import { selectUserContacts } from '../../selectors';
@@ -24,6 +25,8 @@ export class ContactListComponent {
     'contact-actions'
   ];
   private user_id: string;
+  isMobile = true;
+  isMobile$: any;
 
   constructor(
     private router: Router,
@@ -32,7 +35,15 @@ export class ContactListComponent {
     this.store.select(selectUserContacts).subscribe((contacts) => {
       this.contacts = contacts;
     });
+    this.isMobile$ = this.store.select(selectDisplayIsMobile);
+    this.isMobile$.subscribe((isMobile: boolean) => {
+      this.isMobile = isMobile;
+    });
     this.loadUserContacts();
+  }
+
+  addContact(): void {
+    this.router.navigate(['user/contact/form']);
   }
 
   private loadUserContacts(): void {

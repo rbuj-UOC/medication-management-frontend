@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -17,6 +18,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
+    ContactFormComponent,
     ContactListComponent,
     ProfileComponent,
     RegisterComponent,

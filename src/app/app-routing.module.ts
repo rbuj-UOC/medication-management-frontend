@@ -14,6 +14,7 @@ import { ScheduleFormComponent } from './Schedule/components/schedule-form/sched
 import { ScheduleListComponent } from './Schedule/components/schedule-list/schedule-list.component';
 import { AuthGuard } from './Shared/Guards/auth.guard';
 import { TaskListComponent } from './Task/components/task-list/task-list.component';
+import { ContactFormComponent } from './User/components/contact-form/contact-form.component';
 import { ContactListComponent } from './User/components/contact-list/contact-list.component';
 import { ProfileComponent } from './User/components/profile/profile.component';
 import { RegisterComponent } from './User/components/register/register.component';
@@ -70,7 +71,12 @@ const routes: Routes = [
     component: TermsComponent
   },
   {
-    path: 'user/contacts',
+    path: 'user/contact/form',
+    component: ContactFormComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/contact/list',
     component: ContactListComponent,
     canActivate: [AuthGuard]
   },
