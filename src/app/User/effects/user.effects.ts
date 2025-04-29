@@ -14,6 +14,10 @@ export class UserEffects {
   private responseOK: boolean;
   private errorResponse: any;
 
+  addUserContact$: any;
+  addUserContactSuccess$: any;
+  addUserContactFailure$: any;
+
   deleteUser$: any;
   deleteUserSuccess$: any;
   deleteUserFailure$: any;
@@ -28,12 +32,19 @@ export class UserEffects {
   getUserByUserId$: any;
   getUserByUserIdFailure$: any;
 
+  getUserContacts$: any;
+  getUserContactsFailure$: any;
+
   getUsers$: any;
   getUsersFailure$: any;
 
   register$: any;
   registerSuccess$: any;
   registerFailure$: any;
+
+  removeUserContact$: any;
+  removeUserContactSuccess$: any;
+  removeUserContactFailure$: any;
 
   updateUser$: any;
   updateUserSuccess$: any;
@@ -52,6 +63,55 @@ export class UserEffects {
     private authService: AuthService
   ) {
     this.responseOK = false;
+
+    this.addUserContact$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.addUserContact),
+        exhaustMap(({ email }) =>
+          this.userService.addUserContact(email).pipe(
+            map(() => {
+              return UserActions.deleteUserSuccess();
+            }),
+            catchError((error) => {
+              return of(UserActions.deleteUserFailure({ payload: error }));
+            }),
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'contactListFeedback',
+                this.responseOK,
+                this.errorResponse
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.addUserContactSuccess$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.addUserContactSuccess),
+          map(() => {
+            this.responseOK = true;
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.addUserContactFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.addUserContactFailure),
+          map((error) => {
+            this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
 
     this.deleteUser$ = createEffect(() => {
       return this.actions$.pipe(
@@ -223,6 +283,41 @@ export class UserEffects {
       { dispatch: false }
     );
 
+    this.getUserContacts$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.getUserContacts),
+        exhaustMap(() =>
+          this.userService.getUserContacts().pipe(
+            map((contacts) => {
+              return UserActions.getUserContactsSuccess({
+                contacts: contacts
+              });
+            }),
+            catchError((error) => {
+              return of(
+                UserActions.getUserContactsFailure({
+                  payload: error
+                })
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.getUserContactsFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.getUsersFailure),
+          map((error) => {
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
     this.getUsers$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(UserActions.getUsers),
@@ -301,6 +396,60 @@ export class UserEffects {
       () => {
         return this.actions$.pipe(
           ofType(UserActions.registerFailure),
+          map((error) => {
+            this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.removeUserContact$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.removeUserContact),
+        exhaustMap(({ email }) =>
+          this.userService.removeUserContact(email).pipe(
+            map((contact) => {
+              return UserActions.removeUserContactSuccess({
+                email: email,
+                contact: contact
+              });
+            }),
+            catchError((error) => {
+              return of(
+                UserActions.removeUserContactFailure({ payload: error })
+              );
+            }),
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'userListFeedback',
+                this.responseOK,
+                this.errorResponse
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.removeUserContactSuccess$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.deleteUserByUserIdSuccess),
+          map(() => {
+            this.responseOK = true;
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.removeUserContactFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.removeUserContactFailure),
           map((error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;
