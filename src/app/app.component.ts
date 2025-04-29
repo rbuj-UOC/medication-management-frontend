@@ -149,7 +149,7 @@ export class AppComponent implements OnInit {
   }
 
   userContacts(): void {
-    this.router.navigateByUrl('user/contacts');
+    this.router.navigateByUrl('user/contact/list');
   }
 
   userHistory(): void {
