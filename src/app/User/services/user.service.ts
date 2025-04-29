@@ -49,7 +49,7 @@ export class UserService {
 
   deleteUserByUserId(userId: string): Observable<UserDTO> {
     return this.http
-      .delete<UserDTO>(this.urlApi + '/' + userId)
+      .delete<UserDTO>(this.urlApi + '/user/' + userId)
       .pipe(catchError(this.sharedService.handleError));
   }
 
