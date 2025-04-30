@@ -1,8 +1,11 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { initializeApp } from '@angular/fire/app';
+import { getMessaging, getToken, onMessage } from '@angular/fire/messaging';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { environment } from '../environments/environment';
 import {
   selectAccessToken,
   selectAuthStateLoading,
@@ -14,6 +17,7 @@ import {
   selectDisplayIsDesktop,
   selectDisplayIsMobile
 } from './Display/display.selector';
+import * as FirebaseAction from './Firebase/firebase.actions';
 import { selectUserStateLoading } from './User/selectors';
 
 @Component({
@@ -40,6 +44,7 @@ export class AppComponent implements OnInit {
   isTablet$: any;
   isDesktop: boolean;
   isTablet: boolean;
+  messaging: any;
 
   constructor(
     private observer: BreakpointObserver,
@@ -114,6 +119,14 @@ export class AppComponent implements OnInit {
         this.showUserSection = false;
       }
     });
+
+    const app = initializeApp(environment.firebaseConfig);
+    this.messaging = getMessaging(app);
+    this.saveMessagingDeviceToken();
+    onMessage(this.messaging, (payload) => {
+      alert(JSON.stringify(payload));
+      // ...
+    });
   }
 
   adminDashboard(): void {
@@ -147,6 +160,30 @@ export class AppComponent implements OnInit {
   register(): void {
     this.router.navigateByUrl('register');
   }
+
+  async saveMessagingDeviceToken() {
+    const currentToken = await getToken(this.messaging);
+    if (currentToken) {
+      console.log('Token: ', currentToken);
+      this.store.dispatch(FirebaseAction.setToken({ token: currentToken }));
+    } else {
+      // Need to request permissions to show notifications.
+      this.requestNotificationsPermissions();
+    }
+  }
+
+  requestNotificationsPermissions = async () => {
+    console.log('Requesting notifications permission...');
+    const permission = await Notification.requestPermission();
+
+    if (permission === 'granted') {
+      console.log('Notification permission granted.');
+      // Notification permission granted.
+      await this.saveMessagingDeviceToken();
+    } else {
+      console.log('Unable to get permission to notify.');
+    }
+  };
 
   userContacts(): void {
     this.router.navigateByUrl('user/contact/list');
