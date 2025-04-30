@@ -6,11 +6,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { environment } from '../environments/environment';
-import {
-  selectAccessToken,
-  selectAuthStateLoading,
-  selectUserRole
-} from './Auth/selectors';
+import { selectAccessToken, selectAuthStateLoading } from './Auth/selectors';
 import { AuthService } from './Auth/services/auth.service';
 import * as DisplayAction from './Display/display.actions';
 import {
@@ -18,7 +14,10 @@ import {
   selectDisplayIsMobile
 } from './Display/display.selector';
 import * as FirebaseAction from './Firebase/firebase.actions';
-import { selectUserStateLoading } from './User/selectors';
+import { selectFirebaseToken } from './Firebase/firebase.selector';
+import * as UserAction from './User/actions';
+import { UserDTO } from './User/models/user.dto';
+import { selectUser, selectUserStateLoading } from './User/selectors';
 
 @Component({
   selector: 'app-root',
@@ -45,6 +44,11 @@ export class AppComponent implements OnInit {
   isDesktop: boolean;
   isTablet: boolean;
   messaging: any;
+  localDeviceToken: string;
+  remoteDeviceToken: string;
+  user_role: string;
+  userId: string;
+  user: UserDTO | null;
 
   constructor(
     private observer: BreakpointObserver,
@@ -101,22 +105,45 @@ export class AppComponent implements OnInit {
       if (access_token) {
         this.showAuthSection = true;
         this.showNoAuthSection = false;
+        this.store.dispatch(UserAction.getUser());
       } else {
         this.showAuthSection = false;
         this.showNoAuthSection = true;
       }
     });
 
-    this.store.select(selectUserRole).subscribe((user_role) => {
-      if (user_role === 'admin') {
-        this.showAdminSection = true;
-        this.showUserSection = false;
-      } else if (user_role === 'user') {
-        this.showAdminSection = false;
-        this.showUserSection = true;
-      } else {
-        this.showAdminSection = false;
-        this.showUserSection = false;
+    this.store.select(selectUser).subscribe((user) => {
+      if (user) {
+        this.user = user;
+        this.user_role = user.role;
+        this.remoteDeviceToken = user.device_token;
+        const localDeviceToken = this.localDeviceToken;
+        if (
+          this.user_role === 'user' &&
+          localDeviceToken !== user.device_token
+        ) {
+          this.store.dispatch(
+            UserAction.updateUserDeviceToken({
+              device_token: localDeviceToken
+            })
+          );
+        }
+      }
+    });
+
+    this.store.select(selectFirebaseToken).subscribe((token) => {
+      this.localDeviceToken = token;
+      const remoteDeviceToken = this.remoteDeviceToken;
+      if (
+        this.user &&
+        this.user.role === 'user' &&
+        this.localDeviceToken !== remoteDeviceToken
+      ) {
+        this.store.dispatch(
+          UserAction.updateUserDeviceToken({
+            device_token: this.localDeviceToken
+          })
+        );
       }
     });
 
@@ -164,7 +191,6 @@ export class AppComponent implements OnInit {
   async saveMessagingDeviceToken() {
     const currentToken = await getToken(this.messaging);
     if (currentToken) {
-      console.log('Token: ', currentToken);
       this.store.dispatch(FirebaseAction.setToken({ token: currentToken }));
     } else {
       // Need to request permissions to show notifications.

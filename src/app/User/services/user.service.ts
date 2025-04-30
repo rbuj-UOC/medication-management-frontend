@@ -94,4 +94,10 @@ export class UserService {
       .put<UserDTO>(this.urlApi + '/user/' + userId, user)
       .pipe(catchError(this.sharedService.handleError));
   }
+
+  updateUserDeviceToken(device_token: string): Observable<UserDTO> {
+    return this.http
+      .put<UserDTO>(this.urlApi, { device_token: device_token })
+      .pipe(catchError(this.sharedService.handleError));
+  }
 }

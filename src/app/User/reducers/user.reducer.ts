@@ -29,6 +29,9 @@ import {
   removeUserContactFailure,
   removeUserContactSuccess,
   updateUser,
+  updateUserDeviceToken,
+  updateUserDeviceTokenFailure,
+  updateUserDeviceTokenSuccess,
   updateUserFailure,
   updateUserSuccess
 } from '../actions';
@@ -250,6 +253,25 @@ const _userReducer = createReducer(
     error: null
   })),
   on(updateUserFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload }
+  })),
+  on(updateUserDeviceToken, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null
+  })),
+  on(updateUserDeviceTokenSuccess, (state, action) => ({
+    ...state,
+    user: action.user,
+    loading: false,
+    loaded: true,
+    error: null
+  })),
+  on(updateUserDeviceTokenFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,

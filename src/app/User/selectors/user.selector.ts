@@ -18,6 +18,13 @@ export const selectUserContacts = createSelector(selectUserState, (state) => {
   return state.contacts;
 });
 
+export const selectUserDeviceToken = createSelector(
+  selectUserState,
+  (state) => {
+    return state.user.device_token;
+  }
+);
+
 export const selectUsers = createSelector(selectUserState, (state) => {
   return state.users;
 });

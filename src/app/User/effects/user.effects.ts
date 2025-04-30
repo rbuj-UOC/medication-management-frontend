@@ -54,6 +54,10 @@ export class UserEffects {
   updateUserByUserIdSuccess$: any;
   updateUserByUserIdFailure$: any;
 
+  updateUserDeviceToken$: any;
+  updateUserDeviceTokenSuccess$: any;
+  updateUserDeviceTokenFailure$: any;
+
   constructor(
     private actions$: Actions,
     private userService: UserService,
@@ -555,6 +559,59 @@ export class UserEffects {
       () => {
         return this.actions$.pipe(
           ofType(UserActions.updateUserByUserIdFailure),
+          map((error) => {
+            this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.updateUserDeviceToken$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.updateUserDeviceToken),
+        exhaustMap(({ device_token }) =>
+          this.userService.updateUserDeviceToken(device_token).pipe(
+            map((user) => {
+              return UserActions.updateUserDeviceTokenSuccess({
+                user: user
+              });
+            }),
+            catchError((error) => {
+              return of(
+                UserActions.updateUserDeviceTokenFailure({ payload: error })
+              );
+            }),
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'appFeedback',
+                this.responseOK,
+                this.errorResponse
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.updateUserDeviceTokenSuccess$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.updateUserDeviceTokenSuccess),
+          map(() => {
+            this.responseOK = true;
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.updateUserDeviceTokenFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(UserActions.updateUserDeviceTokenFailure),
           map((error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;
