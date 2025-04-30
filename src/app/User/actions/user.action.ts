@@ -135,3 +135,16 @@ export const updateUserByUserIdFailure = createAction(
   '[UserForm Page] Update User By User Id Failure',
   props<{ payload: HttpErrorResponse }>()
 );
+
+export const updateUserDeviceToken = createAction(
+  '[App Component] Update User Device Token',
+  props<{ device_token: string }>()
+);
+export const updateUserDeviceTokenSuccess = createAction(
+  '[App Component] Update User Device Token Success',
+  props<{ user: UserDTO }>()
+);
+export const updateUserDeviceTokenFailure = createAction(
+  '[App Component] Update User Device Token Failure',
+  props<{ payload: HttpErrorResponse }>()
+);

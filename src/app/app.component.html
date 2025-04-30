@@ -30,43 +30,43 @@
           <span *ngIf="!isCollapsed">Home</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="userToday()" *ngIf="showUserSection">
+      <a mat-list-item routerLinkActive (click)="userToday()" *ngIf="user_role === 'user'">
         <span class="entry">
           <mat-icon>home</mat-icon>
           <span *ngIf="!isCollapsed">Today</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="adminDashboard()" *ngIf="showAdminSection">
+      <a mat-list-item routerLinkActive (click)="adminDashboard()" *ngIf="user_role === 'admin'">
         <span class="entry">
           <mat-icon>home</mat-icon>
           <span *ngIf="!isCollapsed">Dashboard</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="userMedications()" *ngIf="showUserSection">
+      <a mat-list-item routerLinkActive (click)="userMedications()" *ngIf="user_role === 'user'">
         <span class="entry">
           <mat-icon>medication</mat-icon>
           <span *ngIf="!isCollapsed">Medications</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="userHistory()" *ngIf="showUserSection">
+      <a mat-list-item routerLinkActive (click)="userHistory()" *ngIf="user_role === 'user'">
         <span class="entry">
           <mat-icon>history</mat-icon>
           <span *ngIf="!isCollapsed">History</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="userContacts()" *ngIf="showUserSection">
+      <a mat-list-item routerLinkActive (click)="userContacts()" *ngIf="user_role === 'user'">
         <span class="entry">
           <mat-icon>perm_contact_cal</mat-icon>
           <span *ngIf="!isCollapsed">Contacts</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="adminUsers()" *ngIf="showAdminSection">
+      <a mat-list-item routerLinkActive (click)="adminUsers()" *ngIf="user_role === 'admin'">
         <span class="entry">
           <mat-icon>supervised_user_circle</mat-icon>
           <span *ngIf="!isCollapsed">Users</span>
         </span>
       </a>
-      <a mat-list-item routerLinkActive (click)="adminTasks()" *ngIf="showAdminSection">
+      <a mat-list-item routerLinkActive (click)="adminTasks()" *ngIf="user_role === 'admin'">
         <span class="entry">
           <mat-icon>task_alt</mat-icon>
           <span *ngIf="!isCollapsed">Tasks</span>
@@ -76,6 +76,9 @@
   </mat-sidenav>
   <mat-sidenav-content class="router-content">
     <div class="main-content">
+      <div style="margin-left: auto; margin-right: auto">
+        <p id="appFeedback"></p>
+      </div>
       <router-outlet></router-outlet>
     </div>
     <div class="footer-content">
