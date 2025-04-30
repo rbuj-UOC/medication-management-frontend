@@ -28,6 +28,7 @@ import { TermsComponent } from './components/terms/terms.component';
 import { TodayListComponent } from './components/today-list/today-list.component';
 import { LandingModule } from './Landing/landing.module';
 import { MedicationModule } from './Medication/medication.module';
+import { NotificationModule } from './Notification/notification.module';
 import { ScheduleModule } from './Schedule/schedule.module';
 import { SpinnerComponent } from './Shared/Components/spinner/spinner.component';
 import { AuthInterceptorService } from './Shared/Services/auth-interceptor.service';
@@ -54,6 +55,7 @@ import { UserModule } from './User/user.module';
     UserModule,
     LandingModule,
     MedicationModule,
+    NotificationModule,
     ScheduleModule,
     TaskModule,
     MatButtonModule,

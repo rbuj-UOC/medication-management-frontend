@@ -15,6 +15,8 @@ import {
 } from './Display/display.selector';
 import * as FirebaseAction from './Firebase/firebase.actions';
 import { selectFirebaseToken } from './Firebase/firebase.selector';
+import * as NotificationAction from './Notification/actions';
+import { NotificationDTO } from './Notification/models/notification.dto';
 import * as UserAction from './User/actions';
 import { UserDTO } from './User/models/user.dto';
 import { selectUser, selectUserStateLoading } from './User/selectors';
@@ -151,8 +153,14 @@ export class AppComponent implements OnInit {
     this.messaging = getMessaging(app);
     this.saveMessagingDeviceToken();
     onMessage(this.messaging, (payload) => {
-      alert(JSON.stringify(payload));
-      // ...
+      const newNotification = new NotificationDTO(
+        payload.messageId,
+        payload.notification.title,
+        payload.notification.body
+      );
+      this.store.dispatch(
+        NotificationAction.addNotification({ notification: newNotification })
+      );
     });
   }
 

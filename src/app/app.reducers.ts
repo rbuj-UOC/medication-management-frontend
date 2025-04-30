@@ -5,6 +5,7 @@ import * as DisplayReducer from './Display/display.reducer';
 import * as FirebaseReducer from './Firebase/firebase.reducer';
 import { MedicationsEffects } from './Medication/effects';
 import * as MedicationsReducer from './Medication/reducers';
+import * as NotificationsReducer from './Notification/reducers';
 import { SchedulesEffects } from './Schedule/effects';
 import * as SchedulesReducer from './Schedule/reducers';
 import { TasksEffects } from './Task/effects';
@@ -17,6 +18,7 @@ export interface AppState {
   display: DisplayReducer.DisplayState;
   firebase: FirebaseReducer.FirebaseState;
   medications: MedicationsReducer.MedicationsState;
+  notifications: NotificationsReducer.NotificationState;
   schedules: SchedulesReducer.SchedulesState;
   tasks: TaskReducer.TaskState;
   user: UserReducer.UserState;
@@ -27,6 +29,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   display: DisplayReducer.displayReducer,
   firebase: FirebaseReducer.firebaseReducer,
   medications: MedicationsReducer.medicationsReducer,
+  notifications: NotificationsReducer.notificationReducer,
   schedules: SchedulesReducer.schedulesReducer,
   tasks: TaskReducer.taskReducer,
   user: UserReducer.userReducer
