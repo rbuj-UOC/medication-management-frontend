@@ -1,7 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { AuthEffects } from './Auth/effects/auth.effects';
+import { AuthEffects } from './Auth/effects/auth.effect';
 import * as AuthReducer from './Auth/reducers';
-import * as DisplayReducer from './Display/display.reducer';
+import * as DisplayReducer from './Display/reducers';
 import * as FirebaseReducer from './Firebase/firebase.reducer';
 import { MedicationsEffects } from './Medication/effects';
 import * as MedicationsReducer from './Medication/reducers';

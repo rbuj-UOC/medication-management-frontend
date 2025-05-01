@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { catchError, Observable } from 'rxjs';
-import { SharedService } from '../../Shared/Services/shared.service';
+import { SharedService } from '../../Shared/services/shared.service';
 import * as MedicationAction from '../actions';
 import { MedicationDTO } from '../models/medication.dto';
 
