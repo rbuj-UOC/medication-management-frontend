@@ -2,7 +2,7 @@ import { ActionReducerMap } from '@ngrx/store';
 import { AuthEffects } from './Auth/effects/auth.effect';
 import * as AuthReducer from './Auth/reducers';
 import * as DisplayReducer from './Display/reducers';
-import * as FirebaseReducer from './Firebase/firebase.reducer';
+import * as FirebaseReducer from './Firebase/reducers';
 import { MedicationsEffects } from './Medication/effects';
 import * as MedicationsReducer from './Medication/reducers';
 import * as NotificationsReducer from './Notification/reducers';
@@ -10,7 +10,7 @@ import { SchedulesEffects } from './Schedule/effects';
 import * as SchedulesReducer from './Schedule/reducers';
 import { TasksEffects } from './Task/effects';
 import * as TaskReducer from './Task/reducers';
-import { UserEffects } from './User/effects/user.effects';
+import { UserEffects } from './User/effects/user.effect';
 import * as UserReducer from './User/reducers';
 
 export interface AppState {

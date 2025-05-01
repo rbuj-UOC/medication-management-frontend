@@ -12,7 +12,7 @@ import { HelpComponent } from './Shared/components/help/help.component';
 import { LandingComponent } from './Shared/components/landing/landing.component';
 import { PrivacyComponent } from './Shared/components/privacy/privacy.component';
 import { TermsComponent } from './Shared/components/terms/terms.component';
-import { AuthGuard } from './Shared/Guards/auth.guard';
+import { AuthGuard } from './Shared/guards/auth.guard';
 import { TaskListComponent } from './Task/components/task-list/task-list.component';
 import { ContactFormComponent } from './User/components/contact-form/contact-form.component';
 import { ContactListComponent } from './User/components/contact-list/contact-list.component';

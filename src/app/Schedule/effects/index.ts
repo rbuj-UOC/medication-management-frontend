@@ -1,1 +1,1 @@
-export * from './schedule.effects';
+export * from './schedule.effect';

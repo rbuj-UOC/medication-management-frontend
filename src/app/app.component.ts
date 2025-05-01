@@ -13,8 +13,8 @@ import {
   selectDisplayIsDesktop,
   selectDisplayIsMobile
 } from './Display/selectors';
-import * as FirebaseAction from './Firebase/firebase.actions';
-import { selectFirebaseToken } from './Firebase/firebase.selector';
+import * as FirebaseAction from './Firebase/actions';
+import { selectFirebaseToken } from './Firebase/selectors';
 import { selectMedicationStateLoading } from './Medication/selectors';
 import * as NotificationAction from './Notification/actions';
 import { NotificationDTO } from './Notification/models/notification.dto';

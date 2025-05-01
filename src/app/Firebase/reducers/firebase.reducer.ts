@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as FirebaseActions from './firebase.actions';
+import * as FirebaseActions from '../actions';
 
 export interface FirebaseState {
   token: string;
