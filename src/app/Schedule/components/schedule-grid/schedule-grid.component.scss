@@ -1,6 +1,5 @@
 h2 {
   margin: 32px 0 16px 0;
-  vertical-align: baseline;
 }
 
 .schedule-line {
@@ -17,12 +16,6 @@ h2 {
   }
 }
 
-.title {
+.add-button {
   margin: 16px 0;
-  padding: 0;
-  vertical-align: baseline;
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-  justify-content: space-between;
 }

@@ -1,1 +1,6 @@
-<app-schedule-table [schedules]="schedules"></app-schedule-table>
+<app-schedule-table [schedules]="schedules" (createScheduleRequest)="createSchedule($event)"
+  (deleteScheduleRequest)="deleteSchedule($event)" (editScheduleRequest)="editSchedule($event)"
+  *ngIf="!isMobile"></app-schedule-table>
+<app-schedule-grid [schedules]="schedules" (createScheduleRequest)="createSchedule($event)"
+  (deleteScheduleRequest)="deleteSchedule($event)" (editScheduleRequest)="editSchedule($event)"
+  *ngIf="isMobile"></app-schedule-grid>

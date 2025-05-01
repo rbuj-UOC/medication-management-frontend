@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { selectDisplayIsMobile } from '../../../Display/display.selector';
 import * as SchedulesAction from '../../actions';
 import { ScheduleDTO } from '../../models/schedule.dto';
 import { selectSchedules } from '../../selectors';
@@ -15,17 +16,35 @@ import { selectSchedules } from '../../selectors';
 export class ScheduleListComponent {
   medicationId: string | null;
   schedules: ScheduleDTO[];
+  isMobile = true;
+  isMobile$: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private store: Store
   ) {
+    this.isMobile$ = this.store.select(selectDisplayIsMobile);
+    this.isMobile$.subscribe((isMobile: boolean) => {
+      this.isMobile = isMobile;
+    });
     this.medicationId = this.activatedRoute.snapshot.paramMap.get('id');
     this.store.select(selectSchedules).subscribe((schedules) => {
       this.schedules = schedules;
     });
     this.loadSchedules();
+  }
+
+  createSchedule(): void {
+    this.router.navigateByUrl('/user/schedule/form/');
+  }
+
+  deleteSchedule(id: number): void {
+    this.store.dispatch(SchedulesAction.deleteSchedule({ id }));
+  }
+
+  editSchedule(id: number): void {
+    this.router.navigateByUrl('/user/schedule/form/' + id);
   }
 
   private loadSchedules(): void {

@@ -1,7 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import * as SchedulesAction from '../../actions';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ScheduleDTO } from '../../models/schedule.dto';
 
 @Component({
@@ -13,25 +10,24 @@ import { ScheduleDTO } from '../../models/schedule.dto';
 })
 export class ScheduleTableComponent {
   @Input() schedules: ScheduleDTO[];
+  @Output() createScheduleRequest = new EventEmitter<void>();
+  @Output() deleteScheduleRequest = new EventEmitter<number>();
+  @Output() editScheduleRequest = new EventEmitter<number>();
+
   displayedColumns: string[] = ['schedule-start_date', 'schedule-actions'];
 
-  constructor(
-    private router: Router,
-    private store: Store
-  ) {}
-
   createSchedule(): void {
-    this.router.navigateByUrl('/user/schedule/form/');
+    this.createScheduleRequest.emit();
   }
 
   deleteSchedule(id: number): void {
     const result = confirm('Confirm delete medication');
     if (result) {
-      this.store.dispatch(SchedulesAction.deleteSchedule({ id }));
+      this.deleteScheduleRequest.emit(id);
     }
   }
 
-  updateSchedule(scheduleId: number): void {
-    this.router.navigateByUrl('/user/schedule/form/' + scheduleId);
+  updateSchedule(id: number): void {
+    this.editScheduleRequest.emit(id);
   }
 }

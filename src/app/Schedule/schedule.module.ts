@@ -9,7 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatTimepickerModule } from '@angular/material/timepicker';
+import { ScheduleCardComponent } from './components/schedule-card/schedule-card.component';
 import { ScheduleFormComponent } from './components/schedule-form/schedule-form.component';
+import { ScheduleGridComponent } from './components/schedule-grid/schedule-grid.component';
 import { ScheduleListComponent } from './components/schedule-list/schedule-list.component';
 import { ScheduleTableComponent } from './components/schedule-table/schedule-table.component';
 
@@ -27,6 +29,8 @@ import { ScheduleTableComponent } from './components/schedule-table/schedule-tab
     MatNativeDateModule
   ],
   declarations: [
+    ScheduleCardComponent,
+    ScheduleGridComponent,
     ScheduleListComponent,
     ScheduleFormComponent,
     ScheduleTableComponent
