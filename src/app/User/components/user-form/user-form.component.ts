@@ -122,18 +122,18 @@ export class UserFormComponent implements OnInit {
       );
       this.email.setValue(this.user.email);
       this.role.setValue(this.user.role);
+    });
 
-      this.userForm = this.formBuilder.group({
-        name: this.name,
-        surname_1: this.surname_1,
-        surname_2: this.surname_2,
-        alias: this.alias,
-        birth_date: this.birth_date,
-        email: this.email,
-        password: this.password,
-        confirmPassword: this.confirmPassword,
-        role: this.role
-      });
+    this.userForm = this.formBuilder.group({
+      name: this.name,
+      surname_1: this.surname_1,
+      surname_2: this.surname_2,
+      alias: this.alias,
+      birth_date: this.birth_date,
+      email: this.email,
+      password: this.password,
+      confirmPassword: this.confirmPassword,
+      role: this.role
     });
   }
 
@@ -147,19 +147,16 @@ export class UserFormComponent implements OnInit {
 
   onSubmit(): void {
     this.isValidForm = false;
-
     if (this.userForm.invalid) {
       return;
     }
-
     this.isValidForm = true;
-    this.user = this.userForm.value;
-
+    const { confirmPassword, ...user } = this.userForm.value;
     if (this.userId) {
       this.store.dispatch(
         UserAction.updateUserFormByUserId({
           userId: this.userId,
-          userForm: this.user
+          userForm: user
         })
       );
     }
