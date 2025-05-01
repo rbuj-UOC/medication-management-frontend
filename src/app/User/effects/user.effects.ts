@@ -81,10 +81,13 @@ export class UserEffects {
             }),
             finalize(async () => {
               await this.sharedService.managementToast(
-                'contactListFeedback',
+                'contactFeedback',
                 this.responseOK,
                 this.errorResponse
               );
+              if (this.responseOK) {
+                this.router.navigateByUrl('user/contact/list');
+              }
             })
           )
         )

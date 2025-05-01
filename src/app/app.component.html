@@ -72,14 +72,14 @@
         *ngIf="user_role === 'admin'">
         <span class="entry">
           <mat-icon>supervised_user_circle</mat-icon>
-          <span *ngIf="!isCollapsed">Users</span>
+          <span *ngIf="!isCollapsed">User List</span>
         </span>
       </a>
       <a mat-list-item routerLinkActive (click)="adminTasks()" (keydown.enter)="adminTasks()" tabindex="0"
         *ngIf="user_role === 'admin'">
         <span class="entry">
           <mat-icon>task_alt</mat-icon>
-          <span *ngIf="!isCollapsed">Tasks</span>
+          <span *ngIf="!isCollapsed">Task List</span>
         </span>
       </a>
     </mat-nav-list>
