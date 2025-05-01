@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { selectDisplayIsMobile } from '../../../Display/display.selector';
 import * as UserAction from '../../actions';
 import { UserDTO } from '../../models/user.dto';
 import { selectUsers } from '../../selectors';
@@ -14,22 +15,17 @@ import { selectUsers } from '../../selectors';
 })
 export class UserListComponent {
   users: UserDTO[];
-  displayedColumns: string[] = [
-    'user-name',
-    'user-surname_1',
-    'user-surname_2',
-    'user-alias',
-    'user-birth_date',
-    'user-email',
-    'user-role',
-    'user-actions'
-  ];
-  private user_id: string;
+  isMobile = true;
+  isMobile$: any;
 
   constructor(
     private router: Router,
     private store: Store
   ) {
+    this.isMobile$ = this.store.select(selectDisplayIsMobile);
+    this.isMobile$.subscribe((isMobile: boolean) => {
+      this.isMobile = isMobile;
+    });
     this.store.select(selectUsers).subscribe((users) => {
       this.users = users;
     });
@@ -38,16 +34,5 @@ export class UserListComponent {
 
   private loadUsers(): void {
     this.store.dispatch(UserAction.getUsers());
-  }
-
-  deleteUser(userId: string, email: string): void {
-    const result = confirm('Confirm delete medication: ' + email);
-    if (result) {
-      this.store.dispatch(UserAction.deleteUserByUserId({ userId }));
-    }
-  }
-
-  editUser(userId: string): void {
-    this.router.navigate(['user/edit/' + userId]);
   }
 }
