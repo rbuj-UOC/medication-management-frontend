@@ -26,53 +26,68 @@ export const initialState: NotificationState = {
 
 const _notificationReducer = createReducer(
   initialState,
-
   // Add Notification
-  on(addNotification, (state, { notification }) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    notifications: [...state.notifications, notification]
-  })),
-  on(addNotificationSuccess, (state, { notifications }) => ({
-    ...state,
-    loading: false,
-    loaded: true,
-    notifications: [...state.notifications, ...notifications]
-  })),
-  on(addNotificationFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: payload
-  })),
-
+  on(
+    addNotification,
+    (state, { notification }): NotificationState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      notifications: [...state.notifications, notification]
+    })
+  ),
+  on(
+    addNotificationSuccess,
+    (state, { notifications }): NotificationState => ({
+      ...state,
+      loading: false,
+      loaded: true,
+      notifications: [...state.notifications, ...notifications]
+    })
+  ),
+  on(
+    addNotificationFailure,
+    (state, { payload }): NotificationState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: payload
+    })
+  ),
   // Remove Notification
-  on(removeNotification, (state, { id }) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    notifications: state.notifications.filter(
-      (notification) => notification.id !== id
-    )
-  })),
-  on(removeNotificationSuccess, (state, { id, notifications }) => ({
-    ...state,
-    loading: false,
-    loaded: true,
-    notifications: state.notifications.filter(
-      (notification) => notification.id !== id
-    )
-  })),
-  on(removeNotificationFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: payload
-  })),
-
+  on(
+    removeNotification,
+    (state, { id }): NotificationState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      notifications: state.notifications.filter(
+        (notification) => notification.id !== id
+      )
+    })
+  ),
+  on(
+    removeNotificationSuccess,
+    (state, { id }): NotificationState => ({
+      ...state,
+      loading: false,
+      loaded: true,
+      notifications: state.notifications.filter(
+        (notification) => notification.id !== id
+      )
+    })
+  ),
+  on(
+    removeNotificationFailure,
+    (state, { payload }): NotificationState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: payload
+    })
+  ),
   // Logout
-  on(logout, () => initialState)
+  on(logout, (): NotificationState => initialState)
 );
 
 export function notificationReducer(

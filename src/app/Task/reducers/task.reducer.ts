@@ -20,26 +20,35 @@ export const initialState: TaskState = {
 
 const _taskReducer = createReducer(
   initialState,
-  on(getTasks, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(getTasksSuccess, (state, action) => ({
-    ...state,
-    tasks: action.tasks,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(getTasksFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-  on(logout, () => initialState)
+  on(
+    getTasks,
+    (state): TaskState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getTasksSuccess,
+    (state, action): TaskState => ({
+      ...state,
+      tasks: action.tasks,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getTasksFailure,
+    (state, { payload }): TaskState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(logout, (): TaskState => initialState)
 );
 
 export function taskReducer(

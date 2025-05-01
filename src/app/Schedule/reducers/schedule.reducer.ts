@@ -34,87 +34,119 @@ export const initialState: SchedulesState = {
 
 const _schedulesReducer = createReducer(
   initialState,
-  on(createSchedule, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(createScheduleSuccess, (state, action) => ({
-    ...state,
-    schedule: action.schedule,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(createScheduleFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: payload
-  })),
-
-  on(deleteSchedule, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(deleteScheduleSuccess, (state, { id }) => ({
-    ...state,
-    schedules: [...state.schedules.filter((schedule) => schedule.id !== id)],
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(deleteScheduleFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(getScheduleById, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(getScheduleByIdSuccess, (state, action) => ({
-    ...state,
-    schedule: action.schedule,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(getScheduleByIdFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(getSchedulesByMedicationId, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(getSchedulesByMedicationIdSuccess, (state, action) => ({
-    ...state,
-    schedules: action.schedules,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(getSchedulesByMedicationIdFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(logout, () => initialState)
+  on(
+    createSchedule,
+    (state): SchedulesState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    createScheduleSuccess,
+    (state, action): SchedulesState => ({
+      ...state,
+      schedule: action.schedule,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    createScheduleFailure,
+    (state, { payload }): SchedulesState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: payload
+    })
+  ),
+  on(
+    deleteSchedule,
+    (state): SchedulesState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    deleteScheduleSuccess,
+    (state, { id }): SchedulesState => ({
+      ...state,
+      schedules: [...state.schedules.filter((schedule) => schedule.id !== id)],
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    deleteScheduleFailure,
+    (state, { payload }): SchedulesState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    getScheduleById,
+    (state): SchedulesState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getScheduleByIdSuccess,
+    (state, action): SchedulesState => ({
+      ...state,
+      schedule: action.schedule,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getScheduleByIdFailure,
+    (state, { payload }): SchedulesState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    getSchedulesByMedicationId,
+    (state): SchedulesState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getSchedulesByMedicationIdSuccess,
+    (state, action): SchedulesState => ({
+      ...state,
+      schedules: action.schedules,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getSchedulesByMedicationIdFailure,
+    (state, { payload }): SchedulesState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(logout, (): SchedulesState => initialState)
 );
 
 export function schedulesReducer(
