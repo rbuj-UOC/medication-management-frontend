@@ -1,6 +1,10 @@
 <!-- loading spinners-->
 <app-spinner *ngIf="showLoadingAuth$ | async"></app-spinner>
 <app-spinner *ngIf="showLoadingUser$ | async"></app-spinner>
+<app-spinner *ngIf="showLoadingMedication$ | async"></app-spinner>
+<app-spinner *ngIf="showLoadingNotification$ | async"></app-spinner>
+<app-spinner *ngIf="showLoadingSchedule$ | async"></app-spinner>
+<app-spinner *ngIf="showLoadingTask$ | async"></app-spinner>
 
 <!-- UPPER TOOLBAR: NOT LOGGED -->
 <mat-toolbar *ngIf="showNoAuthSection" color="primary">
