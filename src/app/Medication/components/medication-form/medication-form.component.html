@@ -1,31 +1,27 @@
 <div style="margin-left: auto; margin-right: auto">
   <p id="medicationFeedback"></p>
 </div>
-<mat-card class="main-container-card">
-  <mat-card-header>
-    <h1>Medication Form</h1>
-  </mat-card-header>
-  <mat-card-content>
-    <form *ngIf="medicationForm" [formGroup]="medicationForm" (ngSubmit)="saveMedication()">
-      <div class="medication-line">
-        <mat-form-field>
-          <mat-label for="name">Name:</mat-label>
-          <input matInput type="text" [formControl]="name" />
-          <mat-error *ngIf="name.hasError('required')">Name is required</mat-error>
-          <mat-error *ngIf="name.hasError('maxlength')">
-            Name can be max 55 characters long.
-          </mat-error>
-        </mat-form-field>
-      </div>
+<div class="main-container">
+  <h1>Medication Form</h1>
+  <form *ngIf="medicationForm" [formGroup]="medicationForm" (ngSubmit)="saveMedication()">
+    <div class="medication-line">
+      <mat-form-field>
+        <mat-label for="name">Name:</mat-label>
+        <input matInput type="text" [formControl]="name" />
+        <mat-error *ngIf="name.hasError('required')">Name is required</mat-error>
+        <mat-error *ngIf="name.hasError('maxlength')">
+          Name can be max 55 characters long.
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-      <div class="medication-line">
-        <button mat-flat-button color="primary" type="submit">SAVE</button>
-        <button mat-flat-button color="primary" type="button" (click)="cancelMedication()"
-          *ngIf="!isUpdateMode">CANCEL</button>
-      </div>
-    </form>
+    <div class="medication-line">
+      <button mat-flat-button color="primary" type="submit">SAVE</button>
+      <button mat-flat-button color="primary" type="button" (click)="cancelMedication()"
+        *ngIf="!isUpdateMode">CANCEL</button>
+    </div>
+  </form>
 
-    <app-schedule-list *ngIf="isUpdateMode" class="schedule-list"></app-schedule-list>
+  <app-schedule-list *ngIf="isUpdateMode" class="schedule-list"></app-schedule-list>
 
-  </mat-card-content>
-</mat-card>
+</div>
