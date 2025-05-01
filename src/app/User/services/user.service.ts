@@ -91,7 +91,7 @@ export class UserService {
 
   updateUserByUserId(userId: string, user: UserDTO): Observable<UserDTO> {
     return this.http
-      .put<UserDTO>(this.urlApi + '/user/' + userId, user)
+      .put<UserDTO>(this.urlApi + '/' + userId, user)
       .pipe(catchError(this.sharedService.handleError));
   }
 
