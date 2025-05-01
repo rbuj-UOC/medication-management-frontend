@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as DisplayActions from './display.actions';
+import * as DisplayActions from '../actions';
 
 export interface DisplayState {
   isMobile: boolean;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectDisplayIsMobile } from '../../../Display/display.selector';
+import { selectDisplayIsMobile } from '../../../Display/selectors';
 import * as UserAction from '../../actions';
 import { UserDTO } from '../../models/user.dto';
 import { selectUsers } from '../../selectors';

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { SharedService } from '../../Shared/Services/shared.service';
+import { SharedService } from '../../Shared/services/shared.service';
 import * as AuthAction from '../actions';
 import { AuthDTO } from '../models/auth.dto';
 

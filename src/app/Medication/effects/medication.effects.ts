@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, finalize, map, of } from 'rxjs';
-import { SharedService } from '../../Shared/Services/shared.service';
+import { SharedService } from '../../Shared/services/shared.service';
 import * as MedicationActions from '../actions';
 import { MedicationService } from '../services/medication.service';
 

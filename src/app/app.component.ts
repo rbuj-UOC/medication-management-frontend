@@ -8,11 +8,11 @@ import { Store } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { selectAccessToken, selectAuthStateLoading } from './Auth/selectors';
 import { AuthService } from './Auth/services/auth.service';
-import * as DisplayAction from './Display/display.actions';
+import * as DisplayAction from './Display/actions';
 import {
   selectDisplayIsDesktop,
   selectDisplayIsMobile
-} from './Display/display.selector';
+} from './Display/selectors';
 import * as FirebaseAction from './Firebase/firebase.actions';
 import { selectFirebaseToken } from './Firebase/firebase.selector';
 import { selectMedicationStateLoading } from './Medication/selectors';

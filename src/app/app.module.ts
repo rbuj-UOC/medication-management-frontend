@@ -21,30 +21,31 @@ import { AppComponent } from './app.component';
 import { appReducers, EffectsArray } from './app.reducers';
 import { AuthModule } from './Auth/auth.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HelpComponent } from './components/help/help.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
-import { PrivacyComponent } from './components/privacy/privacy.component';
-import { TermsComponent } from './components/terms/terms.component';
 import { TodayListComponent } from './components/today-list/today-list.component';
-import { LandingModule } from './Landing/landing.module';
 import { MedicationModule } from './Medication/medication.module';
 import { NotificationModule } from './Notification/notification.module';
 import { ScheduleModule } from './Schedule/schedule.module';
-import { SpinnerComponent } from './Shared/Components/spinner/spinner.component';
-import { AuthInterceptorService } from './Shared/Services/auth-interceptor.service';
+import { HelpComponent } from './Shared/components/help/help.component';
+import { LandingComponent } from './Shared/components/landing/landing.component';
+import { PrivacyComponent } from './Shared/components/privacy/privacy.component';
+import { SpinnerComponent } from './Shared/components/spinner/spinner.component';
+import { TermsComponent } from './Shared/components/terms/terms.component';
+import { AuthInterceptorService } from './Shared/services/auth-interceptor.service';
 import { TaskModule } from './Task/task.module';
 import { UserModule } from './User/user.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SpinnerComponent,
-    TodayListComponent,
     DashboardComponent,
+    HelpComponent,
     HistoryListComponent,
+    LandingComponent,
     PrivacyComponent,
+    SpinnerComponent,
     TermsComponent,
-    HelpComponent
+    TodayListComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +54,6 @@ import { UserModule } from './User/user.module';
     HttpClientModule,
     AuthModule,
     UserModule,
-    LandingModule,
     MedicationModule,
     NotificationModule,
     ScheduleModule,

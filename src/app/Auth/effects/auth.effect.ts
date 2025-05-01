@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { catchError, exhaustMap, finalize, map } from 'rxjs/operators';
 import { MedicationService } from '../../Medication/services/medication.service';
 import { ScheduleService } from '../../Schedule/services/schedule.service';
-import { SharedService } from '../../Shared/Services/shared.service';
+import { SharedService } from '../../Shared/services/shared.service';
 import { TaskService } from '../../Task/services/task.service';
 import { UserService } from '../../User/services/user.service';
 import * as AuthActions from '../actions';

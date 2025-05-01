@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { SharedService } from '../../Shared/Services/shared.service';
+import { SharedService } from '../../Shared/services/shared.service';
 import * as TaskAction from '../actions';
 import { TaskDTO } from '../models/task.dto';
 

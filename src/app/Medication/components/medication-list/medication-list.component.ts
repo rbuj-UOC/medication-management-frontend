@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUserId } from '../../../Auth/selectors';
-import { selectDisplayIsMobile } from '../../../Display/display.selector';
+import { selectDisplayIsMobile } from '../../../Display/selectors';
 import * as MedicationsAction from '../../actions';
 import { MedicationDTO } from '../../models/medication.dto';
 import { selectMedications } from '../../selectors/medication.selector';

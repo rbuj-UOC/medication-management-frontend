@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectDisplayIsMobile } from '../../../Display/display.selector';
+import { selectDisplayIsMobile } from '../../../Display/selectors';
 import * as SchedulesAction from '../../actions';
 import { ScheduleDTO } from '../../models/schedule.dto';
 import { selectSchedules } from '../../selectors';
