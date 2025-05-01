@@ -3,6 +3,13 @@ import { SchedulesState } from '../reducers';
 
 const selectSchedulesState = createFeatureSelector<SchedulesState>('schedules');
 
+export const selectScheduleStateLoading = createSelector(
+  selectSchedulesState,
+  (state) => {
+    return state.loading;
+  }
+);
+
 export const selectSchedule = createSelector(selectSchedulesState, (state) => {
   return state.schedule;
 });

@@ -15,8 +15,12 @@ import {
 } from './Display/display.selector';
 import * as FirebaseAction from './Firebase/firebase.actions';
 import { selectFirebaseToken } from './Firebase/firebase.selector';
+import { selectMedicationStateLoading } from './Medication/selectors';
 import * as NotificationAction from './Notification/actions';
 import { NotificationDTO } from './Notification/models/notification.dto';
+import { selectNotificationStateLoading } from './Notification/selectors';
+import { selectScheduleStateLoading } from './Schedule/selectors';
+import { selectTaskStateLoading } from './Task/selectors';
 import * as UserAction from './User/actions';
 import { UserDTO } from './User/models/user.dto';
 import { selectUser, selectUserStateLoading } from './User/selectors';
@@ -35,19 +39,30 @@ export class AppComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   isCollapsed = true;
+
   showLoadingAuth$: any;
+  showLoadingMedication$: any;
+  showLoadingNotification$: any;
+  showLoadingSchedule$: any;
+  showLoadingTask$: any;
   showLoadingUser$: any;
+
   showAdminSection: boolean;
   showUserSection: boolean;
+
   isMobile$: any;
   isMobile = true;
+
   isDesktop$: any;
   isTablet$: any;
+
   isDesktop: boolean;
   isTablet: boolean;
+
   messaging: any;
   localDeviceToken: string;
   remoteDeviceToken: string;
+
   user_role: string;
   userId: string;
   user: UserDTO | null;
@@ -62,7 +77,16 @@ export class AppComponent implements OnInit {
     this.showNoAuthSection = true;
     this.showUserSection = false;
     this.showAdminSection = false;
+
     this.showLoadingAuth$ = this.store.select(selectAuthStateLoading);
+    this.showLoadingMedication$ = this.store.select(
+      selectMedicationStateLoading
+    );
+    this.showLoadingNotification$ = this.store.select(
+      selectNotificationStateLoading
+    );
+    this.showLoadingSchedule$ = this.store.select(selectScheduleStateLoading);
+    this.showLoadingTask$ = this.store.select(selectTaskStateLoading);
     this.showLoadingUser$ = this.store.select(selectUserStateLoading);
   }
 
