@@ -29,8 +29,8 @@ export class UserEffects {
   getUser$: any;
   getUserFailure$: any;
 
-  getUserByUserId$: any;
-  getUserByUserIdFailure$: any;
+  getUserFormByUserId$: any;
+  getUserFormByUserIdFailure$: any;
 
   getUserContacts$: any;
   getUserContactsFailure$: any;
@@ -57,6 +57,9 @@ export class UserEffects {
   updateUserDeviceToken$: any;
   updateUserDeviceTokenSuccess$: any;
   updateUserDeviceTokenFailure$: any;
+  updateUserFormByUserId$: any;
+  updateUserFormByUserIdSuccess$: any;
+  updateUserFormByUserIdFailure$: any;
 
   constructor(
     private actions$: Actions,
@@ -257,29 +260,31 @@ export class UserEffects {
       { dispatch: false }
     );
 
-    this.getUserByUserId$ = createEffect(() => {
+    this.getUserFormByUserId$ = createEffect(() => {
       return this.actions$.pipe(
-        ofType(UserActions.getUserByUserId),
+        ofType(UserActions.getUserFormByUserId),
         exhaustMap(({ userId }) =>
           this.userService.getUserByUserId(userId).pipe(
-            map((user) => {
-              return UserActions.getUserByUserIdSuccess({
+            map((userForm) => {
+              return UserActions.getUserFormByUserIdSuccess({
                 userId: userId,
-                user: user
+                userForm: userForm
               });
             }),
             catchError((error) => {
-              return of(UserActions.getUserByUserIdFailure({ payload: error }));
+              return of(
+                UserActions.getUserFormByUserIdFailure({ payload: error })
+              );
             })
           )
         )
       );
     });
 
-    this.getUserByUserIdFailure$ = createEffect(
+    this.getUserFormByUserIdFailure$ = createEffect(
       () => {
         return this.actions$.pipe(
-          ofType(UserActions.getUserByUserIdFailure),
+          ofType(UserActions.getUserFormByUserIdFailure),
           map((error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;
@@ -518,20 +523,20 @@ export class UserEffects {
       { dispatch: false }
     );
 
-    this.updateUserByUserId$ = createEffect(() => {
+    this.updateUserFormByUserId$ = createEffect(() => {
       return this.actions$.pipe(
-        ofType(UserActions.updateUserByUserId),
-        exhaustMap(({ userId, user }) =>
-          this.userService.updateUserByUserId(userId, user).pipe(
-            map((user) => {
-              return UserActions.updateUserByUserIdSuccess({
+        ofType(UserActions.updateUserFormByUserId),
+        exhaustMap(({ userId, userForm }) =>
+          this.userService.updateUserByUserId(userId, userForm).pipe(
+            map((userForm) => {
+              return UserActions.updateUserFormByUserIdSuccess({
                 userId: userId,
-                user: user
+                userForm: userForm
               });
             }),
             catchError((error) => {
               return of(
-                UserActions.updateUserByUserIdFailure({ payload: error })
+                UserActions.updateUserFormByUserIdFailure({ payload: error })
               );
             }),
             finalize(async () => {
@@ -546,10 +551,10 @@ export class UserEffects {
       );
     });
 
-    this.updateUserByUserIdSuccess$ = createEffect(
+    this.updateUserFormByUserIdSuccess$ = createEffect(
       () => {
         return this.actions$.pipe(
-          ofType(UserActions.updateUserByUserIdSuccess),
+          ofType(UserActions.updateUserFormByUserIdSuccess),
           map(() => {
             this.responseOK = true;
           })
@@ -558,10 +563,10 @@ export class UserEffects {
       { dispatch: false }
     );
 
-    this.updateUserByUserIdFailure$ = createEffect(
+    this.updateUserFormByUserIdFailure$ = createEffect(
       () => {
         return this.actions$.pipe(
-          ofType(UserActions.updateUserByUserIdFailure),
+          ofType(UserActions.updateUserFormByUserIdFailure),
           map((error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;

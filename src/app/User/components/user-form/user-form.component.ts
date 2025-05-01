@@ -12,7 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as UserAction from '../../actions';
 import { UserDTO } from '../../models/user.dto';
-import { selectUser } from '../../selectors';
+import { selectUserForm } from '../../selectors';
+
 @Component({
   selector: 'app-user-form',
   // eslint-disable-next-line @angular-eslint/prefer-standalone
@@ -109,7 +110,7 @@ export class UserFormComponent implements OnInit {
       password: this.password
     });
 
-    this.store.select(selectUser).subscribe((user) => {
+    this.store.select(selectUserForm).subscribe((user) => {
       this.user = user;
 
       this.name.setValue(this.user.name);
@@ -138,7 +139,9 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.userId) {
-      this.store.dispatch(UserAction.getUserByUserId({ userId: this.userId }));
+      this.store.dispatch(
+        UserAction.getUserFormByUserId({ userId: this.userId })
+      );
     }
   }
 
@@ -154,7 +157,10 @@ export class UserFormComponent implements OnInit {
 
     if (this.userId) {
       this.store.dispatch(
-        UserAction.updateUserByUserId({ userId: this.userId, user: this.user })
+        UserAction.updateUserFormByUserId({
+          userId: this.userId,
+          userForm: this.user
+        })
       );
     }
   }
