@@ -1,1 +1,1 @@
-export * from './medication.effects';
+export * from './medication.effect';

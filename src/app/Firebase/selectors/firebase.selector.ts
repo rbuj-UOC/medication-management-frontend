@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { FirebaseState } from './firebase.reducer';
+import { FirebaseState } from '../reducers';
 
 const selectFirebase = createFeatureSelector<FirebaseState>('firebase');
 
