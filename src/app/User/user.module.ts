@@ -16,8 +16,11 @@ import { ContactListComponent } from './components/contact-list/contact-list.com
 import { ContactTableComponent } from './components/contact-table/contact-table.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { UserGridComponent } from './components/user-grid/user-grid.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { UserTableComponent } from './components/user-table/user-table.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +31,11 @@ import { UserListComponent } from './components/user-list/user-list.component';
     ContactTableComponent,
     ProfileComponent,
     RegisterComponent,
+    UserCardComponent,
     UserFormComponent,
-    UserListComponent
+    UserGridComponent,
+    UserListComponent,
+    UserTableComponent
   ],
   imports: [
     CommonModule,
