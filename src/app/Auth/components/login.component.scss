@@ -46,11 +46,11 @@
   color: var(--mat-sys-error);
 }
 
-.login-container-card {
-  margin: 0 32px;
+.login-container {
+  margin: 8px 16px 0 16px;
 
   @media screen and (min-width: 600px) {
-    margin: 0 auto;
+    margin: 16px auto 0 auto;
     width: 400px;
   }
 

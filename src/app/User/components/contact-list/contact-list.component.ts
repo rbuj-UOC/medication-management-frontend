@@ -15,16 +15,6 @@ import { selectUserContacts } from '../../selectors';
 })
 export class ContactListComponent {
   contacts: UserDTO[];
-  displayedColumns: string[] = [
-    'contact-name',
-    'contact-surname_1',
-    'contact-surname_2',
-    'contact-alias',
-    'contact-birth_date',
-    'contact-email',
-    'contact-actions'
-  ];
-  private user_id: string;
   isMobile = true;
   isMobile$: any;
 
@@ -42,18 +32,7 @@ export class ContactListComponent {
     this.loadUserContacts();
   }
 
-  addContact(): void {
-    this.router.navigate(['user/contact/form']);
-  }
-
   private loadUserContacts(): void {
     this.store.dispatch(UserAction.getUserContacts());
-  }
-
-  removeUserContact(email: string): void {
-    const result = confirm('Confirm delete medication: ' + email);
-    if (result) {
-      this.store.dispatch(UserAction.removeUserContact({ email }));
-    }
   }
 }

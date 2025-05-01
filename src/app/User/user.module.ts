@@ -9,8 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { ContactCardComponent } from './components/contact-card/contact-card.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import { ContactGridComponent } from './components/contact-grid/contact-grid.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
+import { ContactTableComponent } from './components/contact-table/contact-table.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
@@ -18,8 +21,11 @@ import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
+    ContactCardComponent,
     ContactFormComponent,
+    ContactGridComponent,
     ContactListComponent,
+    ContactTableComponent,
     ProfileComponent,
     RegisterComponent,
     UserFormComponent,

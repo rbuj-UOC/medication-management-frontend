@@ -52,14 +52,11 @@ export class ContactFormComponent implements OnInit {
 
   saveContact(): void {
     this.isValidForm = false;
-
     if (this.contactForm.invalid) {
       return;
     }
-
     this.isValidForm = true;
     this.contact = this.contactForm.value;
-
     this.store.dispatch(
       UserAction.addUserContact({ email: this.contact.email })
     );

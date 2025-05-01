@@ -25,7 +25,7 @@ export class UserService {
 
   addUserContact(email: string): Observable<UserDTO> {
     return this.http
-      .post<UserDTO>(this.urlApi + '/contact', email)
+      .post<UserDTO>(this.urlApi + '/contact', { email: email })
       .pipe(catchError(this.sharedService.handleError));
   }
 
