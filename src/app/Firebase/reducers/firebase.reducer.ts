@@ -11,11 +11,13 @@ export const initialState: FirebaseState = {
 
 export const _firebaseReducer = createReducer(
   initialState,
-  on(FirebaseActions.setToken, (state, { token }) => ({
-    token: token
-  })),
-
-  on(FirebaseActions.resetToken, () => initialState)
+  on(
+    FirebaseActions.setToken,
+    (state, { token }): FirebaseState => ({
+      token: token
+    })
+  ),
+  on(FirebaseActions.resetToken, (): FirebaseState => initialState)
 );
 
 export function firebaseReducer(

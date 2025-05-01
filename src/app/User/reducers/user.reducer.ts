@@ -60,224 +60,315 @@ export const initialState: UserState = {
 const _userReducer = createReducer(
   initialState,
 
-  on(addUserContact, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(addUserContactSuccess, (state, action) => ({
-    ...state,
-    contacts: action.contacts,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(addUserContactFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(deleteUser, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(deleteUserSuccess, (state) => ({
-    ...state,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(deleteUserFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(deleteUserByUserId, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(deleteUserByUserIdSuccess, (state, { userId }) => ({
-    ...state,
-    users: [...state.users.filter((user) => user.id !== userId)],
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(deleteUserByUserIdFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(getUser, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(getUserSuccess, (state, action) => ({
-    ...state,
-    user: action.user,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(getUserFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(getUserFormByUserId, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(getUserFormByUserIdSuccess, (state, action) => ({
-    ...state,
-    userForm: action.userForm,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(getUserFormByUserIdFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(getUserContacts, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(getUserContactsSuccess, (state, action) => ({
-    ...state,
-    contacts: action.contacts,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(getUserContactsFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(getUsers, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(getUsersSuccess, (state, action) => ({
-    ...state,
-    users: action.users,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(getUsersFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(logout, () => initialState),
-
-  on(register, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(registerSuccess, (state) => ({
-    ...state,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(registerFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(removeUserContact, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(removeUserContactSuccess, (state, { email }) => ({
-    ...state,
-    contacts: [...state.contacts.filter((contact) => contact.email !== email)],
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(removeUserContactFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-
-  on(updateUser, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(updateUserSuccess, (state, action) => ({
-    ...state,
-    user: action.user,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(updateUserFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  })),
-  on(updateUserDeviceToken, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null
-  })),
-  on(updateUserDeviceTokenSuccess, (state, action) => ({
-    ...state,
-    user: action.user,
-    loading: false,
-    loaded: true,
-    error: null
-  })),
-  on(updateUserDeviceTokenFailure, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: { payload }
-  }))
+  on(
+    addUserContact,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    addUserContactSuccess,
+    (state, action): UserState => ({
+      ...state,
+      contacts: action.contacts,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    addUserContactFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    deleteUser,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    deleteUserSuccess,
+    (state): UserState => ({
+      ...state,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    deleteUserFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    deleteUserByUserId,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    deleteUserByUserIdSuccess,
+    (state, { userId }): UserState => ({
+      ...state,
+      users: [...state.users.filter((user) => user.id !== userId)],
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    deleteUserByUserIdFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    getUser,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getUserSuccess,
+    (state, action): UserState => ({
+      ...state,
+      user: action.user,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getUserFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    getUserFormByUserId,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getUserFormByUserIdSuccess,
+    (state, action): UserState => ({
+      ...state,
+      userForm: action.userForm,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getUserFormByUserIdFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    getUserContacts,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getUserContactsSuccess,
+    (state, action): UserState => ({
+      ...state,
+      contacts: action.contacts,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getUserContactsFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    getUsers,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getUsersSuccess,
+    (state, action): UserState => ({
+      ...state,
+      users: action.users,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getUsersFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(logout, (): UserState => initialState),
+  on(
+    register,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    registerSuccess,
+    (state): UserState => ({
+      ...state,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    registerFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    removeUserContact,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    removeUserContactSuccess,
+    (state, { email }): UserState => ({
+      ...state,
+      contacts: [
+        ...state.contacts.filter((contact) => contact.email !== email)
+      ],
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    removeUserContactFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    updateUser,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    updateUserSuccess,
+    (state, action): UserState => ({
+      ...state,
+      user: action.user,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    updateUserFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    updateUserDeviceToken,
+    (state): UserState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    updateUserDeviceTokenSuccess,
+    (state, action): UserState => ({
+      ...state,
+      user: action.user,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    updateUserDeviceTokenFailure,
+    (state, { payload }): UserState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  )
 );
 
 export function userReducer(

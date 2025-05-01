@@ -15,21 +15,30 @@ export const initialState: DisplayState = {
 
 export const _displayReducer = createReducer(
   initialState,
-  on(DisplayActions.setIsMobile, (state) => ({
-    isMobile: true,
-    isTablet: false,
-    isDesktop: false
-  })),
-  on(DisplayActions.setIsTablet, (state) => ({
-    isMobile: false,
-    isTablet: true,
-    isDesktop: false
-  })),
-  on(DisplayActions.setIsDesktop, (state) => ({
-    isMobile: false,
-    isTablet: false,
-    isDesktop: true
-  }))
+  on(
+    DisplayActions.setIsMobile,
+    (): DisplayState => ({
+      isMobile: true,
+      isTablet: false,
+      isDesktop: false
+    })
+  ),
+  on(
+    DisplayActions.setIsTablet,
+    (): DisplayState => ({
+      isMobile: false,
+      isTablet: true,
+      isDesktop: false
+    })
+  ),
+  on(
+    DisplayActions.setIsDesktop,
+    (): DisplayState => ({
+      isMobile: false,
+      isTablet: false,
+      isDesktop: true
+    })
+  )
 );
 
 export function displayReducer(
