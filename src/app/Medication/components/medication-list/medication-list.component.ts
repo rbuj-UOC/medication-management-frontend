@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectUserId } from '../../../Auth/selectors';
+import { Observable } from 'rxjs';
 import { selectDisplayIsMobile } from '../../../Display/selectors';
 import * as MedicationsAction from '../../actions';
 import { MedicationDTO } from '../../models/medication.dto';
@@ -15,44 +15,26 @@ import { selectMedications } from '../../selectors/medication.selector';
   styleUrls: ['./medication-list.component.scss']
 })
 export class MedicationListComponent {
-  medications: MedicationDTO[];
+  isMobile$: Observable<boolean>;
+  selectMedications$: Observable<MedicationDTO[]>;
   displayedColumns: string[] = [
     'medication-name',
     'medication-schedules',
     'medication-actions'
   ];
   private user_id: string;
-  isMobile = true;
-  isMobile$: any;
 
   constructor(
     private router: Router,
     private store: Store
   ) {
-    this.user_id = '';
-
-    this.store.select(selectUserId).subscribe((user_id) => {
-      if (user_id) {
-        this.user_id = user_id;
-      }
-    });
-
-    this.store.select(selectMedications).subscribe((medications) => {
-      this.medications = medications;
-    });
-
+    this.selectMedications$ = this.store.select(selectMedications);
     this.isMobile$ = this.store.select(selectDisplayIsMobile);
-    this.isMobile$.subscribe((isMobile: boolean) => {
-      this.isMobile = isMobile;
-    });
-
     this.loadMedications();
   }
 
   private loadMedications(): void {
-    if (this.user_id) {
-      this.store.dispatch(MedicationsAction.getMedications());
-    }
+    this.store.dispatch(MedicationsAction.getMedications());
   }
 
   createMedication(): void {

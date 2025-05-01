@@ -2,24 +2,25 @@
   <p id="medicationListFeedback"></p>
 </div>
 <mat-card class="main-container-card">
-  <mat-card-header *ngIf="isMobile">
+  <mat-card-header *ngIf="(isMobile$ | async) === true">
     <h1 style="margin-bottom: 16px;">Medications</h1>
   </mat-card-header>
   <mat-card-content>
-    <div class="medication-line" *ngIf="isMobile">
+    <div class="medication-line" *ngIf="(isMobile$ | async) === true">
       <button mat-flat-button color="primary" (click)="createMedication()" class="add-button">
         ADD
       </button>
     </div>
-    <div class="title" *ngIf="!isMobile">
+    <div class="title" *ngIf="(isMobile$ | async) === false">
       <h1>Medications</h1>
       <button mat-icon-button color="primary" (click)="createMedication()" aria-label="Add a medication">
         <mat-icon style="transform: scale(1.5);">add_circle</mat-icon>
       </button>
     </div>
 
-    <div *ngIf="medications.length === 0">No Medications</div>
-    <table mat-table [dataSource]="medications" class="mat-elevation-z8" *ngIf="medications.length > 0">
+    <div *ngIf="(selectMedications$ | async)?.length === 0">No Medications</div>
+    <table mat-table [dataSource]="selectMedications$ | async" class="mat-elevation-z8"
+      *ngIf="(selectMedications$ | async)?.length > 0">
       <!-- Name Column -->
       <ng-container matColumnDef="medication-name">
         <th mat-header-cell *matHeaderCellDef>Name</th>

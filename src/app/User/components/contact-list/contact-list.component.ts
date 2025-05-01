@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { selectDisplayIsMobile } from '../../../Display/selectors';
 import * as UserAction from '../../actions';
 import { UserDTO } from '../../models/user.dto';
@@ -14,21 +15,15 @@ import { selectUserContacts } from '../../selectors';
   styleUrls: ['./contact-list.component.scss']
 })
 export class ContactListComponent {
-  contacts: UserDTO[];
-  isMobile = true;
-  isMobile$: any;
+  contacts$: Observable<UserDTO[]>;
+  isMobile$: Observable<boolean>;
 
   constructor(
     private router: Router,
     private store: Store
   ) {
-    this.store.select(selectUserContacts).subscribe((contacts) => {
-      this.contacts = contacts;
-    });
+    this.contacts$ = this.store.select(selectUserContacts);
     this.isMobile$ = this.store.select(selectDisplayIsMobile);
-    this.isMobile$.subscribe((isMobile: boolean) => {
-      this.isMobile = isMobile;
-    });
     this.loadUserContacts();
   }
 
