@@ -1,7 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import * as UserAction from '../../actions';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserDTO } from '../../models/user.dto';
 
 @Component({
@@ -13,16 +10,12 @@ import { UserDTO } from '../../models/user.dto';
 })
 export class ContactCardComponent {
   @Input() contact: UserDTO;
-
-  constructor(
-    private router: Router,
-    private store: Store
-  ) {}
+  @Output() removeUserContactRequest = new EventEmitter<string>();
 
   removeUserContact(email: string): void {
     const result = confirm('Confirm delete contact: ' + email);
     if (result) {
-      this.store.dispatch(UserAction.removeUserContact({ email }));
+      this.removeUserContactRequest.emit(this.contact.email);
     }
   }
 }

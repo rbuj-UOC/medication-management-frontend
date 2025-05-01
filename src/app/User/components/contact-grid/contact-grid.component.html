@@ -6,7 +6,8 @@
     </button>
   </div>
   <div *ngIf="contacts.length > 0">
-    <app-contact-card [contact]="contact" *ngFor="let contact of contacts"></app-contact-card>
+    <app-contact-card [contact]="contact" (removeUserContactRequest)="removeUserContact($event)"
+      *ngFor="let contact of contacts"></app-contact-card>
   </div>
   <div *ngIf="contacts.length === 0">No contacts</div>
 </div>

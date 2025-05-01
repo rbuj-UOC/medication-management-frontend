@@ -1,7 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import * as UserAction from '../../actions';
 import { UserDTO } from '../../models/user.dto';
 
 @Component({
@@ -13,6 +11,8 @@ import { UserDTO } from '../../models/user.dto';
 })
 export class ContactTableComponent {
   @Input() contacts: UserDTO[] = [];
+  @Output() removeUserContactRequest = new EventEmitter<string>();
+
   displayedColumns: string[] = [
     'contact-name',
     'contact-surname_1',
@@ -23,10 +23,7 @@ export class ContactTableComponent {
     'contact-actions'
   ];
 
-  constructor(
-    private router: Router,
-    private store: Store
-  ) {}
+  constructor(private router: Router) {}
 
   addContact(): void {
     this.router.navigate(['user/contact/form']);
@@ -35,7 +32,7 @@ export class ContactTableComponent {
   removeUserContact(email: string): void {
     const result = confirm('Confirm delete contact: ' + email);
     if (result) {
-      this.store.dispatch(UserAction.removeUserContact({ email }));
+      this.removeUserContactRequest.emit(email);
     }
   }
 }

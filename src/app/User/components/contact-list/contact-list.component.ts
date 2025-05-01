@@ -35,4 +35,8 @@ export class ContactListComponent {
   private loadUserContacts(): void {
     this.store.dispatch(UserAction.getUserContacts());
   }
+
+  removeUserContact(email: string): void {
+    this.store.dispatch(UserAction.removeUserContact({ email }));
+  }
 }

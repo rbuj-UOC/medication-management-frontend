@@ -1,5 +1,7 @@
 <div style="margin-left: auto; margin-right: auto">
   <p id="contactListFeedback"></p>
 </div>
-<app-contact-table [contacts]="contacts" *ngIf="isMobile === false"></app-contact-table>
-<app-contact-grid [contacts]="contacts" *ngIf="isMobile === true"></app-contact-grid>
+<app-contact-table [contacts]="contacts" (removeUserContactRequest)="removeUserContact($event)"
+  *ngIf="isMobile===false"></app-contact-table>
+<app-contact-grid [contacts]="contacts" (removeUserContactRequest)="removeUserContact($event)"
+  *ngIf="isMobile===true"></app-contact-grid>
