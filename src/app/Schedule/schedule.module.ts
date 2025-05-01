@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { ScheduleFormComponent } from './components/schedule-form/schedule-form.component';
 import { ScheduleListComponent } from './components/schedule-list/schedule-list.component';
+import { ScheduleTableComponent } from './components/schedule-table/schedule-table.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,11 @@ import { ScheduleListComponent } from './components/schedule-list/schedule-list.
     MatTimepickerModule,
     MatNativeDateModule
   ],
-  declarations: [ScheduleListComponent, ScheduleFormComponent],
+  declarations: [
+    ScheduleListComponent,
+    ScheduleFormComponent,
+    ScheduleTableComponent
+  ],
   exports: [ScheduleListComponent]
 })
 export class ScheduleModule {}

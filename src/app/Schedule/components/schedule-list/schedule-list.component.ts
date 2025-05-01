@@ -15,7 +15,6 @@ import { selectSchedules } from '../../selectors';
 export class ScheduleListComponent {
   medicationId: string | null;
   schedules: ScheduleDTO[];
-  displayedColumns: string[] = ['schedule-start_date', 'schedule-actions'];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,17 +28,6 @@ export class ScheduleListComponent {
     this.loadSchedules();
   }
 
-  createSchedule(): void {
-    this.router.navigateByUrl('/user/schedule/form/');
-  }
-
-  deleteSchedule(id: number): void {
-    const result = confirm('Confirm delete medication');
-    if (result) {
-      this.store.dispatch(SchedulesAction.deleteSchedule({ id }));
-    }
-  }
-
   private loadSchedules(): void {
     if (this.medicationId) {
       this.store.dispatch(
@@ -48,9 +36,5 @@ export class ScheduleListComponent {
         })
       );
     }
-  }
-
-  updateSchedule(scheduleId: number): void {
-    this.router.navigateByUrl('/user/schedule/form/' + scheduleId);
   }
 }
