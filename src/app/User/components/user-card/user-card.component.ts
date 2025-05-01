@@ -1,7 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import * as UserAction from '../../actions';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserDTO } from '../../models/user.dto';
 
 @Component({
@@ -13,22 +10,17 @@ import { UserDTO } from '../../models/user.dto';
 })
 export class UserCardComponent {
   @Input() user: UserDTO;
-
-  constructor(
-    private router: Router,
-    private store: Store
-  ) {}
+  @Output() deleteUserRequest = new EventEmitter<string>();
+  @Output() editUserRequest = new EventEmitter<string>();
 
   deleteUser(): void {
     const result = confirm('Confirm delete medication: ' + this.user.email);
     if (result) {
-      this.store.dispatch(
-        UserAction.deleteUserByUserId({ userId: this.user.id })
-      );
+      this.deleteUserRequest.emit(this.user.id);
     }
   }
 
   editUser(): void {
-    this.router.navigate(['user/edit/' + this.user.id]);
+    this.editUserRequest.emit(this.user.id);
   }
 }

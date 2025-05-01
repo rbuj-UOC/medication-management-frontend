@@ -32,6 +32,14 @@ export class UserListComponent {
     this.loadUsers();
   }
 
+  deleteUser(userId: string): void {
+    this.store.dispatch(UserAction.deleteUserByUserId({ userId }));
+  }
+
+  editUser(userId: string): void {
+    this.router.navigate(['user/edit/' + userId]);
+  }
+
   private loadUsers(): void {
     this.store.dispatch(UserAction.getUsers());
   }

@@ -1,7 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import * as UserAction from '../../actions';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserDTO } from '../../models/user.dto';
 
 @Component({
@@ -13,6 +10,9 @@ import { UserDTO } from '../../models/user.dto';
 })
 export class UserTableComponent {
   @Input() users: UserDTO[] = [];
+  @Output() deleteUserRequest = new EventEmitter<string>();
+  @Output() editUserRequest = new EventEmitter<string>();
+
   displayedColumns: string[] = [
     'user-name',
     'user-surname_1',
@@ -24,19 +24,14 @@ export class UserTableComponent {
     'user-actions'
   ];
 
-  constructor(
-    private router: Router,
-    private store: Store
-  ) {}
-
   deleteUser(userId: string, email: string): void {
     const result = confirm('Confirm delete medication: ' + email);
     if (result) {
-      this.store.dispatch(UserAction.deleteUserByUserId({ userId }));
+      this.deleteUserRequest.emit(userId);
     }
   }
 
   editUser(userId: string): void {
-    this.router.navigate(['user/edit/' + userId]);
+    this.editUserRequest.emit(userId);
   }
 }
