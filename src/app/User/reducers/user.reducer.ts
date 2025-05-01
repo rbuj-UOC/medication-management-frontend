@@ -10,13 +10,13 @@ import {
   deleteUserFailure,
   deleteUserSuccess,
   getUser,
-  getUserByUserId,
-  getUserByUserIdFailure,
-  getUserByUserIdSuccess,
   getUserContacts,
   getUserContactsFailure,
   getUserContactsSuccess,
   getUserFailure,
+  getUserFormByUserId,
+  getUserFormByUserIdFailure,
+  getUserFormByUserIdSuccess,
   getUsers,
   getUsersFailure,
   getUsersSuccess,
@@ -40,6 +40,7 @@ import { UserDTO } from '../models/user.dto';
 export interface UserState {
   users: UserDTO[];
   user: UserDTO;
+  userForm: UserDTO;
   contacts: UserDTO[];
   loading: boolean;
   loaded: boolean;
@@ -49,6 +50,7 @@ export interface UserState {
 export const initialState: UserState = {
   users: new Array<UserDTO>(),
   user: new UserDTO('', '', '', '', new Date(), '', ''),
+  userForm: new UserDTO('', '', '', '', new Date(), '', ''),
   contacts: new Array<UserDTO>(),
   loading: false,
   loaded: false,
@@ -137,20 +139,20 @@ const _userReducer = createReducer(
     error: { payload }
   })),
 
-  on(getUserByUserId, (state) => ({
+  on(getUserFormByUserId, (state) => ({
     ...state,
     loading: true,
     loaded: false,
     error: null
   })),
-  on(getUserByUserIdSuccess, (state, action) => ({
+  on(getUserFormByUserIdSuccess, (state, action) => ({
     ...state,
-    user: action.user,
+    userForm: action.userForm,
     loading: false,
     loaded: true,
     error: null
   })),
-  on(getUserByUserIdFailure, (state, { payload }) => ({
+  on(getUserFormByUserIdFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,

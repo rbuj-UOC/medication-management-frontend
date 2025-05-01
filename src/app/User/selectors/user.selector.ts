@@ -14,6 +14,10 @@ export const selectUser = createSelector(selectUserState, (state) => {
   return state.user;
 });
 
+export const selectUserForm = createSelector(selectUserState, (state) => {
+  return state.userForm;
+});
+
 export const selectUserContacts = createSelector(selectUserState, (state) => {
   return state.contacts;
 });

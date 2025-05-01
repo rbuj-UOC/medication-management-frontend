@@ -47,19 +47,6 @@ export const getUserFailure = createAction(
   props<{ payload: HttpErrorResponse }>()
 );
 
-export const getUserByUserId = createAction(
-  '[??? Page] Get User By Id',
-  props<{ userId: string }>()
-);
-export const getUserByUserIdSuccess = createAction(
-  '[??? Page] Get User By Id Success',
-  props<{ userId: string; user: UserDTO }>()
-);
-export const getUserByUserIdFailure = createAction(
-  '[??? Page] Get User By Id Failure',
-  props<{ payload: HttpErrorResponse }>()
-);
-
 export const getUserContacts = createAction(
   '[ContactList Page] Get User Contact List'
 );
@@ -69,6 +56,19 @@ export const getUserContactsSuccess = createAction(
 );
 export const getUserContactsFailure = createAction(
   '[ContactList Page] Get User Contact List Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const getUserFormByUserId = createAction(
+  '[UserForm Page] Get User Form By Id',
+  props<{ userId: string }>()
+);
+export const getUserFormByUserIdSuccess = createAction(
+  '[UserForm Page] Get User Form By Id Success',
+  props<{ userId: string; userForm: UserDTO }>()
+);
+export const getUserFormByUserIdFailure = createAction(
+  '[UserForm Page] Get User Form By Id Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
@@ -123,16 +123,16 @@ export const updateUserFailure = createAction(
   props<{ payload: HttpErrorResponse }>()
 );
 
-export const updateUserByUserId = createAction(
-  '[UserForm Page] Update User By User Id',
-  props<{ userId: string; user: UserDTO }>()
+export const updateUserFormByUserId = createAction(
+  '[UserForm Page] Update User Form By User Id',
+  props<{ userId: string; userForm: UserDTO }>()
 );
-export const updateUserByUserIdSuccess = createAction(
-  '[UserForm Page] Update User By User Id Success',
-  props<{ userId: string; user: UserDTO }>()
+export const updateUserFormByUserIdSuccess = createAction(
+  '[UserForm Page] Update User Form By User Id Success',
+  props<{ userId: string; userForm: UserDTO }>()
 );
-export const updateUserByUserIdFailure = createAction(
-  '[UserForm Page] Update User By User Id Failure',
+export const updateUserFormByUserIdFailure = createAction(
+  '[UserForm Page] Update User Form By User Id Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
