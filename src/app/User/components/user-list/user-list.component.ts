@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { selectDisplayIsMobile } from '../../../Display/selectors';
 import * as UserAction from '../../actions';
 import { UserDTO } from '../../models/user.dto';
@@ -14,21 +15,15 @@ import { selectUsers } from '../../selectors';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent {
-  users: UserDTO[];
-  isMobile = true;
-  isMobile$: any;
+  selectUsers$: Observable<UserDTO[]>;
+  isMobile$: Observable<boolean>;
 
   constructor(
     private router: Router,
     private store: Store
   ) {
+    this.selectUsers$ = this.store.select(selectUsers);
     this.isMobile$ = this.store.select(selectDisplayIsMobile);
-    this.isMobile$.subscribe((isMobile: boolean) => {
-      this.isMobile = isMobile;
-    });
-    this.store.select(selectUsers).subscribe((users) => {
-      this.users = users;
-    });
     this.loadUsers();
   }
 

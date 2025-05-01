@@ -61,7 +61,6 @@ export class MedicationFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('isUpdateMode', this.isUpdateMode);
     if (this.medicationId) {
       this.isUpdateMode = true;
       this.store.dispatch(
@@ -97,14 +96,11 @@ export class MedicationFormComponent implements OnInit {
 
   saveMedication(): void {
     this.isValidForm = false;
-
     if (this.medicationForm.invalid) {
       return;
     }
-
     this.isValidForm = true;
     this.medication = this.medicationForm.value;
-
     if (this.isUpdateMode) {
       this.editMedication();
     } else {

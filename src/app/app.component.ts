@@ -5,6 +5,7 @@ import { getMessaging, getToken, onMessage } from '@angular/fire/messaging';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { selectAccessToken, selectAuthStateLoading } from './Auth/selectors';
 import { AuthService } from './Auth/services/auth.service';
@@ -40,22 +41,21 @@ export class AppComponent implements OnInit {
   sidenav!: MatSidenav;
   isCollapsed = true;
 
-  showLoadingAuth$: any;
-  showLoadingMedication$: any;
-  showLoadingNotification$: any;
-  showLoadingSchedule$: any;
-  showLoadingTask$: any;
-  showLoadingUser$: any;
+  showLoadingAuth$: Observable<boolean>;
+  showLoadingMedication$: Observable<boolean>;
+  showLoadingNotification$: Observable<boolean>;
+  showLoadingSchedule$: Observable<boolean>;
+  showLoadingTask$: Observable<boolean>;
+  showLoadingUser$: Observable<boolean>;
 
   showAdminSection: boolean;
   showUserSection: boolean;
 
-  isMobile$: any;
+  isMobile$: Observable<boolean>;
+  isDesktop$: Observable<boolean>;
+  isTablet$: Observable<boolean>;
+
   isMobile = true;
-
-  isDesktop$: any;
-  isTablet$: any;
-
   isDesktop: boolean;
   isTablet: boolean;
 

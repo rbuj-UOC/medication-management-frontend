@@ -13,7 +13,7 @@ export const _firebaseReducer = createReducer(
   initialState,
   on(
     FirebaseActions.setToken,
-    (state, { token }): FirebaseState => ({
+    ({ token }): FirebaseState => ({
       token: token
     })
   ),

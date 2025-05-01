@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import * as TaskAction from '../../actions';
 import { TaskDTO } from '../../models/task.dto';
 import { selectTasks } from '../../selectors';
@@ -13,16 +14,14 @@ import { selectTasks } from '../../selectors';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent {
-  tasks: TaskDTO[];
+  selectTasks$: Observable<TaskDTO[]>;
   displayedColumns: string[] = ['task-key', 'task-next', 'task-actions'];
 
   constructor(
     private router: Router,
     private store: Store
   ) {
-    this.store.select(selectTasks).subscribe((tasks) => {
-      this.tasks = tasks;
-    });
+    this.selectTasks$ = this.store.select(selectTasks);
     this.loadTasks();
   }
 
