@@ -1,5 +1,7 @@
 <div style="margin-left: auto; margin-right: auto">
   <p id="userListFeedback"></p>
 </div>
-<app-user-table [users]="users" *ngIf="isMobile === false"></app-user-table>
-<app-user-grid [users]="users" *ngIf="isMobile === true"></app-user-grid>
+<app-user-table [users]="users" (deleteUserRequest)="deleteUser($event)" (editUserRequest)="editUser($event)"
+  *ngIf="isMobile === false"></app-user-table>
+<app-user-grid [users]="users" (deleteUserRequest)="deleteUser($event)" (editUserRequest)="editUser($event)"
+  *ngIf="isMobile === true"></app-user-grid>

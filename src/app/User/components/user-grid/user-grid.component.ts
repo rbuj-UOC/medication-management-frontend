@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserDTO } from '../../models/user.dto';
 
 @Component({
@@ -11,6 +10,14 @@ import { UserDTO } from '../../models/user.dto';
 })
 export class UserGridComponent {
   @Input() users: UserDTO[] = [];
+  @Output() deleteUserRequest = new EventEmitter<string>();
+  @Output() editUserRequest = new EventEmitter<string>();
 
-  constructor(private router: Router) {}
+  editUser(userId: string): void {
+    this.editUserRequest.emit(userId);
+  }
+
+  deleteUser(userId: string): void {
+    this.deleteUserRequest.emit(userId);
+  }
 }
