@@ -207,9 +207,8 @@ const _userReducer = createReducer(
     loaded: false,
     error: null
   })),
-  on(registerSuccess, (state, action) => ({
+  on(registerSuccess, (state) => ({
     ...state,
-    user: action.user,
     loading: false,
     loaded: true,
     error: null
