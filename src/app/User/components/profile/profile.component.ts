@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -9,7 +9,7 @@ import {
   Validators
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { selectUserId, selectUserRole } from '../../../Auth/selectors';
+import { selectUserRole } from '../../../Auth/selectors';
 import * as UserAction from '../../actions';
 import { UserDTO } from '../../models/user.dto';
 import { selectUser } from '../../selectors';
@@ -20,7 +20,7 @@ import { selectUser } from '../../selectors';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   profileUser: UserDTO;
 
   name: FormControl;
@@ -38,13 +38,10 @@ export class ProfileComponent implements OnInit {
   isAdmin: boolean | null;
   roles: { value: string; label: string }[];
 
-  private userId: string;
-
   constructor(
     private formBuilder: FormBuilder,
     private store: Store
   ) {
-    this.userId = '';
     this.profileUser = new UserDTO('', '', '', '', new Date(), '', '');
 
     this.isValidForm = null;
@@ -109,12 +106,6 @@ export class ProfileComponent implements OnInit {
       password: this.password
     });
 
-    this.store.select(selectUserId).subscribe((user_id) => {
-      if (user_id) {
-        this.userId = user_id;
-      }
-    });
-
     this.store.select(selectUserRole).subscribe((user_role) => {
       if (user_role) {
         this.isAdmin = user_role === 'admin';
@@ -133,40 +124,30 @@ export class ProfileComponent implements OnInit {
       );
       this.email.setValue(this.profileUser.email);
       this.role.setValue(this.profileUser.role);
-
-      this.profileForm = this.formBuilder.group({
-        name: this.name,
-        surname_1: this.surname_1,
-        surname_2: this.surname_2,
-        alias: this.alias,
-        birth_date: this.birth_date,
-        email: this.email,
-        password: this.password,
-        confirmPassword: this.confirmPassword,
-        role: this.role
-      });
     });
-  }
 
-  ngOnInit(): void {
-    if (this.userId) {
-      this.store.dispatch(UserAction.getUser());
-    }
+    this.profileForm = this.formBuilder.group({
+      name: this.name,
+      surname_1: this.surname_1,
+      surname_2: this.surname_2,
+      alias: this.alias,
+      birth_date: this.birth_date,
+      email: this.email,
+      password: this.password,
+      confirmPassword: this.confirmPassword,
+      role: this.role
+    });
   }
 
   onSubmit(): void {
     this.isValidForm = false;
-
     if (this.profileForm.invalid) {
       return;
     }
-
     this.isValidForm = true;
     this.profileUser = this.profileForm.value;
-
-    if (this.userId) {
-      this.store.dispatch(UserAction.updateUser({ user: this.profileUser }));
-    }
+    const { confirmPassword, ...user } = this.profileForm.value;
+    this.store.dispatch(UserAction.updateUser({ user }));
   }
 
   onDelete(): void {
