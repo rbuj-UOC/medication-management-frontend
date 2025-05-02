@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { initializeApp } from '@angular/fire/app';
 import { getMessaging, getToken, onMessage } from '@angular/fire/messaging';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -7,13 +7,14 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
-import { selectAccessToken, selectAuthStateLoading } from './Auth/selectors';
+import {
+  selectAccessToken,
+  selectAuthStateLoading,
+  selectUserRole
+} from './Auth/selectors';
 import { AuthService } from './Auth/services/auth.service';
 import * as DisplayAction from './Display/actions';
-import {
-  selectDisplayIsDesktop,
-  selectDisplayIsMobile
-} from './Display/selectors';
+import { selectDisplayIsMobile } from './Display/selectors';
 import * as FirebaseAction from './Firebase/actions';
 import { selectFirebaseToken } from './Firebase/selectors';
 import { selectMedicationStateLoading } from './Medication/selectors';
@@ -34,75 +35,52 @@ import { selectUser, selectUserStateLoading } from './User/selectors';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'frontend';
-  showAuthSection: boolean;
-  showNoAuthSection: boolean;
+  store = inject(Store);
+  isMobile$: Observable<boolean> = this.store.select(selectDisplayIsMobile);
+  selectAccessToken$: Observable<string | null> =
+    this.store.select(selectAccessToken);
+  selectFirebaseToken$: Observable<string | null> =
+    this.store.select(selectFirebaseToken);
+  showLoadingAuth$: Observable<boolean> = this.store.select(
+    selectAuthStateLoading
+  );
+  showLoadingMedication$: Observable<boolean> = this.store.select(
+    selectMedicationStateLoading
+  );
+  showLoadingNotification$: Observable<boolean> = this.store.select(
+    selectNotificationStateLoading
+  );
+  showLoadingSchedule$: Observable<boolean> = this.store.select(
+    selectScheduleStateLoading
+  );
+  showLoadingTask$: Observable<boolean> = this.store.select(
+    selectTaskStateLoading
+  );
+  showLoadingUser$: Observable<boolean> = this.store.select(
+    selectUserStateLoading
+  );
+  selectUser$: Observable<UserDTO | null> = this.store.select(selectUser);
+  selectUserRole$: Observable<string | null> =
+    this.store.select(selectUserRole);
+
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   isCollapsed = true;
-
-  showLoadingAuth$: Observable<boolean>;
-  showLoadingMedication$: Observable<boolean>;
-  showLoadingNotification$: Observable<boolean>;
-  showLoadingSchedule$: Observable<boolean>;
-  showLoadingTask$: Observable<boolean>;
-  showLoadingUser$: Observable<boolean>;
-
-  showAdminSection: boolean;
-  showUserSection: boolean;
-
-  isMobile$: Observable<boolean>;
-  isDesktop$: Observable<boolean>;
-  isTablet$: Observable<boolean>;
-
   isMobile = true;
-  isDesktop: boolean;
-  isTablet: boolean;
-
   messaging: any;
   localDeviceToken: string;
   remoteDeviceToken: string;
-
-  user_role: string;
-  userId: string;
-  user: UserDTO | null;
+  user_role: string | null;
 
   constructor(
     private observer: BreakpointObserver,
     private router: Router,
-    private store: Store,
     private authService: AuthService
-  ) {
-    this.showAuthSection = false;
-    this.showNoAuthSection = true;
-    this.showUserSection = false;
-    this.showAdminSection = false;
-
-    this.showLoadingAuth$ = this.store.select(selectAuthStateLoading);
-    this.showLoadingMedication$ = this.store.select(
-      selectMedicationStateLoading
-    );
-    this.showLoadingNotification$ = this.store.select(
-      selectNotificationStateLoading
-    );
-    this.showLoadingSchedule$ = this.store.select(selectScheduleStateLoading);
-    this.showLoadingTask$ = this.store.select(selectTaskStateLoading);
-    this.showLoadingUser$ = this.store.select(selectUserStateLoading);
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.isMobile$ = this.store.select(selectDisplayIsMobile);
-    this.isTablet$ = this.store.select(selectDisplayIsDesktop);
-    this.isDesktop$ = this.store.select(selectDisplayIsDesktop);
-
     this.isMobile$.subscribe((isMobile: boolean) => {
       this.isMobile = isMobile;
-    });
-    this.isDesktop$.subscribe((isDesktop: boolean) => {
-      this.isDesktop = isDesktop;
-    });
-    this.isTablet$.subscribe((isTablet: boolean) => {
-      this.isTablet = isTablet;
     });
 
     this.observer.observe([Breakpoints.XSmall]).subscribe((result) => {
@@ -127,44 +105,35 @@ export class AppComponent implements OnInit {
         }
       });
 
-    this.store.select(selectAccessToken).subscribe((access_token) => {
+    this.selectAccessToken$.subscribe((access_token) => {
       if (access_token) {
-        this.showAuthSection = true;
-        this.showNoAuthSection = false;
         this.store.dispatch(UserAction.getUser());
-      } else {
-        this.showAuthSection = false;
-        this.showNoAuthSection = true;
       }
     });
 
-    this.store.select(selectUser).subscribe((user) => {
+    this.selectUserRole$.subscribe((user_role) => {
+      this.user_role = user_role;
+    });
+
+    this.selectUser$.subscribe((user) => {
       if (user) {
-        this.user = user;
-        this.user_role = user.role;
         this.remoteDeviceToken = user.device_token;
-        const localDeviceToken = this.localDeviceToken;
         if (
-          this.user_role === 'user' &&
-          localDeviceToken !== user.device_token
+          user.role === 'user' &&
+          this.localDeviceToken !== user.device_token
         ) {
           this.store.dispatch(
             UserAction.updateUserDeviceToken({
-              device_token: localDeviceToken
+              device_token: this.localDeviceToken
             })
           );
         }
       }
     });
 
-    this.store.select(selectFirebaseToken).subscribe((token) => {
+    this.selectFirebaseToken$.subscribe((token) => {
       this.localDeviceToken = token;
-      const remoteDeviceToken = this.remoteDeviceToken;
-      if (
-        this.user &&
-        this.user.role === 'user' &&
-        this.localDeviceToken !== remoteDeviceToken
-      ) {
+      if (this.user_role === 'user' && token !== this.remoteDeviceToken) {
         this.store.dispatch(
           UserAction.updateUserDeviceToken({
             device_token: this.localDeviceToken

@@ -7,7 +7,7 @@
 <app-spinner *ngIf="showLoadingTask$ | async"></app-spinner>
 
 <!-- UPPER TOOLBAR: NOT LOGGED -->
-<mat-toolbar *ngIf="showNoAuthSection" color="primary">
+<mat-toolbar *ngIf="user_role !== 'admin' && user_role !== 'user'" color="primary">
   <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
     <mat-icon>menu</mat-icon>
   </button>
@@ -16,7 +16,7 @@
   <button mat-flat-button color="primary" (click)="register()">Register</button>
 </mat-toolbar>
 <!-- UPPER TOOLBAR: LOGGED -->
-<mat-toolbar *ngIf="showAuthSection" color="primary">
+<mat-toolbar *ngIf="user_role === 'admin' || user_role === 'user'" color="primary">
   <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
     <mat-icon>menu</mat-icon>
   </button>
@@ -31,7 +31,7 @@
     [opened]="isMobile ? 'false' : 'true'">
     <mat-nav-list>
       <a mat-list-item routerLinkActive (click)="landing()" (keydown.enter)="landing()" tabindex="0"
-        *ngIf="showNoAuthSection">
+        *ngIf="user_role !== 'admin' && user_role !== 'user'">
         <span class="entry">
           <mat-icon>home</mat-icon>
           <span *ngIf="!isCollapsed">Home</span>

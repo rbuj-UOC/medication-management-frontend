@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { NotificationDTO } from '../../models/notification.dto';
 import { selectNotifications } from '../../selectors';
 
@@ -11,11 +12,7 @@ import { selectNotifications } from '../../selectors';
   styleUrls: ['./notification-list.component.scss']
 })
 export class NotificationListComponent {
-  notifications: NotificationDTO[] | null;
-
-  constructor(private store: Store) {
-    this.store.select(selectNotifications).subscribe((notifications) => {
-      this.notifications = notifications;
-    });
-  }
+  store: Store = inject(Store);
+  selectNotifications$: Observable<NotificationDTO[] | null> =
+    this.store.select(selectNotifications);
 }

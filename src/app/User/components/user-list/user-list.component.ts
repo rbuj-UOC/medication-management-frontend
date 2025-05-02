@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -14,17 +14,15 @@ import { selectUsers } from '../../selectors';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent {
-  selectUsers$: Observable<UserDTO[]>;
-  isMobile$: Observable<boolean>;
+export class UserListComponent implements OnInit {
+  store = inject(Store);
+  selectUsers$: Observable<UserDTO[] | null> = this.store.select(selectUsers);
+  isMobile$: Observable<boolean> = this.store.select(selectDisplayIsMobile);
 
-  constructor(
-    private router: Router,
-    private store: Store
-  ) {
-    this.selectUsers$ = this.store.select(selectUsers);
-    this.isMobile$ = this.store.select(selectDisplayIsMobile);
-    this.loadUsers();
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(UserAction.getUsers());
   }
 
   deleteUser(userId: string): void {
@@ -33,9 +31,5 @@ export class UserListComponent {
 
   editUser(userId: string): void {
     this.router.navigate(['user/edit/' + userId]);
-  }
-
-  private loadUsers(): void {
-    this.store.dispatch(UserAction.getUsers());
   }
 }
