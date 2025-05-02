@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectUserId } from '../../../Auth/selectors';
-import * as UserAction from '../../../User/actions';
 import * as MedicationsAction from '../../actions';
+import { MedicationDTO } from '../../models/medication.dto';
 
 @Component({
   selector: 'app-medication-new',
@@ -23,7 +23,7 @@ export class MedicationNewComponent implements OnInit {
   store = inject(Store);
   private selectUserId$: Observable<string | null> =
     this.store.select(selectUserId);
-
+  private userId: string | null;
   medicationForm: FormGroup;
   isValidForm: boolean | null;
   name: FormControl;
@@ -40,11 +40,13 @@ export class MedicationNewComponent implements OnInit {
     this.medicationForm = this.formBuilder.group({
       name: this.name
     });
+    this.selectUserId$.subscribe((userId) => {
+      this.userId = userId;
+    });
   }
 
   ngOnInit(): void {
     this.medicationForm.reset();
-    this.store.dispatch(UserAction.getUser());
   }
 
   cancelMedication() {
@@ -52,7 +54,7 @@ export class MedicationNewComponent implements OnInit {
   }
 
   saveMedication(): void {
-    if (this.selectUserId$ === null) {
+    if (this.userId === null) {
       return;
     }
     this.isValidForm = false;
@@ -60,8 +62,8 @@ export class MedicationNewComponent implements OnInit {
       return;
     }
     this.isValidForm = true;
-    const medication = this.medicationForm.value;
-    medication.user_id = this.selectUserId$;
+    const medication: MedicationDTO = this.medicationForm.value;
+    medication.user_id = this.userId;
     this.store.dispatch(MedicationsAction.createMedication({ medication }));
   }
 }

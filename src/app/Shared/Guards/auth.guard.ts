@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -8,16 +8,14 @@ import { selectAccessToken } from '../../Auth/selectors';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  private access_token = '';
-  constructor(
-    private router: Router,
-    private store: Store
-  ) {
-    this.store.select(selectAccessToken).subscribe((access_token) => {
-      this.access_token = '';
-      if (access_token) {
-        this.access_token = access_token;
-      }
+  store = inject(Store);
+  selectAccessToken$: Observable<string | null> =
+    this.store.select(selectAccessToken);
+  private access_token: string | null = null;
+
+  constructor(private router: Router) {
+    this.selectAccessToken$.subscribe((access_token) => {
+      this.access_token = access_token;
     });
   }
 
@@ -29,9 +27,7 @@ export class AuthGuard implements CanActivate {
     if (this.access_token) {
       return true;
     }
-
     this.router.navigate(['/login']);
-
     return false;
   }
 }

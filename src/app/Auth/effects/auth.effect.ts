@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, exhaustMap, finalize, map } from 'rxjs/operators';
+import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { MedicationService } from '../../Medication/services/medication.service';
 import { ScheduleService } from '../../Schedule/services/schedule.service';
 import { SharedService } from '../../Shared/services/shared.service';
@@ -52,13 +52,6 @@ export class AuthEffects {
             }),
             catchError((error) => {
               return of(AuthActions.loginFailure({ payload: error }));
-            }),
-            finalize(async () => {
-              await this.sharedService.managementToast(
-                'loginFeedback',
-                this.responseOK,
-                this.errorResponse
-              );
             })
           )
         )
@@ -69,8 +62,13 @@ export class AuthEffects {
       () => {
         return this.actions$.pipe(
           ofType(AuthActions.loginSuccess),
-          map(({ credentials }) => {
+          map(async ({ credentials }) => {
             this.responseOK = true;
+            await this.sharedService.managementToast(
+              'loginFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
             if (credentials.user_role === 'admin') {
               this.router.navigateByUrl('admin/dashboard');
             } else if (credentials.user_role === 'user') {
@@ -86,10 +84,15 @@ export class AuthEffects {
       () => {
         return this.actions$.pipe(
           ofType(AuthActions.loginFailure),
-          map((error) => {
+          map(async (error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
+            await this.sharedService.managementToast(
+              'loginFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
           })
         );
       },

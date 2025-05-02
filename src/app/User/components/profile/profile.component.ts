@@ -127,7 +127,8 @@ export class ProfileComponent implements OnInit {
       return;
     }
     this.isValidForm = true;
-    const { confirmPassword, ...user } = this.profileForm.value;
+    const user = this.profileForm.value;
+    delete user.confirmPassword;
     this.store.dispatch(UserAction.updateUser({ user }));
   }
 

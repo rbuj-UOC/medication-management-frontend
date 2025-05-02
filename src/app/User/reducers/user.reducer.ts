@@ -71,9 +71,8 @@ const _userReducer = createReducer(
   ),
   on(
     addUserContactSuccess,
-    (state, action): UserState => ({
+    (state): UserState => ({
       ...state,
-      contacts: action.contacts,
       loading: false,
       loaded: true,
       error: null

@@ -77,20 +77,10 @@ export class UserEffects {
         exhaustMap(({ email }) =>
           this.userService.addUserContact(email).pipe(
             map(() => {
-              return UserActions.deleteUserSuccess();
+              return UserActions.addUserContactSuccess();
             }),
             catchError((error) => {
-              return of(UserActions.deleteUserFailure({ payload: error }));
-            }),
-            finalize(async () => {
-              await this.sharedService.managementToast(
-                'contactFeedback',
-                this.responseOK,
-                this.errorResponse
-              );
-              if (this.responseOK) {
-                this.router.navigateByUrl('user/contact/list');
-              }
+              return of(UserActions.addUserContactFailure({ payload: error }));
             })
           )
         )
@@ -101,8 +91,14 @@ export class UserEffects {
       () => {
         return this.actions$.pipe(
           ofType(UserActions.addUserContactSuccess),
-          map(() => {
+          map(async () => {
             this.responseOK = true;
+            await this.sharedService.managementToast(
+              'contactFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
+            this.router.navigateByUrl('/user/contact/list');
           })
         );
       },
@@ -113,10 +109,15 @@ export class UserEffects {
       () => {
         return this.actions$.pipe(
           ofType(UserActions.addUserContactFailure),
-          map((error) => {
+          map(async (error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
+            await this.sharedService.managementToast(
+              'contactFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
           })
         );
       },
@@ -436,7 +437,7 @@ export class UserEffects {
             }),
             finalize(async () => {
               await this.sharedService.managementToast(
-                'userListFeedback',
+                'contactListFeedback',
                 this.responseOK,
                 this.errorResponse
               );
