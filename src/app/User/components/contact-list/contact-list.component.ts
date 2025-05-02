@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectDisplayIsMobile } from '../../../Display/selectors';
@@ -14,20 +13,13 @@ import { selectUserContacts } from '../../selectors';
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']
 })
-export class ContactListComponent {
-  contacts$: Observable<UserDTO[]>;
-  isMobile$: Observable<boolean>;
+export class ContactListComponent implements OnInit {
+  store = inject(Store);
+  contacts$: Observable<UserDTO[] | null> =
+    this.store.select(selectUserContacts);
+  isMobile$: Observable<boolean> = this.store.select(selectDisplayIsMobile);
 
-  constructor(
-    private router: Router,
-    private store: Store
-  ) {
-    this.contacts$ = this.store.select(selectUserContacts);
-    this.isMobile$ = this.store.select(selectDisplayIsMobile);
-    this.loadUserContacts();
-  }
-
-  private loadUserContacts(): void {
+  ngOnInit(): void {
     this.store.dispatch(UserAction.getUserContacts());
   }
 

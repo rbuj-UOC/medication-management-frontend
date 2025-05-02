@@ -1,1 +1,2 @@
-<app-notification-card [notification]="notification" *ngFor="let notification of notifications"></app-notification-card>
+<app-notification-card [notification]="notification"
+  *ngFor="let notification of (selectNotifications$ | async)"></app-notification-card>

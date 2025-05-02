@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -21,18 +21,21 @@ import { selectMedication } from '../../selectors/medication.selector';
   styleUrls: ['./medication-edit.component.scss']
 })
 export class MedicationEditComponent implements OnInit {
-  medication$: Observable<MedicationDTO | null>;
+  store = inject(Store);
+  selectMedication$: Observable<MedicationDTO | null> =
+    this.store.select(selectMedication);
+  private selectUserId$: Observable<string | null> =
+    this.store.select(selectUserId);
+
   medicationForm: FormGroup;
   isValidForm: boolean | null;
   name: FormControl;
-  private userId$: Observable<string | null>;
   private medicationId: string | null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private router: Router,
-    private store: Store
+    private router: Router
   ) {
     this.isValidForm = null;
     this.medicationId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -43,17 +46,7 @@ export class MedicationEditComponent implements OnInit {
     this.medicationForm = this.formBuilder.group({
       name: this.name
     });
-    this.userId$ = this.store.select(selectUserId);
-    this.medication$ = this.store.select(selectMedication);
-  }
-
-  ngOnInit(): void {
-    if (this.medicationId !== null) {
-      this.store.dispatch(
-        MedicationsAction.getMedicationById({ id: this.medicationId })
-      );
-    }
-    this.medication$.subscribe((medication) => {
+    this.selectMedication$.subscribe((medication) => {
       if (medication) {
         this.medicationForm.patchValue({
           name: medication.name
@@ -62,12 +55,20 @@ export class MedicationEditComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    if (this.medicationId !== null) {
+      this.store.dispatch(
+        MedicationsAction.getMedicationById({ id: this.medicationId })
+      );
+    }
+  }
+
   cancelMedication() {
     this.router.navigateByUrl('/user/medication/list');
   }
 
   saveMedication(): void {
-    if (this.userId$ === null || this.medicationId === null) {
+    if (this.selectUserId$ === null || this.medicationId === null) {
       return;
     }
     this.isValidForm = false;
@@ -76,7 +77,7 @@ export class MedicationEditComponent implements OnInit {
     }
     this.isValidForm = true;
     const medication = this.medicationForm.value;
-    medication.user_id = this.userId$;
+    medication.user_id = this.selectUserId$;
     this.store.dispatch(
       MedicationsAction.updateMedication({
         id: this.medicationId,

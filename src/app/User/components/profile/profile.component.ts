@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -21,7 +21,8 @@ import { selectUser } from '../../selectors';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  selectUser$: Observable<UserDTO | null>;
+  store = inject(Store);
+  selectUser$: Observable<UserDTO | null> = this.store.select(selectUser);
 
   name: FormControl;
   surname_1: FormControl;
@@ -37,10 +38,7 @@ export class ProfileComponent implements OnInit {
   isValidForm: boolean | null;
   roles: { value: string; label: string }[];
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private store: Store
-  ) {
+  constructor(private formBuilder: FormBuilder) {
     this.isValidForm = null;
 
     this.name = new FormControl('', [
@@ -107,7 +105,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectUser$ = this.store.select(selectUser);
     this.selectUser$.subscribe((user) => {
       if (user) {
         this.profileForm.patchValue({

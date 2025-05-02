@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { selectDisplayIsMobile } from '../../../Display/selectors';
 import * as SchedulesAction from '../../actions';
 import { ScheduleDTO } from '../../models/schedule.dto';
@@ -13,26 +14,28 @@ import { selectSchedules } from '../../selectors';
   templateUrl: './schedule-list.component.html',
   styleUrls: ['./schedule-list.component.scss']
 })
-export class ScheduleListComponent {
-  medicationId: string | null;
-  schedules: ScheduleDTO[];
-  isMobile = true;
-  isMobile$: any;
+export class ScheduleListComponent implements OnInit {
+  store = inject(Store);
+  isMobile$: Observable<boolean> = this.store.select(selectDisplayIsMobile);
+  selectSchedules$: Observable<ScheduleDTO[] | null> =
+    this.store.select(selectSchedules);
+  private medicationId: string | null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private store: Store
+    private router: Router
   ) {
-    this.isMobile$ = this.store.select(selectDisplayIsMobile);
-    this.isMobile$.subscribe((isMobile: boolean) => {
-      this.isMobile = isMobile;
-    });
     this.medicationId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.store.select(selectSchedules).subscribe((schedules) => {
-      this.schedules = schedules;
-    });
-    this.loadSchedules();
+  }
+
+  ngOnInit(): void {
+    if (this.medicationId) {
+      this.store.dispatch(
+        SchedulesAction.getSchedulesByMedicationId({
+          medicationId: this.medicationId
+        })
+      );
+    }
   }
 
   createSchedule(): void {
@@ -45,15 +48,5 @@ export class ScheduleListComponent {
 
   editSchedule(id: number): void {
     this.router.navigateByUrl('/user/schedule/form/' + id);
-  }
-
-  private loadSchedules(): void {
-    if (this.medicationId) {
-      this.store.dispatch(
-        SchedulesAction.getSchedulesByMedicationId({
-          medicationId: this.medicationId
-        })
-      );
-    }
   }
 }

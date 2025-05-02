@@ -46,8 +46,9 @@ export class AuthEffects {
                 user_role: userToken.user_role,
                 access_token: userToken.access_token
               };
-
-              return AuthActions.loginSuccess({ credentials: credentialsTemp });
+              return AuthActions.loginSuccess({
+                credentials: credentialsTemp
+              });
             }),
             catchError((error) => {
               return of(AuthActions.loginFailure({ payload: error }));
