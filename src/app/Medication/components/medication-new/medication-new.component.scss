@@ -1,4 +1,4 @@
-#medicationFeedback {
+#medicationNewFeedback {
   opacity: 0;
   display: none;
   text-align: center;
@@ -9,12 +9,12 @@
   margin-right: auto;
 }
 
-#medicationFeedback.fade-in {
+#medicationNewFeedback.fade-in {
   display: block;
   animation: fade-in 0.7s ease-in forwards;
 }
 
-#medicationFeedback.fade-out {
+#medicationNewFeedback.fade-out {
   animation: fade-out 0.7s ease-out forwards;
 }
 

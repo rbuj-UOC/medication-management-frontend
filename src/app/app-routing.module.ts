@@ -4,8 +4,9 @@ import { LoginComponent } from './Auth/components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
 import { TodayListComponent } from './components/today-list/today-list.component';
-import { MedicationFormComponent } from './Medication/components/medication-form/medication-form.component';
+import { MedicationEditComponent } from './Medication/components/medication-edit/medication-edit.component';
 import { MedicationListComponent } from './Medication/components/medication-list/medication-list.component';
+import { MedicationNewComponent } from './Medication/components/medication-new/medication-new.component';
 import { ScheduleFormComponent } from './Schedule/components/schedule-form/schedule-form.component';
 import { ScheduleListComponent } from './Schedule/components/schedule-list/schedule-list.component';
 import { HelpComponent } from './Shared/components/help/help.component';
@@ -91,8 +92,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'user/medication/form/:id',
-    component: MedicationFormComponent,
+    path: 'user/medication/new',
+    component: MedicationNewComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/medication/edit/:id',
+    component: MedicationEditComponent,
     canActivate: [AuthGuard]
   },
   {

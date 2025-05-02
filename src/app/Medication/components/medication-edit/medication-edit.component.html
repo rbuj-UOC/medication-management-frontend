@@ -1,8 +1,8 @@
 <div style="margin-left: auto; margin-right: auto">
-  <p id="medicationFeedback"></p>
+  <p id="medicationEditFeedback"></p>
 </div>
 <div class="main-container">
-  <h1>Medication Form</h1>
+  <h1>Edit Medication</h1>
   <form *ngIf="medicationForm" [formGroup]="medicationForm" (ngSubmit)="saveMedication()">
     <div class="medication-line">
       <mat-form-field>
@@ -22,6 +22,6 @@
     </div>
   </form>
 
-  <app-schedule-list *ngIf="isUpdateMode" class="schedule-list"></app-schedule-list>
+  <app-schedule-list class="schedule-list"></app-schedule-list>
 
 </div>
