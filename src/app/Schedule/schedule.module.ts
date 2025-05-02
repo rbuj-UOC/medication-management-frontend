@@ -10,9 +10,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { ScheduleCardComponent } from './components/schedule-card/schedule-card.component';
-import { ScheduleFormComponent } from './components/schedule-form/schedule-form.component';
+import { ScheduleEditComponent } from './components/schedule-edit/schedule-edit.component';
 import { ScheduleGridComponent } from './components/schedule-grid/schedule-grid.component';
 import { ScheduleListComponent } from './components/schedule-list/schedule-list.component';
+import { ScheduleNewComponent } from './components/schedule-new/schedule-new.component';
 import { ScheduleTableComponent } from './components/schedule-table/schedule-table.component';
 
 @NgModule({
@@ -30,9 +31,10 @@ import { ScheduleTableComponent } from './components/schedule-table/schedule-tab
   ],
   declarations: [
     ScheduleCardComponent,
+    ScheduleEditComponent,
     ScheduleGridComponent,
     ScheduleListComponent,
-    ScheduleFormComponent,
+    ScheduleNewComponent,
     ScheduleTableComponent
   ],
   exports: [ScheduleListComponent]

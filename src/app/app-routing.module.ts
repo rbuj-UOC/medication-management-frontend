@@ -7,8 +7,9 @@ import { TodayListComponent } from './components/today-list/today-list.component
 import { MedicationEditComponent } from './Medication/components/medication-edit/medication-edit.component';
 import { MedicationListComponent } from './Medication/components/medication-list/medication-list.component';
 import { MedicationNewComponent } from './Medication/components/medication-new/medication-new.component';
-import { ScheduleFormComponent } from './Schedule/components/schedule-form/schedule-form.component';
+import { ScheduleEditComponent } from './Schedule/components/schedule-edit/schedule-edit.component';
 import { ScheduleListComponent } from './Schedule/components/schedule-list/schedule-list.component';
+import { ScheduleNewComponent } from './Schedule/components/schedule-new/schedule-new.component';
 import { HelpComponent } from './Shared/components/help/help.component';
 import { LandingComponent } from './Shared/components/landing/landing.component';
 import { PrivacyComponent } from './Shared/components/privacy/privacy.component';
@@ -107,8 +108,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'user/schedule/form/:id',
-    component: ScheduleFormComponent,
+    path: 'user/schedule/new/',
+    component: ScheduleNewComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/schedule/edit/:id',
+    component: ScheduleEditComponent,
     canActivate: [AuthGuard]
   },
   {

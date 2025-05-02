@@ -3,17 +3,17 @@ import { createAction, props } from '@ngrx/store';
 import { ScheduleDTO } from '../models/schedule.dto';
 
 export const createSchedule = createAction(
-  '[ScheduleForm Page] Create Schedule',
+  '[NewSchedule Page] Create Schedule',
   props<{ schedule: ScheduleDTO }>()
 );
 
 export const createScheduleSuccess = createAction(
-  '[ScheduleForm Page] Create Schedule Success',
+  '[NewSchedule Page] Create Schedule Success',
   props<{ schedule: ScheduleDTO }>()
 );
 
 export const createScheduleFailure = createAction(
-  '[ScheduleForm Page] Create Schedule Failure',
+  '[NewSchedule Page] Create Schedule Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
@@ -33,17 +33,17 @@ export const deleteScheduleFailure = createAction(
 );
 
 export const getScheduleById = createAction(
-  '[ScheduleForm Page] Get Schedule',
+  '[EditSchedule Page] Get Schedule',
   props<{ id: string }>()
 );
 
 export const getScheduleByIdSuccess = createAction(
-  '[ScheduleForm Page] Get Schedule Success',
+  '[EditSchedule Page] Get Schedule Success',
   props<{ schedule: ScheduleDTO }>()
 );
 
 export const getScheduleByIdFailure = createAction(
-  '[ScheduleForm Page] Get Schedule Failure',
+  '[EditSchedule Page] Get Schedule Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
@@ -65,16 +65,16 @@ export const getSchedulesByMedicationIdFailure = createAction(
 export const logout = createAction('[Schedule Service] Logout');
 
 export const updateSchedule = createAction(
-  '[ScheduleForm Page] Update Schedules',
+  '[EditSchedule Page] Update Schedules',
   props<{ id: string; schedule: ScheduleDTO }>()
 );
 
 export const updateScheduleSuccess = createAction(
-  '[ScheduleForm Page] Update Schedules Success',
+  '[EditSchedule Page] Update Schedules Success',
   props<{ id: string; schedule: ScheduleDTO }>()
 );
 
 export const updateScheduleFailure = createAction(
-  '[ScheduleForm Page] Update Schedules Failure',
+  '[EditSchedule Page] Update Schedules Failure',
   props<{ payload: HttpErrorResponse }>()
 );
