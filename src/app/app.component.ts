@@ -20,7 +20,6 @@ import { selectFirebaseToken } from './Firebase/selectors';
 import { selectMedicationStateLoading } from './Medication/selectors';
 import * as NotificationAction from './Notification/actions';
 import { NotificationDTO } from './Notification/models/notification.dto';
-import { selectNotificationStateLoading } from './Notification/selectors';
 import { selectScheduleStateLoading } from './Schedule/selectors';
 import { selectTaskStateLoading } from './Task/selectors';
 import * as UserAction from './User/actions';
@@ -46,9 +45,6 @@ export class AppComponent implements OnInit {
   );
   showLoadingMedication$: Observable<boolean> = this.store.select(
     selectMedicationStateLoading
-  );
-  showLoadingNotification$: Observable<boolean> = this.store.select(
-    selectNotificationStateLoading
   );
   showLoadingSchedule$: Observable<boolean> = this.store.select(
     selectScheduleStateLoading
