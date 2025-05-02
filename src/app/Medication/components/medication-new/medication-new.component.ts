@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -20,15 +20,17 @@ import * as MedicationsAction from '../../actions';
   styleUrls: ['./medication-new.component.scss']
 })
 export class MedicationNewComponent implements OnInit {
+  store = inject(Store);
+  private selectUserId$: Observable<string | null> =
+    this.store.select(selectUserId);
+
   medicationForm: FormGroup;
   isValidForm: boolean | null;
   name: FormControl;
-  private userId$: Observable<string | null>;
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private store: Store
+    private router: Router
   ) {
     this.isValidForm = null;
     this.name = new FormControl('', [
@@ -38,7 +40,6 @@ export class MedicationNewComponent implements OnInit {
     this.medicationForm = this.formBuilder.group({
       name: this.name
     });
-    this.userId$ = this.store.select(selectUserId);
   }
 
   ngOnInit(): void {
@@ -51,16 +52,16 @@ export class MedicationNewComponent implements OnInit {
   }
 
   saveMedication(): void {
+    if (this.selectUserId$ === null) {
+      return;
+    }
     this.isValidForm = false;
     if (this.medicationForm.invalid) {
       return;
     }
     this.isValidForm = true;
     const medication = this.medicationForm.value;
-    if (this.userId$ === null) {
-      return;
-    }
-    medication.user_id = this.userId$;
+    medication.user_id = this.selectUserId$;
     this.store.dispatch(MedicationsAction.createMedication({ medication }));
   }
 }

@@ -39,7 +39,7 @@ export class ScheduleListComponent implements OnInit {
   }
 
   createSchedule(): void {
-    this.router.navigateByUrl('/user/schedule/form/');
+    this.router.navigateByUrl('/user/schedule/new/');
   }
 
   deleteSchedule(id: number): void {
@@ -47,6 +47,6 @@ export class ScheduleListComponent implements OnInit {
   }
 
   editSchedule(id: number): void {
-    this.router.navigateByUrl('/user/schedule/form/' + id);
+    this.router.navigateByUrl('/user/schedule/edit/' + id);
   }
 }

@@ -1,4 +1,4 @@
-#scheduleFeedback {
+#scheduleEditFeedback {
   opacity: 0;
   display: none;
   text-align: center;
@@ -9,12 +9,12 @@
   margin-right: auto;
 }
 
-#scheduleFeedback.fade-in {
+#scheduleEditFeedback.fade-in {
   display: block;
   animation: fade-in 0.7s ease-in forwards;
 }
 
-#scheduleFeedback.fade-out {
+#scheduleEditFeedback.fade-out {
   animation: fade-out 0.7s ease-out forwards;
 }
 

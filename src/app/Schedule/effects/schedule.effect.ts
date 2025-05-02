@@ -51,14 +51,13 @@ export class SchedulesEffects {
             }),
             finalize(async () => {
               await this.sharedService.managementToast(
-                'scheduleFeedback',
+                'scheduleNewFeedback',
                 this.responseOK,
                 this.errorResponse
               );
-
               if (this.responseOK) {
                 this.router.navigateByUrl(
-                  'user/medication/form/' + schedule.medication_id
+                  'user/medication/edit/' + schedule.medication_id
                 );
               }
             })
@@ -110,7 +109,7 @@ export class SchedulesEffects {
             }),
             finalize(async () => {
               await this.sharedService.managementToast(
-                'medicationFeedback',
+                'medicationEditFeedback',
                 this.responseOK,
                 this.errorResponse
               );
@@ -232,13 +231,14 @@ export class SchedulesEffects {
             }),
             finalize(async () => {
               await this.sharedService.managementToast(
-                'medicationFeedback',
+                'scheduleEditFeedback',
                 this.responseOK,
                 this.errorResponse
               );
-
               if (this.responseOK) {
-                this.router.navigateByUrl('user/medication/list');
+                this.router.navigateByUrl(
+                  'user/medication/edit/' + schedule.medication_id
+                );
               }
             })
           )
