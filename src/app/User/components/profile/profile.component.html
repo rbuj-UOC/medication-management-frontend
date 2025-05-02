@@ -116,7 +116,8 @@
     </div>
 
     <div class="profile-line">
-      <button mat-flat-button class="warn" type="button" (click)="onDelete()" [disabled]="isAdmin">Delete User
+      <button mat-flat-button class="warn" type="button" (click)="onDelete()"
+        [disabled]="(selectUser$ |async)?.role === 'admin'">Delete User
         Account</button>
     </div>
   </form>
