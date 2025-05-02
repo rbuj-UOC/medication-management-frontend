@@ -8,7 +8,6 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as UserAction from '../../actions';
-import { UserDTO } from '../../models/user.dto';
 
 @Component({
   selector: 'app-contact-form',
@@ -18,7 +17,6 @@ import { UserDTO } from '../../models/user.dto';
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent implements OnInit {
-  contact: UserDTO;
   contactForm: FormGroup;
   isValidForm: boolean | null;
   email: FormControl;
@@ -30,13 +28,10 @@ export class ContactFormComponent implements OnInit {
     private store: Store
   ) {
     this.isValidForm = null;
-
-    this.contact = new UserDTO('', '', '', '', new Date(), '', '');
-    this.email = new FormControl(this.contact.email, [
+    this.email = new FormControl('', [
       Validators.required,
       Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')
     ]);
-
     this.contactForm = this.fb.group({
       email: this.email
     });
@@ -56,9 +51,7 @@ export class ContactFormComponent implements OnInit {
       return;
     }
     this.isValidForm = true;
-    this.contact = this.contactForm.value;
-    this.store.dispatch(
-      UserAction.addUserContact({ email: this.contact.email })
-    );
+    const contact = this.contactForm.value;
+    this.store.dispatch(UserAction.addUserContact({ email: contact.email }));
   }
 }
