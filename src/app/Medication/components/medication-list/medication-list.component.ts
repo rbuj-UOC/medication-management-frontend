@@ -38,7 +38,7 @@ export class MedicationListComponent {
   }
 
   createMedication(): void {
-    this.router.navigateByUrl('/user/medication/form/');
+    this.router.navigateByUrl('/user/medication/new');
   }
 
   deleteMedication(id: number, name: string): void {
@@ -49,6 +49,6 @@ export class MedicationListComponent {
   }
 
   updateMedication(id: number): void {
-    this.router.navigateByUrl('/user/medication/form/' + id);
+    this.router.navigateByUrl('/user/medication/edit/' + id);
   }
 }

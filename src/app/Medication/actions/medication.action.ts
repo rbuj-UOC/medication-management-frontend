@@ -3,17 +3,17 @@ import { createAction, props } from '@ngrx/store';
 import { MedicationDTO } from '../models/medication.dto';
 
 export const createMedication = createAction(
-  '[MedicationForm Page] Create medication',
+  '[NewMedication Page] Create medication',
   props<{ medication: MedicationDTO }>()
 );
 
 export const createMedicationSuccess = createAction(
-  '[MedicationForm Page] Create medication Success',
+  '[NewMedication Page] Create medication Success',
   props<{ medication: MedicationDTO }>()
 );
 
 export const createMedicationFailure = createAction(
-  '[MedicationForm Page] Create medication Failure',
+  '[NewMedication Page] Create medication Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
@@ -33,17 +33,17 @@ export const deleteMedicationFailure = createAction(
 );
 
 export const getMedicationById = createAction(
-  '[MedicationForm Page] Get medication',
+  '[EditMedication Page] Get medication',
   props<{ id: string }>()
 );
 
 export const getMedicationByIdSuccess = createAction(
-  '[MedicationForm Page] Get medication Success',
+  '[EditMedication Page] Get medication Success',
   props<{ medication: MedicationDTO }>()
 );
 
 export const getMedicationByIdFailure = createAction(
-  '[MedicationForm Page] Get medication Failure',
+  '[EditMedication Page] Get medication Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
@@ -64,16 +64,16 @@ export const getMedicationsFailure = createAction(
 export const logout = createAction('[Medication Service] Logout');
 
 export const updateMedication = createAction(
-  '[MedicationForm Page] Update medication',
+  '[EditMedication Page] Update medication',
   props<{ id: string; medication: MedicationDTO }>()
 );
 
 export const updateMedicationSuccess = createAction(
-  '[MedicationForm Page] Update medication Success',
+  '[EditMedication Page] Update medication Success',
   props<{ id: string; medication: MedicationDTO }>()
 );
 
 export const updateMedicationFailure = createAction(
-  '[MedicationForm Page] Update medication Failure',
+  '[EditMedication Page] Update medication Failure',
   props<{ payload: HttpErrorResponse }>()
 );

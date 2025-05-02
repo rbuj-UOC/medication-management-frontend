@@ -54,7 +54,7 @@ export class MedicationsEffects {
             }),
             finalize(async () => {
               await this.sharedService.managementToast(
-                'medicationFeedback',
+                'medicationEditFeedback',
                 this.responseOK,
                 this.errorResponse
               );
@@ -233,11 +233,10 @@ export class MedicationsEffects {
             }),
             finalize(async () => {
               await this.sharedService.managementToast(
-                'medicationFeedback',
+                'medicationEditFeedback',
                 this.responseOK,
                 this.errorResponse
               );
-
               if (this.responseOK) {
                 this.router.navigateByUrl('user/medication/list');
               }
