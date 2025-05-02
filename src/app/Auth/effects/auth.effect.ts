@@ -58,10 +58,6 @@ export class AuthEffects {
                 this.responseOK,
                 this.errorResponse
               );
-
-              if (this.responseOK) {
-                this.router.navigateByUrl('landing');
-              }
             })
           )
         )
@@ -72,8 +68,13 @@ export class AuthEffects {
       () => {
         return this.actions$.pipe(
           ofType(AuthActions.loginSuccess),
-          map(() => {
+          map(({ credentials }) => {
             this.responseOK = true;
+            if (credentials.user_role === 'admin') {
+              this.router.navigateByUrl('admin/dashboard');
+            } else if (credentials.user_role === 'user') {
+              this.router.navigateByUrl('user/today');
+            }
           })
         );
       },
