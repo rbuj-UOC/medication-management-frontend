@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -11,7 +11,6 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as UserAction from '../../actions';
-import { UserDTO } from '../../models/user.dto';
 import { selectUserForm } from '../../selectors';
 
 @Component({
@@ -22,7 +21,8 @@ import { selectUserForm } from '../../selectors';
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
-  user: UserDTO;
+  store = inject(Store);
+  selectUser$ = this.store.select(selectUserForm);
 
   name: FormControl;
   surname_1: FormControl;
@@ -42,48 +42,45 @@ export class UserFormComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private store: Store
+    private formBuilder: FormBuilder
   ) {
     this.userId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.user = new UserDTO('', '', '', '', new Date(), '', '');
-
     this.isValidForm = null;
 
-    this.name = new FormControl(this.user.name, [
-      Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(25)
-    ]);
-
-    this.surname_1 = new FormControl(this.user.surname_1, [
+    this.name = new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(25)
     ]);
 
-    this.surname_2 = new FormControl(this.user.surname_2, [
+    this.surname_1 = new FormControl('', [
+      Validators.required,
       Validators.minLength(3),
       Validators.maxLength(25)
     ]);
 
-    this.alias = new FormControl(this.user.alias, [
+    this.surname_2 = new FormControl('', [
+      Validators.minLength(3),
+      Validators.maxLength(25)
+    ]);
+
+    this.alias = new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(25)
     ]);
 
     this.birth_date = new FormControl(
-      formatDate(this.user.birth_date, 'yyyy-MM-dd', 'en'),
+      formatDate(new Date(), 'yyyy-MM-dd', 'en'),
       [Validators.required]
     );
 
-    this.email = new FormControl(this.user.email, [
+    this.email = new FormControl('', [
       Validators.required,
       Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')
     ]);
 
-    this.password = new FormControl(this.user.password, [
+    this.password = new FormControl('', [
       Validators.required,
       Validators.minLength(8)
     ]);
@@ -93,7 +90,7 @@ export class UserFormComponent implements OnInit {
       this.validateSamePassword
     ]);
 
-    this.role = new FormControl(this.user.role, [Validators.required]);
+    this.role = new FormControl('', [Validators.required]);
     this.role.disable();
     this.roles = [
       { value: 'admin', label: 'Admin' },
@@ -107,33 +104,23 @@ export class UserFormComponent implements OnInit {
       alias: this.alias,
       birth_date: this.birth_date,
       email: this.email,
-      password: this.password
-    });
-
-    this.store.select(selectUserForm).subscribe((user) => {
-      this.user = user;
-
-      this.name.setValue(this.user.name);
-      this.surname_1.setValue(this.user.surname_1);
-      this.surname_2.setValue(this.user.surname_2);
-      this.alias.setValue(this.user.alias);
-      this.birth_date.setValue(
-        formatDate(this.user.birth_date, 'yyyy-MM-dd', 'en')
-      );
-      this.email.setValue(this.user.email);
-      this.role.setValue(this.user.role);
-    });
-
-    this.userForm = this.formBuilder.group({
-      name: this.name,
-      surname_1: this.surname_1,
-      surname_2: this.surname_2,
-      alias: this.alias,
-      birth_date: this.birth_date,
-      email: this.email,
       password: this.password,
       confirmPassword: this.confirmPassword,
       role: this.role
+    });
+
+    this.selectUser$.subscribe((user) => {
+      if (user) {
+        this.userForm.patchValue({
+          name: user.name,
+          surname_1: user.surname_1,
+          surname_2: user.surname_2,
+          alias: user.alias,
+          birth_date: formatDate(user.birth_date, 'yyyy-MM-dd', 'en'),
+          email: user.email,
+          role: user.role
+        });
+      }
     });
   }
 
@@ -151,7 +138,8 @@ export class UserFormComponent implements OnInit {
       return;
     }
     this.isValidForm = true;
-    const { confirmPassword, ...user } = this.userForm.value;
+    const user = this.userForm.value;
+    delete user.confirmPassword;
     if (this.userId) {
       this.store.dispatch(
         UserAction.updateUserFormByUserId({

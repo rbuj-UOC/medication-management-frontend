@@ -31,6 +31,7 @@ export class MedicationEditComponent implements OnInit {
   isValidForm: boolean | null;
   name: FormControl;
   private medicationId: string | null;
+  private userId: string | null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,6 +46,9 @@ export class MedicationEditComponent implements OnInit {
     ]);
     this.medicationForm = this.formBuilder.group({
       name: this.name
+    });
+    this.selectUserId$.subscribe((userId) => {
+      this.userId = userId;
     });
     this.selectMedication$.subscribe((medication) => {
       if (medication) {
@@ -68,7 +72,7 @@ export class MedicationEditComponent implements OnInit {
   }
 
   saveMedication(): void {
-    if (this.selectUserId$ === null || this.medicationId === null) {
+    if (this.userId === null || this.medicationId === null) {
       return;
     }
     this.isValidForm = false;
@@ -77,7 +81,7 @@ export class MedicationEditComponent implements OnInit {
     }
     this.isValidForm = true;
     const medication = this.medicationForm.value;
-    medication.user_id = this.selectUserId$;
+    medication.user_id = this.userId;
     this.store.dispatch(
       MedicationsAction.updateMedication({
         id: this.medicationId,

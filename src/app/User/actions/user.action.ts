@@ -7,8 +7,7 @@ export const addUserContact = createAction(
   props<{ email: string }>()
 );
 export const addUserContactSuccess = createAction(
-  '[ContactForm Page] Add New User Contact Success',
-  props<{ contacts: UserDTO[] }>()
+  '[ContactForm Page] Add New User Contact Success'
 );
 export const addUserContactFailure = createAction(
   '[ContactForm Page] Add New User Contact Failure',

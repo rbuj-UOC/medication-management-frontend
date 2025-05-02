@@ -51,17 +51,6 @@ export class MedicationsEffects {
               return of(
                 MedicationActions.createMedicationFailure({ payload: error })
               );
-            }),
-            finalize(async () => {
-              await this.sharedService.managementToast(
-                'medicationEditFeedback',
-                this.responseOK,
-                this.errorResponse
-              );
-
-              if (this.responseOK) {
-                this.router.navigateByUrl('user/medication/list');
-              }
             })
           )
         )
@@ -72,8 +61,14 @@ export class MedicationsEffects {
       () => {
         return this.actions$.pipe(
           ofType(MedicationActions.createMedicationSuccess),
-          map(() => {
+          map(async () => {
             this.responseOK = true;
+            await this.sharedService.managementToast(
+              'medicationNewFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
+            this.router.navigateByUrl('user/medication/list');
           })
         );
       },
@@ -84,10 +79,15 @@ export class MedicationsEffects {
       () => {
         return this.actions$.pipe(
           ofType(MedicationActions.createMedicationFailure),
-          map((error) => {
+          map(async (error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
+            await this.sharedService.managementToast(
+              'medicationEditFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
           })
         );
       },
@@ -237,9 +237,6 @@ export class MedicationsEffects {
                 this.responseOK,
                 this.errorResponse
               );
-              if (this.responseOK) {
-                this.router.navigateByUrl('user/medication/list');
-              }
             })
           )
         )
@@ -250,7 +247,7 @@ export class MedicationsEffects {
       () => {
         return this.actions$.pipe(
           ofType(MedicationActions.updateMedicationSuccess),
-          map(() => {
+          map(async () => {
             this.responseOK = true;
           })
         );
@@ -262,7 +259,7 @@ export class MedicationsEffects {
       () => {
         return this.actions$.pipe(
           ofType(MedicationActions.updateMedicationFailure),
-          map((error) => {
+          map(async (error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
