@@ -14,13 +14,15 @@
         </mat-error>
       </mat-form-field>
     </div>
-
     <div class="medication-line">
       <button mat-flat-button color="primary" type="submit">SAVE</button>
-      <button mat-flat-button color="primary" type="button" (click)="cancelMedication()">CANCEL</button>
     </div>
   </form>
 
   <app-schedule-list class="schedule-list"></app-schedule-list>
 
+  <div class="medication-line">
+    <button mat-flat-button color="primary" type="button" class="cancel-edit-button"
+      (click)="cancelMedication()">CANCEL</button>
+  </div>
 </div>
