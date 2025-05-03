@@ -1,57 +1,6 @@
 <div style="margin-left: auto; margin-right: auto">
   <p id="medicationListFeedback"></p>
 </div>
-<mat-card class="main-container-card">
-  <mat-card-header *ngIf="(isMobile$ | async) === true">
-    <h1 style="margin-bottom: 16px;">Medications</h1>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="medication-line" *ngIf="(isMobile$ | async) === true">
-      <button mat-flat-button color="primary" (click)="createMedication()" class="add-button">
-        ADD
-      </button>
-    </div>
-    <div class="title" *ngIf="(isMobile$ | async) === false">
-      <h1>Medications</h1>
-      <button mat-icon-button color="primary" (click)="createMedication()" aria-label="Add a medication">
-        <mat-icon style="transform: scale(1.5);">add_circle</mat-icon>
-      </button>
-    </div>
-
-    <div *ngIf="(selectMedications$ | async)?.length === 0">No Medications</div>
-    <table mat-table [dataSource]="selectMedications$ | async" class="mat-elevation-z8"
-      *ngIf="(selectMedications$ | async)?.length > 0">
-      <!-- Name Column -->
-      <ng-container matColumnDef="medication-name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let medication">{{ medication.name }}</td>
-      </ng-container>
-
-      <!-- Schedules Column -->
-      <ng-container matColumnDef="medication-schedules">
-        <th mat-header-cell *matHeaderCellDef>Schedules</th>
-        <td mat-cell *matCellDef="let medication">
-          <ul class="code-editor-options-menu" *ngFor="let schedule of medication.schedules">
-            <li>{{schedule.start_date | date:'shortTime'}}</li>
-          </ul>
-        </td>
-      </ng-container>
-
-      <!-- Actions Column -->
-      <ng-container matColumnDef="medication-actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let medication">
-          <button mat-icon-button (click)="updateMedication(medication.id)">
-            <mat-icon>edit_calendar</mat-icon>
-          </button>
-          <button mat-icon-button (click)="deleteMedication(medication.id, medication.name)">
-            <mat-icon color="warn">delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </mat-card-content>
-</mat-card>
+<app-medication-table [medications]="(selectMedications$ | async)" (createMedicationRequest)="createMedication()"
+  (deleteMedicationRequest)="deleteMedication($event)" (editMedicationRequest)="editMedication($event)">
+</app-medication-table>

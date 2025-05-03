@@ -11,6 +11,7 @@ import { ScheduleModule } from '../Schedule/schedule.module';
 import { MedicationEditComponent } from './components/medication-edit/medication-edit.component';
 import { MedicationListComponent } from './components/medication-list/medication-list.component';
 import { MedicationNewComponent } from './components/medication-new/medication-new.component';
+import { MedicationTableComponent } from './components/medication-table/medication-table.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { MedicationNewComponent } from './components/medication-new/medication-n
   declarations: [
     MedicationEditComponent,
     MedicationListComponent,
-    MedicationNewComponent
+    MedicationNewComponent,
+    MedicationTableComponent
   ]
 })
 export class MedicationModule {}
