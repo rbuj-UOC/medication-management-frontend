@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-content>
+    <div class="medication-info">
+      <div class="medication-title">{{ medication.name }}</div>
+      <div>
+        <ul *ngFor="let schedule of medication.schedules" class="schedule-list">
+          <li>{{ schedule.start_date | date: 'shortTime' }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="medication-actions">
+      <button mat-icon-button (click)="editMedication(medication.id)">
+        <mat-icon>edit_calendar</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deleteMedication(medication.id, medication.name)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
