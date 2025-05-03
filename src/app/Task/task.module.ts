@@ -9,9 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskTableComponent } from './components/task-table/task-table.component';
 
 @NgModule({
-  declarations: [TaskListComponent],
+  declarations: [TaskListComponent, TaskTableComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
