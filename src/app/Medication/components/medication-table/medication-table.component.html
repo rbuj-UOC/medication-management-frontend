@@ -1,15 +1,5 @@
 <div class="main-container">
-  <!-- header mobile -->
-  <div *ngIf=" (isMobile$ | async)===true">
-    <h1 style="margin-bottom: 16px;">Medications</h1>
-    <div class="medication-line">
-      <button mat-flat-button color="primary" (click)="createMedication()" class="add-button">
-        ADD
-      </button>
-    </div>
-  </div>
-  <!-- header tablet / desktop -->
-  <div class="title" *ngIf="(isMobile$ | async) === false">
+  <div class="title">
     <h1>Medications</h1>
     <button mat-icon-button color="primary" (click)="createMedication()" aria-label="Add a medication">
       <mat-icon style="transform: scale(1.5);">add_circle</mat-icon>

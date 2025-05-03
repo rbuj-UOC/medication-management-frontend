@@ -8,7 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { ScheduleModule } from '../Schedule/schedule.module';
+import { MedicationCardComponent } from './components/medication-card/medication-card.component';
 import { MedicationEditComponent } from './components/medication-edit/medication-edit.component';
+import { MedicationGridComponent } from './components/medication-grid/medication-grid.component';
 import { MedicationListComponent } from './components/medication-list/medication-list.component';
 import { MedicationNewComponent } from './components/medication-new/medication-new.component';
 import { MedicationTableComponent } from './components/medication-table/medication-table.component';
@@ -26,6 +28,8 @@ import { MedicationTableComponent } from './components/medication-table/medicati
     ScheduleModule
   ],
   declarations: [
+    MedicationCardComponent,
+    MedicationGridComponent,
     MedicationEditComponent,
     MedicationListComponent,
     MedicationNewComponent,

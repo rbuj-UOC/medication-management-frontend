@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { selectDisplayIsMobile } from '../../../Display/selectors';
 import * as MedicationsAction from '../../actions';
 import { MedicationDTO } from '../../models/medication.dto';
 import { selectMedications } from '../../selectors/medication.selector';
@@ -17,6 +18,9 @@ export class MedicationListComponent implements OnInit {
   store = inject(Store);
   selectMedications$: Observable<MedicationDTO[] | null> =
     this.store.select(selectMedications);
+  selectDisplayIsMobile$: Observable<boolean> = this.store.select(
+    selectDisplayIsMobile
+  );
   private user_id: string;
 
   constructor(private router: Router) {}
