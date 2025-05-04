@@ -217,7 +217,7 @@ export class SchedulesEffects {
       return this.actions$.pipe(
         ofType(ScheduleActions.updateSchedule),
         exhaustMap(({ id, schedule }) =>
-          this.scheduleService.updateMedication(id, schedule).pipe(
+          this.scheduleService.updateSchedule(id, schedule).pipe(
             map((schedule) => {
               return ScheduleActions.updateScheduleSuccess({
                 id: id,

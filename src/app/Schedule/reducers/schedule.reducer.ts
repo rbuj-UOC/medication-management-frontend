@@ -26,7 +26,7 @@ export interface SchedulesState {
 
 export const initialState: SchedulesState = {
   schedules: new Array<ScheduleDTO>(),
-  schedule: new ScheduleDTO(new Date()),
+  schedule: new ScheduleDTO(new Date(), new Date(), 0, '', ''),
   loading: false,
   loaded: false,
   error: null

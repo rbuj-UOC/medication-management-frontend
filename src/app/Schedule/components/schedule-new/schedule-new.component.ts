@@ -62,13 +62,15 @@ export class ScheduleNewComponent implements OnInit {
       return;
     }
     this.isValidForm = true;
-    const schedule: ScheduleDTO = this.scheduleForm.value;
-    schedule.medication_id = this.medicationId;
-    if (typeof schedule.start_date === 'string') {
-      schedule.start_date = new Date(schedule.start_date);
-    }
-    schedule.cron_expression = this.getCronExpression(schedule.start_date);
-    schedule.frequency = 'daily';
+    const scheduleData = this.scheduleForm.value;
+    const start_date = new Date(scheduleData.start_date);
+    const schedule = new ScheduleDTO(
+      start_date,
+      start_date,
+      Number(this.medicationId),
+      'daily',
+      this.getCronExpression(start_date)
+    );
     this.store.dispatch(ScheduleAction.createSchedule({ schedule }));
   }
 }

@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-content>
     <div class="details">
-      {{schedule.created_at | date: 'shortTime'}}
+      {{ schedule.start_date | date:'shortTime'}}
     </div>
     <div class="actions">
       <button mat-icon-button (click)="editSchedule()">

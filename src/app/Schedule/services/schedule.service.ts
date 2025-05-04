@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -22,7 +23,14 @@ export class ScheduleService {
     this.urlApi = 'http://localhost:3000/' + this.controller;
   }
 
-  createSchedule(schedule: ScheduleDTO): Observable<ScheduleDTO> {
+  createSchedule(sch: ScheduleDTO): Observable<ScheduleDTO> {
+    const schedule = {
+      medicationId: sch.medication_id,
+      start_date: sch.start_date.toISOString(),
+      time: formatDate(sch.time, 'HH:mm:ss', 'en-US'),
+      frequency: sch.frequency,
+      cron_expression: sch.cron_expression
+    };
     return this.http
       .post<ScheduleDTO>(this.urlApi, schedule)
       .pipe(catchError(this.sharedService.handleError));
@@ -50,9 +58,16 @@ export class ScheduleService {
     this.store.dispatch(ScheduleAction.logout());
   }
 
-  updateMedication(id: string, schedule: ScheduleDTO): Observable<ScheduleDTO> {
+  updateSchedule(id: string, schedule: ScheduleDTO): Observable<ScheduleDTO> {
+    const sch = {
+      medicationId: schedule.medication_id,
+      start_date: schedule.start_date.toISOString(),
+      time: formatDate(schedule.time, 'HH:mm:ss', 'en-US'),
+      frequency: schedule.frequency,
+      cron_expression: schedule.cron_expression
+    };
     return this.http
-      .put<ScheduleDTO>(this.urlApi + '/' + id, schedule)
+      .put<ScheduleDTO>(this.urlApi + '/' + id, sch)
       .pipe(catchError(this.sharedService.handleError));
   }
 }
