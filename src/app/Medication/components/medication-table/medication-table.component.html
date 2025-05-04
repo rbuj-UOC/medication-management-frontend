@@ -28,6 +28,12 @@
     <ng-container matColumnDef="medication-actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let medication">
+        <button mat-icon-button (click)="pauseMedication(medication.id)" *ngIf="!medication.disabled">
+          <mat-icon>pause</mat-icon>
+        </button>
+        <button mat-icon-button (click)="resumeMedication(medication.id)" *ngIf="medication.disabled">
+          <mat-icon>play_arrow</mat-icon>
+        </button>
         <button mat-icon-button (click)="editMedication(medication.id)">
           <mat-icon>edit_calendar</mat-icon>
         </button>
