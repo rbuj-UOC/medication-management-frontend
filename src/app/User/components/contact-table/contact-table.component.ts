@@ -14,9 +14,9 @@ export class ContactTableComponent {
   @Output() removeUserContactRequest = new EventEmitter<string>();
 
   displayedColumns: string[] = [
-    'contact-name',
     'contact-surname_1',
     'contact-surname_2',
+    'contact-name',
     'contact-alias',
     'contact-birth_date',
     'contact-email',

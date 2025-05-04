@@ -14,9 +14,9 @@ export class UserTableComponent {
   @Output() editUserRequest = new EventEmitter<string>();
 
   displayedColumns: string[] = [
-    'user-name',
     'user-surname_1',
     'user-surname_2',
+    'user-name',
     'user-alias',
     'user-birth_date',
     'user-email',
