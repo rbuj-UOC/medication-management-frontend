@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectUserId } from '../../../Auth/selectors';
+import { selectDisplayIsMobile } from '../../../Display/selectors';
 import * as MedicationsAction from '../../actions';
 import { MedicationDTO } from '../../models/medication.dto';
 import { selectMedication } from '../../selectors/medication.selector';
@@ -24,6 +25,9 @@ export class MedicationEditComponent implements OnInit {
   store = inject(Store);
   selectMedication$: Observable<MedicationDTO | null> =
     this.store.select(selectMedication);
+  selectDisplayIsMobile$: Observable<boolean> = this.store.select(
+    selectDisplayIsMobile
+  );
   private selectUserId$: Observable<string | null> =
     this.store.select(selectUserId);
 
@@ -71,6 +75,18 @@ export class MedicationEditComponent implements OnInit {
     this.router.navigateByUrl('/user/medication/list');
   }
 
+  deleteMedication(): void {
+    if (this.medicationId === null) {
+      return;
+    }
+    const result = confirm('Confirm delete medication');
+    if (result) {
+      this.store.dispatch(
+        MedicationsAction.deleteMedication({ id: Number(this.medicationId) })
+      );
+    }
+  }
+
   saveMedication(): void {
     if (this.userId === null || this.medicationId === null) {
       return;
@@ -88,5 +104,13 @@ export class MedicationEditComponent implements OnInit {
         medication: medication
       })
     );
+  }
+
+  pauseMedication() {
+    throw new Error('Method not implemented.');
+  }
+
+  resumeMedication() {
+    throw new Error('Method not implemented.');
   }
 }
