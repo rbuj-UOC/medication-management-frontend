@@ -1,20 +1,9 @@
-mat-card-content {
-  display: grid;
-  grid-template-columns: auto auto;
-  justify-content: space-between;
-}
-
 .medication-title {
   font-family: var(--mat-card-title-text-font, var(--mat-sys-title-large-font));
   line-height: var(--mat-card-title-text-line-height, var(--mat-sys-title-large-line-height));
   font-size: var(--mat-card-title-text-size, var(--mat-sys-title-large-size));
   letter-spacing: var(--mat-card-title-text-tracking, var(--mat-sys-title-large-tracking));
   font-weight: var(--mat-card-title-text-weight, var(--mat-sys-title-large-weight));
-}
-
-.medication-actions {
-  display: grid;
-  grid-template-rows: auto auto;
 }
 
 ul {
