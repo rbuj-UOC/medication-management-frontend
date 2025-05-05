@@ -22,12 +22,14 @@
   <app-schedule-list class="schedule-list"></app-schedule-list>
 
   <div class="medication-line">
-    <button mat-flat-button class="bottom-button" (click)="pauseMedication()"
-      *ngIf="(selectMedication$ | async)?.disabled && (selectDisplayIsMobile$ | async)===true">RESUME
-      MEDICATION</button>
     <button mat-flat-button class="bottom-button" (click)="resumeMedication()"
-      *ngIf="(selectMedication$ | async)?.disabled === false && (selectDisplayIsMobile$ | async)===true">PAUSE
+      *ngIf="(selectMedication$ | async)?.disabled">RESUME
       MEDICATION</button>
+    <button mat-flat-button class=" bottom-button" (click)="pauseMedication()"
+      *ngIf="(selectMedication$ | async)?.disabled === false">PAUSE
+      MEDICATION</button>
+  </div>
+  <div class="medication-line">
     <button mat-flat-button class="warn bottom-button" (click)="deleteMedication()"
       *ngIf="(selectDisplayIsMobile$ | async)===true">DELETE MEDICATION</button>
     <button mat-flat-button color="primary" class="bottom-button" (click)="cancelMedication()">GO BACK</button>

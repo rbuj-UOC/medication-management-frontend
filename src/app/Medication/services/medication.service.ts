@@ -50,6 +50,18 @@ export class MedicationService {
     this.store.dispatch(MedicationAction.logout());
   }
 
+  resumeMedication(id: number): Observable<MedicationDTO> {
+    return this.http
+      .put<MedicationDTO>(this.urlApi + '/' + id, { disabled: false })
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  pauseMedication(id: number): Observable<MedicationDTO> {
+    return this.http
+      .put<MedicationDTO>(this.urlApi + '/' + id, { disabled: true })
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
   updateMedication(
     id: string,
     medication: MedicationDTO

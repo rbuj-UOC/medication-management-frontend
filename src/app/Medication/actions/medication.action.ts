@@ -63,6 +63,34 @@ export const getMedicationsFailure = createAction(
 
 export const logout = createAction('[Medication Service] Logout');
 
+export const pauseMedication = createAction(
+  '[EditMedication Page] Pause Medication',
+  props<{ id: number }>()
+);
+
+export const pauseMedicationSuccess = createAction(
+  '[EditMedication Page] Pause Medication Success'
+);
+
+export const pauseMedicationFailure = createAction(
+  '[EditMedication Page] Pause Medication Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const resumeMedication = createAction(
+  '[EditMedication Page] Resume Medication',
+  props<{ id: number }>()
+);
+
+export const resumeMedicationSuccess = createAction(
+  '[EditMedication Page] Resume Medication Success'
+);
+
+export const resumeMedicationFailure = createAction(
+  '[EditMedication Page] Resume Medication Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
 export const updateMedication = createAction(
   '[EditMedication Page] Update medication',
   props<{ id: string; medication: MedicationDTO }>()

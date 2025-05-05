@@ -17,6 +17,7 @@ export class MedicationTableComponent {
   displayedColumns: string[] = [
     'medication-name',
     'medication-schedules',
+    'medication-status',
     'medication-actions'
   ];
 
@@ -33,13 +34,5 @@ export class MedicationTableComponent {
 
   editMedication(id: number): void {
     this.editMedicationRequest.emit(id);
-  }
-
-  pauseMedication(id: number): void {
-    throw new Error('Not implemented');
-  }
-
-  resumeMedication(id: number): void {
-    throw new Error('Not implemented');
   }
 }

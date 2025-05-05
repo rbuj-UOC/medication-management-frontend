@@ -13,6 +13,12 @@ import {
   getMedicationsFailure,
   getMedicationsSuccess,
   logout,
+  pauseMedication,
+  pauseMedicationFailure,
+  pauseMedicationSuccess,
+  resumeMedication,
+  resumeMedicationFailure,
+  resumeMedicationSuccess,
   updateMedication,
   updateMedicationFailure,
   updateMedicationSuccess
@@ -152,6 +158,60 @@ const _medicationsReducer = createReducer(
     })
   ),
   on(logout, (): MedicationsState => initialState),
+  on(
+    pauseMedication,
+    (state): MedicationsState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    pauseMedicationSuccess,
+    (state): MedicationsState => ({
+      ...state,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    pauseMedicationFailure,
+    (state, { payload }): MedicationsState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    resumeMedication,
+    (state): MedicationsState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    resumeMedicationSuccess,
+    (state): MedicationsState => ({
+      ...state,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    resumeMedicationFailure,
+    (state, { payload }): MedicationsState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
   on(
     updateMedication,
     (state): MedicationsState => ({
