@@ -40,8 +40,8 @@ export class AuthEffects {
           this.authService.login(credentials).pipe(
             map((userToken) => {
               const credentialsTemp: AuthDTO = {
-                username: credentials.username,
-                password: credentials.password,
+                username: undefined,
+                password: undefined,
                 user_id: userToken.user_id,
                 user_role: userToken.user_role,
                 access_token: userToken.access_token
