@@ -1,5 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectDisplayIsMobile } from '../../../Display/selectors';
 import * as SchedulesAction from '../../actions';
 import { TodayDTO } from '../../models/today.dto';
 import { selectToday } from '../../selectors';
@@ -15,8 +17,13 @@ export class TodayListComponent implements OnInit {
   store = inject(Store);
   schedules: TodayDTO[];
   selectToday$ = this.store.select(selectToday);
+  isMobile$: Observable<boolean> = this.store.select(selectDisplayIsMobile);
+  isMobile: boolean;
 
   constructor() {
+    this.isMobile$.subscribe((isMobile) => {
+      this.isMobile = isMobile;
+    });
     this.selectToday$.subscribe((schedules) => {
       this.schedules = schedules;
     });
