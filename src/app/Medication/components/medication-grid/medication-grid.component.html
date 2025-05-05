@@ -5,10 +5,10 @@
       ADD
     </button>
   </div>
-  <div *ngIf="medications.length > 0">
-    <app-medication-card [medication]="medication" (createMedicationRequest)="createMedication()"
-      (deleteMedicationRequest)="deleteMedication($event)" (editMedicationRequest)="editMedication($event)"
-      *ngFor="let medication of medications"></app-medication-card>
-  </div>
   <div *ngIf="medications.length === 0">No Medications</div>
+</div>
+<div *ngIf="medications.length > 0">
+  <app-medication-card [medication]="medication" (createMedicationRequest)="createMedication()"
+    (deleteMedicationRequest)="deleteMedication($event)" (editMedicationRequest)="editMedication($event)"
+    *ngFor="let medication of medications"></app-medication-card>
 </div>

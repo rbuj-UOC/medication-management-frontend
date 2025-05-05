@@ -1,9 +1,14 @@
+@use '@angular/material' as mat;
+
 mat-card {
-  margin: 16px 0;
+  margin: 16px;
 
   @media screen and (min-width: 600px) {
     max-width: 600px;
   }
+
+  @include mat.card-overrides((elevated-container-elevation: var(--mat-sys-level4),
+    ));
 }
 
 mat-card-content {
