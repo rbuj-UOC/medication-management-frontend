@@ -107,10 +107,20 @@ export class MedicationEditComponent implements OnInit {
   }
 
   pauseMedication() {
-    throw new Error('Method not implemented.');
+    if (this.medicationId === null) {
+      return;
+    }
+    this.store.dispatch(
+      MedicationsAction.pauseMedication({ id: Number(this.medicationId) })
+    );
   }
 
   resumeMedication() {
-    throw new Error('Method not implemented.');
+    if (this.medicationId === null) {
+      return;
+    }
+    this.store.dispatch(
+      MedicationsAction.resumeMedication({ id: Number(this.medicationId) })
+    );
   }
 }

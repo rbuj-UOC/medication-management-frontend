@@ -25,6 +25,14 @@ export class MedicationsEffects {
   getMedications$: any;
   getMedicationsFailure$: any;
 
+  pauseMedication$: any;
+  pauseMedicationSuccess$: any;
+  pauseMedicationFailure$: any;
+
+  resumeMedication$: any;
+  resumeMedicationSuccess$: any;
+  resumeMedicationFailure$: any;
+
   updateMedication$: any;
   updateMedicationSuccess$: any;
   updateMedicationFailure$: any;
@@ -84,7 +92,7 @@ export class MedicationsEffects {
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
             await this.sharedService.managementToast(
-              'medicationEditFeedback',
+              'medicationNewFeedback',
               this.responseOK,
               this.errorResponse
             );
@@ -209,6 +217,118 @@ export class MedicationsEffects {
           map((error) => {
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.pauseMedication$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(MedicationActions.pauseMedication),
+        exhaustMap(({ id }) =>
+          this.medicationService.pauseMedication(id).pipe(
+            map(() => {
+              return MedicationActions.pauseMedicationSuccess();
+            }),
+            catchError((error) => {
+              return of(
+                MedicationActions.pauseMedicationFailure({ payload: error })
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.pauseMedicationSuccess$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.pauseMedicationSuccess),
+          map(async () => {
+            this.responseOK = true;
+            await this.sharedService.managementToast(
+              'medicationEditFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
+            this.router.navigateByUrl('user/medication/list');
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.pauseMedicationFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.pauseMedicationFailure),
+          map(async (error) => {
+            this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+            await this.sharedService.managementToast(
+              'medicationEditFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
+            this.router.navigateByUrl('user/medication/list');
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.resumeMedication$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(MedicationActions.resumeMedication),
+        exhaustMap(({ id }) =>
+          this.medicationService.resumeMedication(id).pipe(
+            map(() => {
+              return MedicationActions.resumeMedicationSuccess();
+            }),
+            catchError((error) => {
+              return of(
+                MedicationActions.resumeMedicationFailure({ payload: error })
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.resumeMedicationSuccess$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.resumeMedicationSuccess),
+          map(async () => {
+            this.responseOK = true;
+            await this.sharedService.managementToast(
+              'medicationEditFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
+            this.router.navigateByUrl('user/medication/list');
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.resumeMedicationFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.resumeMedicationFailure),
+          map(async (error) => {
+            this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+            await this.sharedService.managementToast(
+              'medicationEditFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
+            this.router.navigateByUrl('user/medication/list');
           })
         );
       },
