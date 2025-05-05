@@ -22,6 +22,8 @@ export class SchedulesEffects {
   deleteScheduleFailure$: any;
   getScheduleById$: any;
   getScheduleByIdFailure$: any;
+  getToday$: any;
+  getTodayFailure$: any;
   updateSchedule$: any;
   updateScheduleSuccess$: any;
   updateScheduleFailure$: any;
@@ -204,6 +206,41 @@ export class SchedulesEffects {
       () => {
         return this.actions$.pipe(
           ofType(ScheduleActions.getSchedulesByMedicationIdFailure),
+          map((error) => {
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.getToday$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(ScheduleActions.getToday),
+        exhaustMap(() =>
+          this.scheduleService.getToday().pipe(
+            map((today) => {
+              return ScheduleActions.getTodaySuccess({
+                today: today
+              });
+            }),
+            catchError((error) => {
+              return of(
+                ScheduleActions.getTodayFailure({
+                  payload: error
+                })
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.getTodayFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(ScheduleActions.getTodayFailure),
           map((error) => {
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);

@@ -12,13 +12,18 @@ import {
   getSchedulesByMedicationId,
   getSchedulesByMedicationIdFailure,
   getSchedulesByMedicationIdSuccess,
+  getToday,
+  getTodayFailure,
+  getTodaySuccess,
   logout
 } from '../actions';
 import { ScheduleDTO } from '../models/schedule.dto';
+import { TodayDTO } from '../models/today.dto';
 
 export interface SchedulesState {
   schedules: ScheduleDTO[];
   schedule: ScheduleDTO;
+  today: TodayDTO[];
   loading: boolean;
   loaded: boolean;
   error: any;
@@ -27,6 +32,7 @@ export interface SchedulesState {
 export const initialState: SchedulesState = {
   schedules: new Array<ScheduleDTO>(),
   schedule: new ScheduleDTO(new Date(), new Date(), 0, '', ''),
+  today: new Array<TodayDTO>(),
   loading: false,
   loaded: false,
   error: null
@@ -139,6 +145,34 @@ const _schedulesReducer = createReducer(
   ),
   on(
     getSchedulesByMedicationIdFailure,
+    (state, { payload }): SchedulesState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    getToday,
+    (state): SchedulesState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getTodaySuccess,
+    (state, action): SchedulesState => ({
+      ...state,
+      today: action.today,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getTodayFailure,
     (state, { payload }): SchedulesState => ({
       ...state,
       loading: false,

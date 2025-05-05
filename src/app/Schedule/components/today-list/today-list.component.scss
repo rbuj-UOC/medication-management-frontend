@@ -1,0 +1,16 @@
+mat-card {
+  margin: 16px 0;
+
+  @media screen and (min-width: 600px) {
+    max-width: 600px;
+  }
+}
+
+mat-card-content {
+  font-family: var(--mat-card-title-text-font, var(--mat-sys-title-medium-font));
+  line-height: var(--mat-card-title-text-line-height, var(--mat-sys-title-large-line-height));
+  font-size: var(--mat-card-title-text-size, var(--mat-sys-title-medium-size));
+  letter-spacing: var(--mat-card-title-text-tracking, var(--mat-sys-title-large-tracking));
+  font-weight: var(--mat-card-title-text-weight, var(--mat-sys-title-large-weight));
+  margin-top: 8px;
+}
