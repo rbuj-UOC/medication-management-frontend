@@ -24,3 +24,7 @@ export const selectScheduleId = createSelector(
 export const selectSchedules = createSelector(selectSchedulesState, (state) => {
   return state.schedules;
 });
+
+export const selectToday = createSelector(selectSchedulesState, (state) => {
+  return state.today;
+});

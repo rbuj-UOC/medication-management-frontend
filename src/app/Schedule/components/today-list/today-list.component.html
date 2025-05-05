@@ -1,0 +1,14 @@
+<div class="main-container">
+  <h1>Today</h1>
+  <div *ngIf="schedules.length > 0">
+    <mat-card *ngFor="let schedule of schedules" class="schedule-card">
+      <mat-card-header>
+        <mat-card-title>{{ schedule.start_date | date: 'shortTime' }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{ schedule.medication.name }}
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div *ngIf="schedules.length === 0">No Schedules</div>
+</div>

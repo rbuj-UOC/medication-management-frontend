@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { ScheduleDTO } from '../models/schedule.dto';
+import { TodayDTO } from '../models/today.dto';
 
 export const createSchedule = createAction(
   '[NewSchedule Page] Create Schedule',
@@ -59,6 +60,18 @@ export const getSchedulesByMedicationIdSuccess = createAction(
 
 export const getSchedulesByMedicationIdFailure = createAction(
   '[MedicationForm Page] Get Schedule List By Medication Id Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const getToday = createAction('[Today Page] Get Today');
+
+export const getTodaySuccess = createAction(
+  '[Today Page] Get Today Success',
+  props<{ today: TodayDTO[] }>()
+);
+
+export const getTodayFailure = createAction(
+  '[Today Page] Get Today Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 

@@ -22,7 +22,6 @@ import { appReducers, EffectsArray } from './app.reducers';
 import { AuthModule } from './Auth/auth.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HistoryListComponent } from './components/history-list/history-list.component';
-import { TodayListComponent } from './components/today-list/today-list.component';
 import { MedicationModule } from './Medication/medication.module';
 import { NotificationModule } from './Notification/notification.module';
 import { ScheduleModule } from './Schedule/schedule.module';
@@ -44,8 +43,7 @@ import { UserModule } from './User/user.module';
     LandingComponent,
     PrivacyComponent,
     SpinnerComponent,
-    TermsComponent,
-    TodayListComponent
+    TermsComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,7 @@ import { ScheduleGridComponent } from './components/schedule-grid/schedule-grid.
 import { ScheduleListComponent } from './components/schedule-list/schedule-list.component';
 import { ScheduleNewComponent } from './components/schedule-new/schedule-new.component';
 import { ScheduleTableComponent } from './components/schedule-table/schedule-table.component';
+import { TodayListComponent } from './components/today-list/today-list.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { ScheduleTableComponent } from './components/schedule-table/schedule-tab
     ScheduleGridComponent,
     ScheduleListComponent,
     ScheduleNewComponent,
-    ScheduleTableComponent
+    ScheduleTableComponent,
+    TodayListComponent
   ],
   exports: [ScheduleListComponent]
 })
