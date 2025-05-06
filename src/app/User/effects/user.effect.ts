@@ -57,6 +57,7 @@ export class UserEffects {
   updateUserDeviceToken$: any;
   updateUserDeviceTokenSuccess$: any;
   updateUserDeviceTokenFailure$: any;
+
   updateUserFormByUserId$: any;
   updateUserFormByUserIdSuccess$: any;
   updateUserFormByUserIdFailure$: any;
@@ -539,13 +540,6 @@ export class UserEffects {
               return of(
                 UserActions.updateUserFormByUserIdFailure({ payload: error })
               );
-            }),
-            finalize(async () => {
-              await this.sharedService.managementToast(
-                'userFormFeedback',
-                this.responseOK,
-                this.errorResponse
-              );
             })
           )
         )
@@ -556,8 +550,14 @@ export class UserEffects {
       () => {
         return this.actions$.pipe(
           ofType(UserActions.updateUserFormByUserIdSuccess),
-          map(() => {
+          map(async () => {
             this.responseOK = true;
+            await this.sharedService.managementToast(
+              'userFormFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
+            this.router.navigateByUrl('admin/user/list');
           })
         );
       },
@@ -568,10 +568,15 @@ export class UserEffects {
       () => {
         return this.actions$.pipe(
           ofType(UserActions.updateUserFormByUserIdFailure),
-          map((error) => {
+          map(async (error) => {
             this.responseOK = false;
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
+            await this.sharedService.managementToast(
+              'userFormFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
           })
         );
       },
