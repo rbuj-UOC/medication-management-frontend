@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { MedicationService } from '../../Medication/services/medication.service';
+import { NotificationService } from '../../Notification/services/notification.service';
 import { ScheduleService } from '../../Schedule/services/schedule.service';
 import { SharedService } from '../../Shared/services/shared.service';
 import { TaskService } from '../../Task/services/task.service';
@@ -29,6 +30,7 @@ export class AuthEffects {
     private userService: UserService,
     private medicationService: MedicationService,
     private scheduleService: ScheduleService,
+    private notificationService: NotificationService,
     private taskService: TaskService
   ) {
     this.responseOK = false;
@@ -106,6 +108,7 @@ export class AuthEffects {
           map(() => {
             this.userService.logout();
             this.medicationService.logout();
+            this.notificationService.logout();
             this.scheduleService.logout();
             this.taskService.logout();
           })
