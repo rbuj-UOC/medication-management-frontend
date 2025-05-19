@@ -1,12 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { initializeApp } from '@angular/fire/app';
-import { getMessaging, getToken, onMessage } from '@angular/fire/messaging';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
 import {
   selectAccessToken,
   selectAuthStateLoading,
@@ -15,11 +12,9 @@ import {
 import { AuthService } from './Auth/services/auth.service';
 import * as DisplayAction from './Display/actions';
 import { selectDisplayIsMobile } from './Display/selectors';
-import * as FirebaseAction from './Firebase/actions';
 import { selectFirebaseToken } from './Firebase/selectors';
 import { selectMedicationStateLoading } from './Medication/selectors';
-import * as NotificationAction from './Notification/actions';
-import { NotificationDTO } from './Notification/models/notification.dto';
+import { NotificationService } from './Notification/services/notification.service';
 import { selectScheduleStateLoading } from './Schedule/selectors';
 import { selectTaskStateLoading } from './Task/selectors';
 import * as UserAction from './User/actions';
@@ -63,7 +58,6 @@ export class AppComponent implements OnInit {
   sidenav!: MatSidenav;
   isCollapsed = true;
   isMobile = true;
-  messaging: any;
   localDeviceToken: string;
   remoteDeviceToken: string;
   user_role: string | null;
@@ -71,7 +65,8 @@ export class AppComponent implements OnInit {
   constructor(
     private observer: BreakpointObserver,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -138,19 +133,7 @@ export class AppComponent implements OnInit {
       }
     });
 
-    const app = initializeApp(environment.firebaseConfig);
-    this.messaging = getMessaging(app);
-    this.saveMessagingDeviceToken();
-    onMessage(this.messaging, (payload) => {
-      const newNotification = new NotificationDTO(
-        payload.messageId,
-        payload.notification.title,
-        payload.notification.body
-      );
-      this.store.dispatch(
-        NotificationAction.addNotification({ notification: newNotification })
-      );
-    });
+    this.notificationService.saveMessagingDeviceToken();
   }
 
   adminDashboard(): void {
@@ -184,29 +167,6 @@ export class AppComponent implements OnInit {
   register(): void {
     this.router.navigateByUrl('register');
   }
-
-  async saveMessagingDeviceToken() {
-    const currentToken = await getToken(this.messaging);
-    if (currentToken) {
-      this.store.dispatch(FirebaseAction.setToken({ token: currentToken }));
-    } else {
-      // Need to request permissions to show notifications.
-      this.requestNotificationsPermissions();
-    }
-  }
-
-  requestNotificationsPermissions = async () => {
-    console.log('Requesting notifications permission...');
-    const permission = await Notification.requestPermission();
-
-    if (permission === 'granted') {
-      console.log('Notification permission granted.');
-      // Notification permission granted.
-      await this.saveMessagingDeviceToken();
-    } else {
-      console.log('Unable to get permission to notify.');
-    }
-  };
 
   userContacts(): void {
     this.router.navigateByUrl('user/contact/list');
