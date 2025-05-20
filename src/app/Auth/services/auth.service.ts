@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { SharedService } from '../../Shared/services/shared.service';
+import { SharedService } from '../../Shared/Services/shared.service';
 import * as AuthAction from '../actions';
 import { AuthDTO } from '../models/auth.dto';
 
@@ -28,7 +28,8 @@ export class AuthService {
     private store: Store
   ) {
     this.controller = 'auth';
-    this.urlBlogUocApi = 'http://localhost:3000/' + this.controller;
+    this.urlBlogUocApi =
+      import.meta.env.NG_APP_MEDICATION_API_URL + this.controller;
   }
 
   login(auth: AuthDTO): Observable<AuthToken> {

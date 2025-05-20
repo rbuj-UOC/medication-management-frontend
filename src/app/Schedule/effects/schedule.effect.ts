@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, finalize, map, of } from 'rxjs';
-import { SharedService } from '../../Shared/services/shared.service';
+import { SharedService } from '../../Shared/Services/shared.service';
 import * as ScheduleActions from '../actions';
 import { ScheduleService } from '../services/schedule.service';
 

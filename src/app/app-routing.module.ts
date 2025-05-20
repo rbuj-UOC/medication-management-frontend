@@ -10,11 +10,11 @@ import { ScheduleEditComponent } from './Schedule/components/schedule-edit/sched
 import { ScheduleListComponent } from './Schedule/components/schedule-list/schedule-list.component';
 import { ScheduleNewComponent } from './Schedule/components/schedule-new/schedule-new.component';
 import { TodayListComponent } from './Schedule/components/today-list/today-list.component';
-import { HelpComponent } from './Shared/components/help/help.component';
-import { LandingComponent } from './Shared/components/landing/landing.component';
-import { PrivacyComponent } from './Shared/components/privacy/privacy.component';
-import { TermsComponent } from './Shared/components/terms/terms.component';
-import { AuthGuard } from './Shared/guards/auth.guard';
+import { HelpComponent } from './Shared/Components/help/help.component';
+import { LandingComponent } from './Shared/Components/landing/landing.component';
+import { PrivacyComponent } from './Shared/Components/privacy/privacy.component';
+import { TermsComponent } from './Shared/Components/terms/terms.component';
+import { AuthGuard } from './Shared/Guards/auth.guard';
 import { TaskListComponent } from './Task/components/task-list/task-list.component';
 import { ContactFormComponent } from './User/components/contact-form/contact-form.component';
 import { ContactListComponent } from './User/components/contact-list/contact-list.component';

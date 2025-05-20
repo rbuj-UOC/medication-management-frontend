@@ -22,12 +22,12 @@ import { HistoryListComponent } from './components/history-list/history-list.com
 import { MedicationModule } from './Medication/medication.module';
 import { NotificationModule } from './Notification/notification.module';
 import { ScheduleModule } from './Schedule/schedule.module';
-import { HelpComponent } from './Shared/components/help/help.component';
-import { LandingComponent } from './Shared/components/landing/landing.component';
-import { PrivacyComponent } from './Shared/components/privacy/privacy.component';
-import { SpinnerComponent } from './Shared/components/spinner/spinner.component';
-import { TermsComponent } from './Shared/components/terms/terms.component';
-import { AuthInterceptorService } from './Shared/services/auth-interceptor.service';
+import { HelpComponent } from './Shared/Components/help/help.component';
+import { LandingComponent } from './Shared/Components/landing/landing.component';
+import { PrivacyComponent } from './Shared/Components/privacy/privacy.component';
+import { SpinnerComponent } from './Shared/Components/spinner/spinner.component';
+import { TermsComponent } from './Shared/Components/terms/terms.component';
+import { AuthInterceptorService } from './Shared/Services/auth-interceptor.service';
 import { TaskModule } from './Task/task.module';
 import { UserModule } from './User/user.module';
 

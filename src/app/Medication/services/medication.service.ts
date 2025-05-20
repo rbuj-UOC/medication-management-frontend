@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { catchError, Observable } from 'rxjs';
-import { SharedService } from '../../Shared/services/shared.service';
+import { SharedService } from '../../Shared/Services/shared.service';
 import * as MedicationAction from '../actions';
 import { MedicationDTO } from '../models/medication.dto';
 
@@ -19,7 +19,7 @@ export class MedicationService {
     private store: Store
   ) {
     this.controller = 'medications';
-    this.urlApi = 'http://localhost:3000/' + this.controller;
+    this.urlApi = import.meta.env.NG_APP_MEDICATION_API_URL + this.controller;
   }
 
   createMedication(medication: MedicationDTO): Observable<MedicationDTO> {

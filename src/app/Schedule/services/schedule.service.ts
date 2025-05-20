@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, catchError } from 'rxjs';
-import { SharedService } from '../../Shared/services/shared.service';
+import { SharedService } from '../../Shared/Services/shared.service';
 import * as ScheduleAction from '../actions';
 import { ScheduleDTO } from '../models/schedule.dto';
 import { TodayDTO } from '../models/today.dto';
@@ -21,7 +21,7 @@ export class ScheduleService {
     private store: Store
   ) {
     this.controller = 'schedules';
-    this.urlApi = 'http://localhost:3000/' + this.controller;
+    this.urlApi = import.meta.env.NG_APP_MEDICATION_API_URL + this.controller;
   }
 
   createSchedule(sch: ScheduleDTO): Observable<ScheduleDTO> {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { SharedService } from '../../Shared/services/shared.service';
+import { SharedService } from '../../Shared/Services/shared.service';
 import * as UserAction from '../actions';
 import { UserDTO } from '../models/user.dto';
 
@@ -20,7 +20,7 @@ export class UserService {
     private store: Store
   ) {
     this.controller = 'users';
-    this.urlApi = 'http://localhost:3000/' + this.controller;
+    this.urlApi = import.meta.env.NG_APP_MEDICATION_API_URL + this.controller;
   }
 
   addUserContact(email: string): Observable<UserDTO> {
