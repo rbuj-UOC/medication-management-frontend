@@ -26,7 +26,7 @@ export class ScheduleService {
 
   createSchedule(sch: ScheduleDTO): Observable<ScheduleDTO> {
     const schedule = {
-      medicationId: sch.medication_id,
+      medication_id: sch.medication_id,
       start_date: sch.start_date.toISOString(),
       time: formatDate(sch.time, 'HH:mm:ss', 'en-US'),
       frequency: sch.frequency,
