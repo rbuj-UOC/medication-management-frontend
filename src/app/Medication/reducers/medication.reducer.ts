@@ -6,6 +6,9 @@ import {
   deleteMedication,
   deleteMedicationFailure,
   deleteMedicationSuccess,
+  getAllMedications,
+  getAllMedicationsFailure,
+  getAllMedicationsSuccess,
   getMedicationById,
   getMedicationByIdFailure,
   getMedicationByIdSuccess,
@@ -94,6 +97,34 @@ const _medicationsReducer = createReducer(
   ),
   on(
     deleteMedicationFailure,
+    (state, { payload }): MedicationsState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    getAllMedications,
+    (state): MedicationsState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getAllMedicationsSuccess,
+    (state, action): MedicationsState => ({
+      ...state,
+      medications: action.medications,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getAllMedicationsFailure,
     (state, { payload }): MedicationsState => ({
       ...state,
       loading: false,

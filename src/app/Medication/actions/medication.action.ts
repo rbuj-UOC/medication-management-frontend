@@ -32,32 +32,46 @@ export const deleteMedicationFailure = createAction(
   props<{ payload: HttpErrorResponse }>()
 );
 
+export const getAllMedications = createAction(
+  '[Dashboard Page] Get All Medications'
+);
+
+export const getAllMedicationsSuccess = createAction(
+  '[Dashboard Page] Get All Medications Success',
+  props<{ medications: MedicationDTO[] }>()
+);
+
+export const getAllMedicationsFailure = createAction(
+  '[Dashboard Page] Get All Medications Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
 export const getMedicationById = createAction(
-  '[EditMedication Page] Get medication',
+  '[EditMedication Page] Get Medication',
   props<{ id: string }>()
 );
 
 export const getMedicationByIdSuccess = createAction(
-  '[EditMedication Page] Get medication Success',
+  '[EditMedication Page] Get Medication Success',
   props<{ medication: MedicationDTO }>()
 );
 
 export const getMedicationByIdFailure = createAction(
-  '[EditMedication Page] Get medication Failure',
+  '[EditMedication Page] Get Medication Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
 export const getMedications = createAction(
-  '[MedicationList Page] Get medication list'
+  '[MedicationList Page] Get Medication List'
 );
 
 export const getMedicationsSuccess = createAction(
-  '[MedicationList Page] Get medication list Success',
+  '[MedicationList Page] Get Medication List Success',
   props<{ medications: MedicationDTO[] }>()
 );
 
 export const getMedicationsFailure = createAction(
-  '[MedicationList Page] Get medication list Failure',
+  '[MedicationList Page] Get Medication List Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 
