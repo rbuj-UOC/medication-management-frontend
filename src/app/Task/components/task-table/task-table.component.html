@@ -1,6 +1,7 @@
 <div class="main-container">
   <h1>Task List</h1>
-  <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
+  <div *ngIf="tasks.length === 0">No Tasks</div>
+  <table mat-table [dataSource]="tasks" class="mat-elevation-z8" *ngIf="tasks.length > 0">
     <!-- name Column -->
     <ng-container matColumnDef="task-key">
       <th mat-header-cell *matHeaderCellDef>Key</th>

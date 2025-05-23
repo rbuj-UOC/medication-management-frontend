@@ -30,6 +30,6 @@ export class TaskListComponent {
   }
 
   deleteTask(key: string): void {
-    throw new Error('Method not implemented.');
+    this.store.dispatch(TaskAction.deleteTask({ id: key }));
   }
 }

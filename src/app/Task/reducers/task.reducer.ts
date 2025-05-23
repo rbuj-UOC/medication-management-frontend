@@ -1,5 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { getTasks, getTasksFailure, getTasksSuccess, logout } from '../actions';
+import {
+  deleteTask,
+  deleteTaskFailure,
+  deleteTaskSuccess,
+  getTasks,
+  getTasksFailure,
+  getTasksSuccess,
+  logout
+} from '../actions';
 import { TaskDTO } from '../models/task.dto';
 
 export interface TaskState {
@@ -20,6 +28,34 @@ export const initialState: TaskState = {
 
 const _taskReducer = createReducer(
   initialState,
+  on(
+    deleteTask,
+    (state): TaskState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    deleteTaskSuccess,
+    (state, { id }): TaskState => ({
+      ...state,
+      tasks: [...state.tasks.filter((task) => task.key !== id)],
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    deleteTaskFailure,
+    (state, { payload }): TaskState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
   on(
     getTasks,
     (state): TaskState => ({

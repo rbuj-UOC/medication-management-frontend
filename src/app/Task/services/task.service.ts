@@ -29,6 +29,12 @@ export class TaskService {
       .pipe(catchError(this.sharedService.handleError));
   }
 
+  deleteTask(id: string): Observable<TaskDTO> {
+    return this.http
+      .delete<TaskDTO>(this.urlApi + '/' + id)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
   logout() {
     this.store.dispatch(TaskAction.logout());
   }
