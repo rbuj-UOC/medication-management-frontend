@@ -6,6 +6,9 @@ import {
   deleteMedication,
   deleteMedicationFailure,
   deleteMedicationSuccess,
+  getActiveMedicationStats,
+  getActiveMedicationStatsFailure,
+  getActiveMedicationStatsSuccess,
   getAllMedications,
   getAllMedicationsFailure,
   getAllMedicationsSuccess,
@@ -26,11 +29,13 @@ import {
   updateMedicationFailure,
   updateMedicationSuccess
 } from '../actions';
+import { ActiveMedicationStats } from '../interfaces/active-medication-stats.interface';
 import { MedicationDTO } from '../models/medication.dto';
 
 export interface MedicationsState {
   medications: MedicationDTO[];
   medication: MedicationDTO;
+  activeMedicationStats: ActiveMedicationStats;
   loading: boolean;
   loaded: boolean;
   error: any;
@@ -39,6 +44,11 @@ export interface MedicationsState {
 export const initialState: MedicationsState = {
   medications: new Array<MedicationDTO>(),
   medication: new MedicationDTO(''),
+  activeMedicationStats: {
+    count: 0,
+    active: 0,
+    paused: 0
+  },
   loading: false,
   loaded: false,
   error: null
@@ -102,6 +112,34 @@ const _medicationsReducer = createReducer(
       loading: false,
       loaded: false,
       error: { payload }
+    })
+  ),
+  on(
+    getActiveMedicationStats,
+    (state): MedicationsState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getActiveMedicationStatsSuccess,
+    (state, action): MedicationsState => ({
+      ...state,
+      activeMedicationStats: action.activeMedicationStats,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getActiveMedicationStatsFailure,
+    (state, { payload }): MedicationsState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: payload
     })
   ),
   on(

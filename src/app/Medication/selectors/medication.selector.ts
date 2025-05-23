@@ -4,6 +4,13 @@ import { MedicationsState } from '../reducers';
 const selectMedicationsState =
   createFeatureSelector<MedicationsState>('medications');
 
+export const selectActiveMedicationStats = createSelector(
+  selectMedicationsState,
+  (state) => {
+    return state.activeMedicationStats;
+  }
+);
+
 export const selectMedicationStateLoading = createSelector(
   selectMedicationsState,
   (state) => {

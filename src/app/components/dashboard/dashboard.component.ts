@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import Chart, { ChartType } from 'chart.js/auto';
 import * as MedicationsAction from '../../Medication/actions';
-import { selectMedications } from '../../Medication/selectors';
+import { selectActiveMedicationStats } from '../../Medication/selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,9 +15,10 @@ export class DashboardComponent implements OnInit {
   store = inject(Store);
   numActive = 0;
   numPaused = 0;
+  numCount = 0;
   chart: Chart | undefined;
 
-  medications$ = this.store.select(selectMedications);
+  activeMedicationStats$ = this.store.select(selectActiveMedicationStats);
 
   chartData = [
     { name: 'Active', value: 0 },
@@ -25,15 +26,12 @@ export class DashboardComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.store.dispatch(MedicationsAction.getAllMedications());
+    this.store.dispatch(MedicationsAction.getActiveMedicationStats());
 
-    this.medications$.subscribe((medications) => {
-      this.numActive = medications.filter(
-        (medication) => medication.disabled === false
-      ).length;
-      this.numPaused = medications.filter(
-        (medication) => medication.disabled === true
-      ).length;
+    this.activeMedicationStats$.subscribe((stats) => {
+      this.numCount = stats.count;
+      this.numActive = stats.active;
+      this.numPaused = stats.paused;
 
       if (!this.chart) {
         this.chart = new Chart('medications', {

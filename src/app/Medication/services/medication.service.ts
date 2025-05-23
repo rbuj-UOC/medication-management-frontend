@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { catchError, Observable } from 'rxjs';
 import { SharedService } from '../../Shared/Services/shared.service';
 import * as MedicationAction from '../actions';
+import { ActiveMedicationStats } from '../interfaces/active-medication-stats.interface';
 import { MedicationDTO } from '../models/medication.dto';
 
 @Injectable({
@@ -31,6 +32,12 @@ export class MedicationService {
   deleteMedication(id: number): Observable<MedicationDTO> {
     return this.http
       .delete<MedicationDTO>(this.urlApi + '/' + id)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  getActiveMedicationStats(): Observable<ActiveMedicationStats> {
+    return this.http
+      .get<ActiveMedicationStats>(this.urlApi + '/stats/active')
       .pipe(catchError(this.sharedService.handleError));
   }
 

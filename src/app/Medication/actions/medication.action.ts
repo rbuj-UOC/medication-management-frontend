@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
+import { ActiveMedicationStats } from '../interfaces/active-medication-stats.interface';
 import { MedicationDTO } from '../models/medication.dto';
 
 export const createMedication = createAction(
@@ -29,6 +30,20 @@ export const deleteMedicationSuccess = createAction(
 
 export const deleteMedicationFailure = createAction(
   '[MedicationList Page] Delete medication Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const getActiveMedicationStats = createAction(
+  '[Dashboard Page] Get Active Medication Stats'
+);
+
+export const getActiveMedicationStatsSuccess = createAction(
+  '[Dashboard Page] Get Active Medication Stats Success',
+  props<{ activeMedicationStats: ActiveMedicationStats }>()
+);
+
+export const getActiveMedicationStatsFailure = createAction(
+  '[Dashboard Page] Get Active Medication Stats Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 

@@ -19,6 +19,9 @@ export class MedicationsEffects {
   deleteMedicationSuccess$: any;
   deleteMedicationFailure$: any;
 
+  getActiveMedicationStats$: any;
+  getActiveMedicationStatsFailure$: any;
+
   getAllMedications$: any;
   getAllMedicationsFailure$: any;
 
@@ -184,6 +187,41 @@ export class MedicationsEffects {
       () => {
         return this.actions$.pipe(
           ofType(MedicationActions.getAllMedicationsFailure),
+          map((error) => {
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.getActiveMedicationStats$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(MedicationActions.getActiveMedicationStats),
+        exhaustMap(() =>
+          this.medicationService.getActiveMedicationStats().pipe(
+            map((activeMedicationStats) => {
+              return MedicationActions.getActiveMedicationStatsSuccess({
+                activeMedicationStats: activeMedicationStats
+              });
+            }),
+            catchError((error) => {
+              return of(
+                MedicationActions.getActiveMedicationStatsFailure({
+                  payload: error
+                })
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.getActiveMedicationStatsFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(MedicationActions.getActiveMedicationStatsFailure),
           map((error) => {
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
