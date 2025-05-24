@@ -42,4 +42,3 @@ testem.log
 Thumbs.db
 
 .env
-public/firebase-messaging-sw.js
