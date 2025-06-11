@@ -38,12 +38,12 @@ body {
 h1,
 h2,
 h3 {
-  color: color.adjust(#d2e1dd, $lightness: -40%);
+  color: light-dark(color.adjust(#d2e1dd, $lightness: -50%), color.adjust(#d2e1dd, $lightness: -30%));
 }
 
 strong {
   font-weight: 600;
-  color: color.adjust(#d2e1dd, $lightness: -50%);
+  color: light-dark(color.adjust(#d2e1dd, $lightness: -50%), color.adjust(#d2e1dd, $lightness: -30%));
 
 }
 

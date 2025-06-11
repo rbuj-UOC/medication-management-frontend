@@ -27,11 +27,11 @@ li {
 }
 
 a {
-  color: color.adjust(#d2e1dd, $lightness: -50%);
+  color: light-dark(color.adjust(#d2e1dd, $lightness: -50%), color.adjust(#d2e1dd, $lightness: -20%));
   text-decoration: underline;
   text-underline-offset: 4px;
 
   &:hover {
-    color: color.adjust(#d2e1dd, $lightness: -30%);
+    color: light-dark(color.adjust(#d2e1dd, $lightness: -30%), color.adjust(#d2e1dd, $lightness: -40%));
   }
 }

@@ -23,20 +23,20 @@ li {
 }
 
 a {
-  color: color.adjust(#d2e1dd, $lightness: -50%);
+  color: light-dark(color.adjust(#d2e1dd, $lightness: -50%), color.adjust(#d2e1dd, $lightness: -20%));
   text-decoration: underline;
   text-underline-offset: 4px;
 
   &:hover {
-    color: color.adjust(#d2e1dd, $lightness: -30%);
+    color: light-dark(color.adjust(#d2e1dd, $lightness: -30%), color.adjust(#d2e1dd, $lightness: -40%));
   }
 }
 
 .contact {
   margin-top: 16px;
   padding: 16px;
-  background-color: color.adjust(#d2e1dd, $lightness: 11%);
-  border-left: 4px solid color.adjust(#d2e1dd, $lightness: -40%);
+  background-color: light-dark(color.adjust(#d2e1dd, $lightness: 11%), color.adjust(#d2e1dd, $lightness: -65%));
+  border-left: 4px solid light-dark(color.adjust(#d2e1dd, $lightness: -40%), color.adjust(#d2e1dd, $lightness: -20%));
 
   p {
     margin: 0;

@@ -25,8 +25,8 @@ li {
 blockquote {
   margin: 16px 24px;
   padding: 16px;
-  border-left: 4px solid color.adjust(#d2e1dd, $lightness: -40%);
-  background-color: color.adjust(#d2e1dd, $lightness: 11%);
+  border-left: 4px solid light-dark(color.adjust(#d2e1dd, $lightness: -40%), color.adjust(#d2e1dd, $lightness: -20%));
+  background-color: light-dark(color.adjust(#d2e1dd, $lightness: 11%), color.adjust(#d2e1dd, $lightness: -65%));
   max-width: 600px;
 
   p {
@@ -36,7 +36,7 @@ blockquote {
   footer {
     text-align: right;
     font-style: italic;
-    color: color.adjust(#d2e1dd, $lightness: -60%);
+    color: light-dark(color.adjust(#d2e1dd, $lightness: -60%), color.adjust(#d2e1dd, $lightness: -20%));
     margin-top: 8px;
   }
 
