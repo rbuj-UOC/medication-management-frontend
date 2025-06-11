@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use 'sass:color' as color;
 
 .notification-card {
   @include mat.theme((color: (theme-type: light,
@@ -9,7 +10,7 @@
       density: 0,
     ));
 
-  @include mat.card-overrides((elevated-container-color: var(--mat-sys-tertiary-container),
+  @include mat.card-overrides((elevated-container-color: light-dark(color.adjust(#90fc9e, $lightness: 12%), color.adjust(#90fc9e, $lightness: -65%)),
       outlined-outline-color: var(--mat-sys-tertiary-container),
       elevated-container-elevation: var(--mat-sys-level0),
       elevated-container-shape: var(--mat-sys-shape-rectangle)));
