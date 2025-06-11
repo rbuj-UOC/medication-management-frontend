@@ -47,8 +47,7 @@ blockquote {
 
 mat-card-title {
   font-size: 1.2rem;
-  color: color.adjust(#d2e1dd, $lightness: -50%);
-  ;
+  color: light-dark(color.adjust(#d2e1dd, $lightness: -60%), color.adjust(#d2e1dd, $lightness: -20%));
 }
 
 .testimonial-container {
