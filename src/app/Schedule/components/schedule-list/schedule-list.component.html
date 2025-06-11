@@ -1,6 +1,10 @@
-<app-schedule-table [schedules]="selectSchedules$ | async" (createScheduleRequest)="createSchedule($event)"
-  (deleteScheduleRequest)="deleteSchedule($event)" (editScheduleRequest)="editSchedule($event)"
-  *ngIf="(isMobile$ | async) === false"></app-schedule-table>
-<app-schedule-grid [schedules]="selectSchedules$ | async" (createScheduleRequest)="createSchedule($event)"
-  (deleteScheduleRequest)="deleteSchedule($event)" (editScheduleRequest)="editSchedule($event)"
-  *ngIf="(isMobile$ | async) === true"></app-schedule-grid>
+@if ((isMobile$ | async) === false) {
+  <app-schedule-table [schedules]="selectSchedules$ | async" (createScheduleRequest)="createSchedule($event)"
+    (deleteScheduleRequest)="deleteSchedule($event)" (editScheduleRequest)="editSchedule($event)"
+  ></app-schedule-table>
+}
+@if ((isMobile$ | async) === true) {
+  <app-schedule-grid [schedules]="selectSchedules$ | async" (createScheduleRequest)="createSchedule($event)"
+    (deleteScheduleRequest)="deleteSchedule($event)" (editScheduleRequest)="editSchedule($event)"
+  ></app-schedule-grid>
+}

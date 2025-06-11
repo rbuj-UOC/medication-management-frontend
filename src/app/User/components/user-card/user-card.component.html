@@ -1,12 +1,16 @@
 <mat-card>
   <mat-card-content>
     <div class="details">
-      <span *ngIf="user.surname_2">
-        {{ user.surname_1 }} {{ user.surname_2 }}, {{ user.name }}
-      </span>
-      <span *ngIf="!user.surname_2">
-        {{ user.surname_1 }}, {{ user.name }}
-      </span>
+      @if (user.surname_2) {
+        <span>
+          {{ user.surname_1 }} {{ user.surname_2 }}, {{ user.name }}
+        </span>
+      }
+      @if (!user.surname_2) {
+        <span>
+          {{ user.surname_1 }}, {{ user.name }}
+        </span>
+      }
       <div>
         {{ user.email }}
       </div>

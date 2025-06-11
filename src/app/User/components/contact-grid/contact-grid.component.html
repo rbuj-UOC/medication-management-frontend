@@ -5,9 +5,15 @@
       ADD
     </button>
   </div>
-  <div *ngIf="contacts.length > 0">
-    <app-contact-card [contact]="contact" (removeUserContactRequest)="removeUserContact($event)"
-      *ngFor="let contact of contacts"></app-contact-card>
-  </div>
-  <div *ngIf="contacts.length === 0">No contacts</div>
+  @if (contacts.length > 0) {
+    <div>
+      @for (contact of contacts; track contact) {
+        <app-contact-card [contact]="contact" (removeUserContactRequest)="removeUserContact($event)"
+        ></app-contact-card>
+      }
+    </div>
+  }
+  @if (contacts.length === 0) {
+    <div>No contacts</div>
+  }
 </div>

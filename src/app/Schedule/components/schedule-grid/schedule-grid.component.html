@@ -4,9 +4,15 @@
     <button mat-flat-button color="primary" (click)="createSchedule()">
       ADD
     </button>
-    <div *ngIf="schedules.length > 0">
-      <app-schedule-card [schedule]="schedule" (deleteScheduleRequest)="deleteSchedule($event)"
-        (editScheduleRequest)="editSchedule($event)" *ngFor="let schedule of schedules"></app-schedule-card>
-    </div>
-    <div *ngIf="schedules.length === 0">No Schedules</div>
+    @if (schedules.length > 0) {
+      <div>
+        @for (schedule of schedules; track schedule) {
+          <app-schedule-card [schedule]="schedule" (deleteScheduleRequest)="deleteSchedule($event)"
+          (editScheduleRequest)="editSchedule($event)"></app-schedule-card>
+        }
+      </div>
+    }
+    @if (schedules.length === 0) {
+      <div>No Schedules</div>
+    }
   </div>

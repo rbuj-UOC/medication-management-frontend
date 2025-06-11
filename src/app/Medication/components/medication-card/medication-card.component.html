@@ -3,12 +3,16 @@
     <div class="medication-info">
       <div class="medication-title">
         <div>{{ medication.name }}</div>
-        <div><mat-icon *ngIf="medication.disabled">pause</mat-icon></div>
+        <div>@if (medication.disabled) {
+          <mat-icon>pause</mat-icon>
+        }</div>
       </div>
       <div>
-        <ul *ngFor="let schedule of medication.schedules" class="schedule-list">
-          <li>{{ schedule.start_date | date: 'shortTime' }}</li>
-        </ul>
+        @for (schedule of medication.schedules; track schedule) {
+          <ul class="schedule-list">
+            <li>{{ schedule.start_date | date: 'shortTime' }}</li>
+          </ul>
+        }
       </div>
     </div>
   </mat-card-content>

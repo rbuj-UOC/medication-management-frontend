@@ -1,23 +1,31 @@
 <div class="main-container">
   <h1>Today</h1>
-  <div *ngIf="schedules.length > 0 && isMobile === false">
-    <mat-card *ngFor="let schedule of schedules" class="schedule-card">
-      <mat-card-header>
-        <mat-card-title>{{ schedule.start_date | date: 'shortTime' }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        {{ schedule.medication.name }}
-      </mat-card-content>
-    </mat-card>
+  @if (schedules.length > 0 && isMobile === false) {
+    <div>
+      @for (schedule of schedules; track schedule) {
+        <mat-card class="schedule-card">
+          <mat-card-header>
+            <mat-card-title>{{ schedule.start_date | date: 'shortTime' }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            {{ schedule.medication.name }}
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+</div>
+@if (schedules.length > 0 && isMobile === true) {
+  <div>
+    @for (schedule of schedules; track schedule) {
+      <mat-card class="schedule-card">
+        <mat-card-header>
+          <mat-card-title>{{ schedule.start_date | date: 'shortTime' }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          {{ schedule.medication.name }}
+        </mat-card-content>
+      </mat-card>
+    }
   </div>
-</div>
-<div *ngIf="schedules.length > 0 && isMobile === true">
-  <mat-card *ngFor="let schedule of schedules" class="schedule-card">
-    <mat-card-header>
-      <mat-card-title>{{ schedule.start_date | date: 'shortTime' }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      {{ schedule.medication.name }}
-    </mat-card-content>
-  </mat-card>
-</div>
+}

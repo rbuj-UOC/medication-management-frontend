@@ -1,2 +1,4 @@
-<app-notification-card [notification]="notification"
-  *ngFor="let notification of (selectNotifications$ | async)"></app-notification-card>
+@for (notification of (selectNotifications$ | async); track notification) {
+  <app-notification-card [notification]="notification"
+  ></app-notification-card>
+}

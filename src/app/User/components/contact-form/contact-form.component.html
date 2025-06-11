@@ -3,23 +3,28 @@
 </div>
 <div class="main-container">
   <h1>Contact Form</h1>
-  <form *ngIf="contactForm" [formGroup]="contactForm" (ngSubmit)="saveContact()">
-    <div class="contact-line">
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput type="email" [formControl]="email" />
-        <mat-error *ngIf="email.hasError('required')">
-          Email is required
-        </mat-error>
-        <mat-error *ngIf="email.hasError('pattern')">
-          Email not a valid format.
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="contact-line">
-      <button mat-flat-button color="primary" type="submit">SAVE</button>
-      <button mat-flat-button color="primary" type="button" (click)="cancelContact()">CANCEL</button>
-    </div>
-  </form>
+  @if (contactForm) {
+    <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
+      <div class="contact-line">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [formControl]="email" />
+          @if (email.hasError('required')) {
+            <mat-error>
+              Email is required
+            </mat-error>
+          }
+          @if (email.hasError('pattern')) {
+            <mat-error>
+              Email not a valid format.
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="contact-line">
+        <button mat-flat-button color="primary" type="submit">SAVE</button>
+        <button mat-flat-button color="primary" type="button" (click)="cancelContact()">CANCEL</button>
+      </div>
+    </form>
+  }
 </div>

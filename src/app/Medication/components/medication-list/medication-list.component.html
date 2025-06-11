@@ -1,11 +1,15 @@
 <div style="margin-left: auto; margin-right: auto">
   <p id="medicationListFeedback"></p>
 </div>
-<app-medication-table [medications]="(selectMedications$ | async)" (createMedicationRequest)="createMedication()"
-  (deleteMedicationRequest)="deleteMedication($event)" (editMedicationRequest)="editMedication($event)"
-  *ngIf="(selectDisplayIsMobile$ | async) === false">
-</app-medication-table>
-<app-medication-grid [medications]="(selectMedications$ | async)" (createMedicationRequest)="createMedication()"
-  (deleteMedicationRequest)="deleteMedication($event)" (editMedicationRequest)="editMedication($event)"
-  *ngIf="(selectDisplayIsMobile$ | async) === true">
-</app-medication-grid>
+@if ((selectDisplayIsMobile$ | async) === false) {
+  <app-medication-table [medications]="(selectMedications$ | async)" (createMedicationRequest)="createMedication()"
+    (deleteMedicationRequest)="deleteMedication($event)" (editMedicationRequest)="editMedication($event)"
+    >
+  </app-medication-table>
+}
+@if ((selectDisplayIsMobile$ | async) === true) {
+  <app-medication-grid [medications]="(selectMedications$ | async)" (createMedicationRequest)="createMedication()"
+    (deleteMedicationRequest)="deleteMedication($event)" (editMedicationRequest)="editMedication($event)"
+    >
+  </app-medication-grid>
+}

@@ -1,11 +1,15 @@
 <mat-card>
   <mat-card-content>
-    <span *ngIf="contact.surname_2">
-      {{ contact.surname_1 }} {{ contact.surname_2 }}, {{ contact.name }}
-    </span>
-    <span *ngIf="!contact.surname_2">
-      {{ contact.surname_1 }}, {{ contact.name }}
-    </span>
+    @if (contact.surname_2) {
+      <span>
+        {{ contact.surname_1 }} {{ contact.surname_2 }}, {{ contact.name }}
+      </span>
+    }
+    @if (!contact.surname_2) {
+      <span>
+        {{ contact.surname_1 }}, {{ contact.name }}
+      </span>
+    }
     <button mat-icon-button (click)="removeUserContact(contact.email)">
       <mat-icon color="warn">delete</mat-icon>
     </button>
