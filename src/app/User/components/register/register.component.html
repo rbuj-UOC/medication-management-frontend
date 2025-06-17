@@ -122,21 +122,6 @@
       </mat-form-field>
     </div>
 
-    <div class="register-line">
-      <mat-form-field class="full-width">
-        <mat-label>Choose a role</mat-label>
-        <mat-select [formControl]="role">
-          <mat-option>Clear</mat-option>
-          @for (option of roles; track option) {
-            <mat-option [value]="option.value">{{ option.label }}</mat-option>
-          }
-        </mat-select>
-        @if (role.hasError('required')) {
-          <mat-error>Role is required</mat-error>
-        }
-      </mat-form-field>
-    </div>
-
     <mat-checkbox [formControl]="legal">
       I accept "Privacy Policy" and "Terms of Service".
       @if (legal.hasError('required')) {

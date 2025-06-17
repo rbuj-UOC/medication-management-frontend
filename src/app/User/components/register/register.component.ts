@@ -30,12 +30,10 @@ export class RegisterComponent {
   email: FormControl;
   password: FormControl;
   confirmPassword: FormControl;
-  role: FormControl;
   legal: FormControl;
 
   registerForm: FormGroup;
   isValidForm: boolean | null;
-  roles: { value: string; label: string }[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -90,12 +88,6 @@ export class RegisterComponent {
 
     this.legal = new FormControl('', [Validators.requiredTrue]);
 
-    this.role = new FormControl(this.registerUser.role, [Validators.required]);
-    this.roles = [
-      { value: 'admin', label: 'Admin' },
-      { value: 'user', label: 'User' }
-    ];
-
     this.registerForm = this.formBuilder.group({
       name: this.name,
       surname_1: this.surname_1,
@@ -105,7 +97,6 @@ export class RegisterComponent {
       email: this.email,
       password: this.password,
       confirmPassword: this.confirmPassword,
-      role: this.role,
       legal: this.legal
     });
   }
@@ -127,8 +118,7 @@ export class RegisterComponent {
       alias: this.registerUser.alias,
       birth_date: this.registerUser.birth_date,
       email: this.registerUser.email,
-      password: this.registerUser.password,
-      role: this.registerUser.role
+      password: this.registerUser.password
     };
 
     this.store.dispatch(UserAction.register({ user }));
