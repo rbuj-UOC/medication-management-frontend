@@ -10,20 +10,22 @@
           <mat-label>Email</mat-label>
           <input matInput type="email" [formControl]="email" />
           @if (email.hasError('required')) {
-            <mat-error>
-              Email is required
-            </mat-error>
-          }
-          @if (email.hasError('pattern')) {
-            <mat-error>
-              Email not a valid format.
-            </mat-error>
+            <mat-error> Email is required </mat-error>
+          } @else if (email.hasError('pattern')) {
+            <mat-error> Email not a valid format. </mat-error>
           }
         </mat-form-field>
       </div>
       <div class="contact-line">
         <button mat-flat-button color="primary" type="submit">SAVE</button>
-        <button mat-flat-button color="primary" type="button" (click)="cancelContact()">CANCEL</button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="cancelContact()"
+        >
+          CANCEL
+        </button>
       </div>
     </form>
   }

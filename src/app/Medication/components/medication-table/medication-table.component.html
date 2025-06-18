@@ -1,15 +1,19 @@
 <div class="main-container">
   <div class="title">
     <h1>Medications</h1>
-    <button mat-icon-button color="primary" (click)="createMedication()" aria-label="Add a medication">
-      <mat-icon style="transform: scale(1.5);">add_circle</mat-icon>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="createMedication()"
+      aria-label="Add a medication"
+    >
+      <mat-icon style="transform: scale(1.5)">add_circle</mat-icon>
     </button>
   </div>
   <!-- table -->
   @if (medications.length === 0) {
     <div>No Medications</div>
-  }
-  @if (medications.length > 0) {
+  } @else if (medications.length > 0) {
     <table mat-table [dataSource]="medications" class="mat-elevation-z8">
       <!-- Name Column -->
       <ng-container matColumnDef="medication-name">
@@ -20,18 +24,18 @@
       <ng-container matColumnDef="medication-schedules">
         <th mat-header-cell *matHeaderCellDef>Schedules</th>
         <td mat-cell *matCellDef="let medication">
-          @for (schedule of medication.schedules; track schedule) {
-            <ul class="code-editor-options-menu">
-              <li>{{schedule.start_date | date:'shortTime'}}</li>
-            </ul>
-          }
+          <ul class="code-editor-options-menu">
+            @for (schedule of medication.schedules; track schedule) {
+              <li>{{ schedule.start_date | date: 'shortTime' }}</li>
+            }
+          </ul>
         </td>
       </ng-container>
       <!-- Schedules Column -->
       <ng-container matColumnDef="medication-status">
         <th mat-header-cell *matHeaderCellDef>Status</th>
         <td mat-cell *matCellDef="let medication">
-          {{medication.disabled === true ? 'Paused' : 'Active'}}
+          {{ medication.disabled === true ? 'Paused' : 'Active' }}
         </td>
       </ng-container>
       <!-- Actions Column -->
@@ -41,7 +45,10 @@
           <button mat-icon-button (click)="editMedication(medication.id)">
             <mat-icon>edit_calendar</mat-icon>
           </button>
-          <button mat-icon-button (click)="deleteMedication(medication.id, medication.name)">
+          <button
+            mat-icon-button
+            (click)="deleteMedication(medication.id, medication.name)"
+          >
             <mat-icon color="warn">delete</mat-icon>
           </button>
         </td>

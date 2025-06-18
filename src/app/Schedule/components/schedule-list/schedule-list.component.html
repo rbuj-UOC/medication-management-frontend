@@ -1,10 +1,15 @@
 @if ((isMobile$ | async) === false) {
-  <app-schedule-table [schedules]="selectSchedules$ | async" (createScheduleRequest)="createSchedule($event)"
-    (deleteScheduleRequest)="deleteSchedule($event)" (editScheduleRequest)="editSchedule($event)"
+  <app-schedule-table
+    [schedules]="selectSchedules$ | async"
+    (createScheduleRequest)="createSchedule($event)"
+    (deleteScheduleRequest)="deleteSchedule($event)"
+    (editScheduleRequest)="editSchedule($event)"
   ></app-schedule-table>
-}
-@if ((isMobile$ | async) === true) {
-  <app-schedule-grid [schedules]="selectSchedules$ | async" (createScheduleRequest)="createSchedule($event)"
-    (deleteScheduleRequest)="deleteSchedule($event)" (editScheduleRequest)="editSchedule($event)"
+} @else {
+  <app-schedule-grid
+    [schedules]="selectSchedules$ | async"
+    (createScheduleRequest)="createSchedule($event)"
+    (deleteScheduleRequest)="deleteSchedule($event)"
+    (editScheduleRequest)="editSchedule($event)"
   ></app-schedule-grid>
 }

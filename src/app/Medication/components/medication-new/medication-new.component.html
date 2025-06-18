@@ -11,17 +11,21 @@
           <input matInput type="text" [formControl]="name" />
           @if (name.hasError('required')) {
             <mat-error>Name is required</mat-error>
-          }
-          @if (name.hasError('maxlength')) {
-            <mat-error>
-              Name can be max 55 characters long.
-            </mat-error>
+          } @else if (name.hasError('maxlength')) {
+            <mat-error> Name can be max 55 characters long. </mat-error>
           }
         </mat-form-field>
       </div>
       <div class="medication-line">
         <button mat-flat-button color="primary" type="submit">SAVE</button>
-        <button mat-flat-button color="primary" type="button" (click)="cancelMedication()">CANCEL</button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="cancelMedication()"
+        >
+          CANCEL
+        </button>
       </div>
     </form>
   }

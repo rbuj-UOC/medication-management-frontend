@@ -3,12 +3,14 @@
   @if (users.length > 0) {
     <div>
       @for (user of users; track user) {
-        <app-user-card [user]="user" (deleteUserRequest)="deleteUser($event)" (editUserRequest)="editUser($event)"
+        <app-user-card
+          [user]="user"
+          (deleteUserRequest)="deleteUser($event)"
+          (editUserRequest)="editUser($event)"
         ></app-user-card>
       }
     </div>
-  }
-  @if (users.length === 0) {
+  } @else if (users.length === 0) {
     <div>No contacts</div>
   }
 </div>

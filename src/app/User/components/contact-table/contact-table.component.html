@@ -1,8 +1,13 @@
 <div class="main-container">
   <div class="title">
     <h1>Contacts</h1>
-    <button mat-icon-button color="primary" (click)="addContact()" aria-label="Add a user contact">
-      <mat-icon style="transform: scale(1.5);">add_circle</mat-icon>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="addContact()"
+      aria-label="Add a user contact"
+    >
+      <mat-icon style="transform: scale(1.5)">add_circle</mat-icon>
     </button>
   </div>
 
@@ -31,7 +36,9 @@
       <!-- birth_date Column -->
       <ng-container matColumnDef="contact-birth_date">
         <th mat-header-cell *matHeaderCellDef>Birth Date</th>
-        <td mat-cell *matCellDef="let contact">{{ contact.birth_date | date:'shortDate' }}</td>
+        <td mat-cell *matCellDef="let contact">
+          {{ contact.birth_date | date: 'shortDate' }}
+        </td>
       </ng-container>
       <!-- email Column -->
       <ng-container matColumnDef="contact-email">
@@ -50,8 +57,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-  }
-  @if (contacts.length === 0) {
+  } @else if (contacts.length === 0) {
     <div>No contacts</div>
   }
 </div>

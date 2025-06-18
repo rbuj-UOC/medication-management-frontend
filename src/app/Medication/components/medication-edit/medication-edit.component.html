@@ -11,11 +11,8 @@
           <input matInput type="text" [formControl]="name" />
           @if (name.hasError('required')) {
             <mat-error>Name is required</mat-error>
-          }
-          @if (name.hasError('maxlength')) {
-            <mat-error>
-              Name can be max 55 characters long.
-            </mat-error>
+          } @else if (name.hasError('maxlength')) {
+            <mat-error> Name can be max 55 characters long. </mat-error>
           }
         </mat-form-field>
       </div>
@@ -29,21 +26,36 @@
 
   <div class="medication-line">
     @if ((selectMedication$ | async)?.disabled) {
-      <button mat-flat-button class="bottom-button" (click)="resumeMedication()"
-        >RESUME
-      MEDICATION</button>
-    }
-    @if ((selectMedication$ | async)?.disabled === false) {
-      <button mat-flat-button class=" bottom-button" (click)="pauseMedication()"
-        >PAUSE
-      MEDICATION</button>
+      <button
+        mat-flat-button
+        class="bottom-button"
+        (click)="resumeMedication()"
+      >
+        RESUME MEDICATION
+      </button>
+    } @else {
+      <button mat-flat-button class="bottom-button" (click)="pauseMedication()">
+        PAUSE MEDICATION
+      </button>
     }
   </div>
   <div class="medication-line">
-    @if ((selectDisplayIsMobile$ | async)===true) {
-      <button mat-flat-button class="warn bottom-button" (click)="deleteMedication()"
-      >DELETE MEDICATION</button>
+    @if ((selectDisplayIsMobile$ | async) === true) {
+      <button
+        mat-flat-button
+        class="warn bottom-button"
+        (click)="deleteMedication()"
+      >
+        DELETE MEDICATION
+      </button>
     }
-    <button mat-flat-button color="primary" class="bottom-button" (click)="cancelMedication()">GO BACK</button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="bottom-button"
+      (click)="cancelMedication()"
+    >
+      GO BACK
+    </button>
   </div>
 </div>

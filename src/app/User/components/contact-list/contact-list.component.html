@@ -2,10 +2,13 @@
   <p id="contactListFeedback"></p>
 </div>
 @if ((isMobile$ | async) === false) {
-  <app-contact-table [contacts]="contacts$ | async" (removeUserContactRequest)="removeUserContact($event)"
+  <app-contact-table
+    [contacts]="contacts$ | async"
+    (removeUserContactRequest)="removeUserContact($event)"
   ></app-contact-table>
-}
-@if ((isMobile$ | async) === true) {
-  <app-contact-grid [contacts]="contacts$ | async" (removeUserContactRequest)="removeUserContact($event)"
+} @else {
+  <app-contact-grid
+    [contacts]="contacts$ | async"
+    (removeUserContactRequest)="removeUserContact($event)"
   ></app-contact-grid>
 }

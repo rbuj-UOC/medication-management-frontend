@@ -2,8 +2,7 @@
   <h1>Task List</h1>
   @if (tasks.length === 0) {
     <div>No Tasks</div>
-  }
-  @if (tasks.length > 0) {
+  } @else if (tasks.length > 0) {
     <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
       <!-- name Column -->
       <ng-container matColumnDef="task-key">

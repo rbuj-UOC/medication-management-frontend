@@ -1,19 +1,25 @@
 <div class="main-container">
   <h1>Contacts</h1>
   <div class="contact-line">
-    <button mat-flat-button color="primary" (click)="addContact()" class="add-button">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="addContact()"
+      class="add-button"
+    >
       ADD
     </button>
   </div>
   @if (contacts.length > 0) {
     <div>
       @for (contact of contacts; track contact) {
-        <app-contact-card [contact]="contact" (removeUserContactRequest)="removeUserContact($event)"
+        <app-contact-card
+          [contact]="contact"
+          (removeUserContactRequest)="removeUserContact($event)"
         ></app-contact-card>
       }
     </div>
-  }
-  @if (contacts.length === 0) {
+  } @else if (contacts.length === 0) {
     <div>No contacts</div>
   }
 </div>

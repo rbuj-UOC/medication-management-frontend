@@ -5,17 +5,14 @@
         <span>
           {{ user.surname_1 }} {{ user.surname_2 }}, {{ user.name }}
         </span>
-      }
-      @if (!user.surname_2) {
-        <span>
-          {{ user.surname_1 }}, {{ user.name }}
-        </span>
+      } @else if (!user.surname_2) {
+        <span> {{ user.surname_1 }}, {{ user.name }} </span>
       }
       <div>
         {{ user.email }}
       </div>
       <mat-chip-set aria-label="Fish selection">
-        <mat-chip>{{user.role}}</mat-chip>
+        <mat-chip>{{ user.role }}</mat-chip>
       </mat-chip-set>
     </div>
     <div class="actions">

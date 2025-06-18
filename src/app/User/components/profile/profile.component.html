@@ -12,16 +12,10 @@
         <input matInput type="text" [formControl]="name" />
         @if (name.hasError('required')) {
           <mat-error>Name is required</mat-error>
-        }
-        @if (name.hasError('minlength')) {
-          <mat-error>
-            Name must be at least 3 characters long.
-          </mat-error>
-        }
-        @if (name.hasError('maxlength')) {
-          <mat-error>
-            Name can be max 25 characters long.
-          </mat-error>
+        } @else if (name.hasError('minlength')) {
+          <mat-error> Name must be at least 3 characters long. </mat-error>
+        } @else if (name.hasError('maxlength')) {
+          <mat-error> Name can be max 25 characters long. </mat-error>
         }
       </mat-form-field>
 
@@ -29,19 +23,11 @@
         <mat-label>Surname1</mat-label>
         <input matInput type="text" [formControl]="surname_1" />
         @if (surname_1.hasError('required')) {
-          <mat-error>
-            Surname1 is required
-          </mat-error>
-        }
-        @if (surname_1.hasError('minlength')) {
-          <mat-error>
-            Surname1 must be at least 3 characters long.
-          </mat-error>
-        }
-        @if (surname_1.hasError('maxlength')) {
-          <mat-error>
-            Surname1 can be max 25 characters long.
-          </mat-error>
+          <mat-error> Surname1 is required </mat-error>
+        } @else if (surname_1.hasError('minlength')) {
+          <mat-error> Surname1 must be at least 3 characters long. </mat-error>
+        } @else if (surname_1.hasError('maxlength')) {
+          <mat-error> Surname1 can be max 25 characters long. </mat-error>
         }
       </mat-form-field>
 
@@ -49,14 +35,9 @@
         <mat-label>Surname2</mat-label>
         <input matInput type="text" [formControl]="surname_2" />
         @if (surname_2.hasError('minlength')) {
-          <mat-error>
-            Surname2 must be at least 3 characters long.
-          </mat-error>
-        }
-        @if (surname_2.hasError('maxlength')) {
-          <mat-error>
-            Surname2 can be max 25 characters long.
-          </mat-error>
+          <mat-error> Surname2 must be at least 3 characters long. </mat-error>
+        } @else if (surname_2.hasError('maxlength')) {
+          <mat-error> Surname2 can be max 25 characters long. </mat-error>
         }
       </mat-form-field>
 
@@ -64,19 +45,11 @@
         <mat-label>Alias</mat-label>
         <input matInput type="text" [formControl]="alias" />
         @if (alias.hasError('required')) {
-          <mat-error>
-            Alias is required
-          </mat-error>
-        }
-        @if (alias.hasError('minlength')) {
-          <mat-error>
-            Alias must be at least 3 characters long.
-          </mat-error>
-        }
-        @if (alias.hasError('maxlength')) {
-          <mat-error>
-            Alias can be max 25 characters long.
-          </mat-error>
+          <mat-error> Alias is required </mat-error>
+        } @else if (alias.hasError('minlength')) {
+          <mat-error> Alias must be at least 3 characters long. </mat-error>
+        } @else if (alias.hasError('maxlength')) {
+          <mat-error> Alias can be max 25 characters long. </mat-error>
         }
       </mat-form-field>
 
@@ -84,9 +57,7 @@
         <mat-label>Birth date</mat-label>
         <input matInput type="date" [formControl]="birth_date" />
         @if (birth_date.hasError('required')) {
-          <mat-error>
-            Birth date is required
-          </mat-error>
+          <mat-error> Birth date is required </mat-error>
         }
       </mat-form-field>
     </div>
@@ -96,14 +67,9 @@
         <mat-label>Email</mat-label>
         <input matInput type="email" [formControl]="email" />
         @if (email.hasError('required')) {
-          <mat-error>
-            Email is required
-          </mat-error>
-        }
-        @if (email.hasError('pattern')) {
-          <mat-error>
-            Email not a valid format.
-          </mat-error>
+          <mat-error> Email is required </mat-error>
+        } @else if (email.hasError('pattern')) {
+          <mat-error> Email not a valid format. </mat-error>
         }
       </mat-form-field>
 
@@ -111,14 +77,9 @@
         <mat-label>Password</mat-label>
         <input matInput type="password" [formControl]="password" />
         @if (password.hasError('required')) {
-          <mat-error>
-            Password is required
-          </mat-error>
-        }
-        @if (password.hasError('minlength')) {
-          <mat-error>
-            Password must be at least 8 characters long.
-          </mat-error>
+          <mat-error> Password is required </mat-error>
+        } @else if (password.hasError('minlength')) {
+          <mat-error> Password must be at least 8 characters long. </mat-error>
         }
       </mat-form-field>
 
@@ -127,11 +88,8 @@
         <input matInput type="password" [formControl]="confirmPassword" />
         @if (confirmPassword.hasError('required')) {
           <mat-error>Confirm Password is required</mat-error>
-        }
-        @if (confirmPassword.errors?.['PasswordNoMatch']) {
-          <mat-error>
-            Passwords must match.
-          </mat-error>
+        } @else if (confirmPassword.errors?.['PasswordNoMatch']) {
+          <mat-error> Passwords must match. </mat-error>
         }
       </mat-form-field>
     </div>
@@ -156,9 +114,15 @@
     </div>
 
     <div class="profile-line">
-      <button mat-flat-button class="warn" type="button" (click)="onDelete()"
-        [disabled]="(selectUser$ |async)?.role === 'admin'">Delete User
-      Account</button>
+      <button
+        mat-flat-button
+        class="warn"
+        type="button"
+        (click)="onDelete()"
+        [disabled]="(selectUser$ | async)?.role === 'admin'"
+      >
+        Delete User Account
+      </button>
     </div>
   </form>
 </div>

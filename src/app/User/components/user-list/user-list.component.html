@@ -2,10 +2,15 @@
   <p id="userListFeedback"></p>
 </div>
 @if ((isMobile$ | async) === false) {
-  <app-user-table [users]="selectUsers$ | async" (deleteUserRequest)="deleteUser($event)"
-  (editUserRequest)="editUser($event)"></app-user-table>
-}
-@if ((isMobile$ | async) === true) {
-  <app-user-grid [users]="selectUsers$ | async" (deleteUserRequest)="deleteUser($event)"
-  (editUserRequest)="editUser($event)"></app-user-grid>
+  <app-user-table
+    [users]="selectUsers$ | async"
+    (deleteUserRequest)="deleteUser($event)"
+    (editUserRequest)="editUser($event)"
+  ></app-user-table>
+} @else {
+  <app-user-grid
+    [users]="selectUsers$ | async"
+    (deleteUserRequest)="deleteUser($event)"
+    (editUserRequest)="editUser($event)"
+  ></app-user-grid>
 }

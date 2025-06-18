@@ -11,8 +11,7 @@
         <input matInput type="email" [formControl]="email" />
         @if (email.hasError('required')) {
           <mat-error>Email is required</mat-error>
-        }
-        @if (email.hasError('pattern')) {
+        } @else if (email.hasError('pattern')) {
           <mat-error>Email not a valid format.</mat-error>
         }
       </mat-form-field>
@@ -24,18 +23,21 @@
         <input matInput type="password" [formControl]="password" />
         @if (password.hasError('required')) {
           <mat-error>Password is required</mat-error>
-        }
-        @if (password.hasError('minlength')) {
+        } @else if (password.hasError('minlength')) {
           <mat-error>Password must be greater tha 8 characters</mat-error>
-        }
-        @if (password.hasError('maxlength')) {
+        } @else if (password.hasError('maxlength')) {
           <mat-error>Password can be max 16 characters long</mat-error>
         }
       </mat-form-field>
     </div>
 
     <div class="login-line">
-      <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="!loginForm.valid"
+      >
         Login
       </button>
     </div>
