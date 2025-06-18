@@ -1,3 +1,5 @@
+[![Medication Management CI](https://github.com/rbuj-UOC/medication-management-frontend/actions/workflows/nodejs.yml/badge.svg)](https://github.com/rbuj-UOC/medication-management-frontend/actions/workflows/nodejs.yml)
+
 # Frontend
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
