@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
+import { ConfirmationDTO } from '../models/confirmation.dto';
 import { ScheduleDTO } from '../models/schedule.dto';
 import { TodayDTO } from '../models/today.dto';
 
@@ -30,6 +31,20 @@ export const deleteScheduleSuccess = createAction(
 
 export const deleteScheduleFailure = createAction(
   '[MedicationForm Page] Delete Schedule Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const getConfirmations = createAction(
+  '[History Page] Get Confirmations'
+);
+
+export const getConfirmationsSuccess = createAction(
+  '[History Page] Get Confirmations Success',
+  props<{ confirmations: ConfirmationDTO[] }>()
+);
+
+export const getConfirmationsFailure = createAction(
+  '[History Page] Get Confirmations Failure',
   props<{ payload: HttpErrorResponse }>()
 );
 

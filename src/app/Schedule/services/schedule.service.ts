@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, catchError } from 'rxjs';
 import { SharedService } from '../../Shared/Services/shared.service';
 import * as ScheduleAction from '../actions';
+import { ConfirmationDTO } from '../models/confirmation.dto';
 import { ScheduleDTO } from '../models/schedule.dto';
 import { TodayDTO } from '../models/today.dto';
 
@@ -40,6 +41,14 @@ export class ScheduleService {
   deleteSchedule(id: number): Observable<ScheduleDTO> {
     return this.http
       .delete<ScheduleDTO>(this.urlApi + '/' + id)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  getConfirmations(): Observable<ConfirmationDTO[]> {
+    return this.http
+      .get<
+        ConfirmationDTO[]
+      >(import.meta.env.NG_APP_MEDICATION_API_URL + 'confirmations')
       .pipe(catchError(this.sharedService.handleError));
   }
 

@@ -14,23 +14,34 @@ export class SchedulesEffects {
   createSchedule$: any;
   createScheduleSuccess$: any;
   createScheduleFailure$: any;
-  getSchedulesByMedicationId$: any;
-  getSchedulesByMedicationIdFailure$: any;
+
   deleteSchedule$: any;
-  ScheduleActions: any;
   deleteScheduleSuccess$: any;
   deleteScheduleFailure$: any;
+
+  getConfirmations$: any;
+  getConfirmationsFailure$: any;
+
   getScheduleById$: any;
   getScheduleByIdFailure$: any;
+
+  getSchedulesByMedicationId$: any;
+  getSchedulesByMedicationIdFailure$: any;
+
   getToday$: any;
   getTodayFailure$: any;
-  updateSchedule$: any;
+
   skipMedication$: any;
   skipMedicationFailure$: any;
+
   takeMedication$: any;
   takeMedicationFailure$: any;
+
+  updateSchedule$: any;
   updateScheduleSuccess$: any;
   updateScheduleFailure$: any;
+
+  ScheduleActions: any;
 
   constructor(
     private actions$: Actions,
@@ -143,6 +154,39 @@ export class SchedulesEffects {
           ofType(ScheduleActions.deleteScheduleFailure),
           map((error) => {
             this.responseOK = false;
+            this.errorResponse = error.payload.error;
+            this.sharedService.errorLog(error.payload.error);
+          })
+        );
+      },
+      { dispatch: false }
+    );
+
+    this.getConfirmations$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(ScheduleActions.getConfirmations),
+        exhaustMap(() =>
+          this.scheduleService.getConfirmations().pipe(
+            map((confirmations) => {
+              return ScheduleActions.getConfirmationsSuccess({
+                confirmations: confirmations
+              });
+            }),
+            catchError((error) => {
+              return of(
+                ScheduleActions.getConfirmationsFailure({ payload: error })
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.getConfirmationsFailure$ = createEffect(
+      () => {
+        return this.actions$.pipe(
+          ofType(ScheduleActions.getConfirmationsFailure),
+          map((error) => {
             this.errorResponse = error.payload.error;
             this.sharedService.errorLog(error.payload.error);
           })

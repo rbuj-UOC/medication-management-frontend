@@ -6,6 +6,9 @@ import {
   deleteSchedule,
   deleteScheduleFailure,
   deleteScheduleSuccess,
+  getConfirmations,
+  getConfirmationsFailure,
+  getConfirmationsSuccess,
   getScheduleById,
   getScheduleByIdFailure,
   getScheduleByIdSuccess,
@@ -23,6 +26,7 @@ import {
   takeMedicationFailure,
   takeMedicationSuccess
 } from '../actions';
+import { ConfirmationDTO } from '../models/confirmation.dto';
 import { ScheduleDTO } from '../models/schedule.dto';
 import { TodayDTO } from '../models/today.dto';
 
@@ -30,6 +34,7 @@ export interface SchedulesState {
   schedules: ScheduleDTO[];
   schedule: ScheduleDTO;
   today: TodayDTO[];
+  confirmations: ConfirmationDTO[];
   loading: boolean;
   loaded: boolean;
   error: any;
@@ -39,6 +44,7 @@ export const initialState: SchedulesState = {
   schedules: new Array<ScheduleDTO>(),
   schedule: new ScheduleDTO(new Date(), new Date(), 0, '', ''),
   today: new Array<TodayDTO>(),
+  confirmations: new Array<ConfirmationDTO>(),
   loading: false,
   loaded: false,
   error: null
@@ -109,6 +115,34 @@ const _schedulesReducer = createReducer(
       loading: true,
       loaded: false,
       error: null
+    })
+  ),
+  on(
+    getConfirmations,
+    (state): SchedulesState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    getConfirmationsSuccess,
+    (state, action): SchedulesState => ({
+      ...state,
+      confirmations: action.confirmations,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    getConfirmationsFailure,
+    (state, { payload }): SchedulesState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
     })
   ),
   on(

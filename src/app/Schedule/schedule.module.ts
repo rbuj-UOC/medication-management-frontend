@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatTimepickerModule } from '@angular/material/timepicker';
+import { HistoryListComponent } from './components/history-list/history-list.component';
 import { ScheduleCardComponent } from './components/schedule-card/schedule-card.component';
 import { ScheduleEditComponent } from './components/schedule-edit/schedule-edit.component';
 import { ScheduleGridComponent } from './components/schedule-grid/schedule-grid.component';
@@ -31,6 +32,7 @@ import { TodayListComponent } from './components/today-list/today-list.component
     MatNativeDateModule
   ],
   declarations: [
+    HistoryListComponent,
     ScheduleCardComponent,
     ScheduleEditComponent,
     ScheduleGridComponent,

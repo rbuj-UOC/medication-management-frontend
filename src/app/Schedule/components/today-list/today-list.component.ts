@@ -33,15 +33,11 @@ export class TodayListComponent implements OnInit {
     this.store.dispatch(SchedulesAction.getToday());
   }
 
-  takeMedication(schedule: TodayDTO): void {
-    this.store.dispatch(
-      SchedulesAction.takeMedication({ scheduleId: schedule.id })
-    );
+  takeMedication(scheduleId: number): void {
+    this.store.dispatch(SchedulesAction.takeMedication({ scheduleId }));
   }
 
-  skipMedication(schedule: TodayDTO): void {
-    this.store.dispatch(
-      SchedulesAction.skipMedication({ scheduleId: schedule.id })
-    );
+  skipMedication(scheduleId: number): void {
+    this.store.dispatch(SchedulesAction.skipMedication({ scheduleId }));
   }
 }
