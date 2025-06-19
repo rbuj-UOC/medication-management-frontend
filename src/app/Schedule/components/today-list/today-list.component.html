@@ -5,11 +5,21 @@
       @for (schedule of schedules; track schedule) {
         <mat-card class="schedule-card">
           <mat-card-header>
-            <mat-card-title>{{ schedule.start_date | date: 'shortTime' }}</mat-card-title>
+            <mat-card-title>{{
+              schedule.start_date | date: 'shortTime'
+            }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
             {{ schedule.medication.name }}
           </mat-card-content>
+          <mat-card-actions>
+            <button mat-button (click)="takeMedication(schedule.id)">
+              Take
+            </button>
+            <button mat-button (click)="skipMedication(schedule.id)">
+              Skip
+            </button>
+          </mat-card-actions>
         </mat-card>
       }
     </div>
@@ -20,11 +30,17 @@
     @for (schedule of schedules; track schedule) {
       <mat-card class="schedule-card">
         <mat-card-header>
-          <mat-card-title>{{ schedule.start_date | date: 'shortTime' }}</mat-card-title>
+          <mat-card-title>{{
+            schedule.start_date | date: 'shortTime'
+          }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           {{ schedule.medication.name }}
         </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="takeMedication(schedule)">Take</button>
+          <button mat-button (click)="skipMedication(schedule)">Skip</button>
+        </mat-card-actions>
       </mat-card>
     }
   </div>

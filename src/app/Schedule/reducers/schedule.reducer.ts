@@ -15,7 +15,13 @@ import {
   getToday,
   getTodayFailure,
   getTodaySuccess,
-  logout
+  logout,
+  skipMedication,
+  skipMedicationFailure,
+  skipMedicationSuccess,
+  takeMedication,
+  takeMedicationFailure,
+  takeMedicationSuccess
 } from '../actions';
 import { ScheduleDTO } from '../models/schedule.dto';
 import { TodayDTO } from '../models/today.dto';
@@ -180,7 +186,61 @@ const _schedulesReducer = createReducer(
       error: { payload }
     })
   ),
-  on(logout, (): SchedulesState => initialState)
+  on(logout, (): SchedulesState => initialState),
+  on(
+    skipMedication,
+    (state): SchedulesState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    skipMedicationSuccess,
+    (state): SchedulesState => ({
+      ...state,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    skipMedicationFailure,
+    (state, { payload }): SchedulesState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  ),
+  on(
+    takeMedication,
+    (state): SchedulesState => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null
+    })
+  ),
+  on(
+    takeMedicationSuccess,
+    (state): SchedulesState => ({
+      ...state,
+      loading: false,
+      loaded: true,
+      error: null
+    })
+  ),
+  on(
+    takeMedicationFailure,
+    (state, { payload }): SchedulesState => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload }
+    })
+  )
 );
 
 export function schedulesReducer(

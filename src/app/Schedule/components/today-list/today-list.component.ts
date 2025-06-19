@@ -32,4 +32,16 @@ export class TodayListComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(SchedulesAction.getToday());
   }
+
+  takeMedication(schedule: TodayDTO): void {
+    this.store.dispatch(
+      SchedulesAction.takeMedication({ scheduleId: schedule.id })
+    );
+  }
+
+  skipMedication(schedule: TodayDTO): void {
+    this.store.dispatch(
+      SchedulesAction.skipMedication({ scheduleId: schedule.id })
+    );
+  }
 }

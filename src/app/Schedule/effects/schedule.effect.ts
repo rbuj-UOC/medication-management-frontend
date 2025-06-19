@@ -25,6 +25,10 @@ export class SchedulesEffects {
   getToday$: any;
   getTodayFailure$: any;
   updateSchedule$: any;
+  skipMedication$: any;
+  skipMedicationFailure$: any;
+  takeMedication$: any;
+  takeMedicationFailure$: any;
   updateScheduleSuccess$: any;
   updateScheduleFailure$: any;
 
@@ -249,6 +253,56 @@ export class SchedulesEffects {
       },
       { dispatch: false }
     );
+
+    this.skipMedication$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(ScheduleActions.skipMedication),
+        exhaustMap(({ scheduleId }) =>
+          this.scheduleService.skipMedication(scheduleId).pipe(
+            map(() => {
+              return ScheduleActions.skipMedicationSuccess();
+            }),
+            catchError((error) => {
+              return of(
+                ScheduleActions.skipMedicationFailure({ payload: error })
+              );
+            }),
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'scheduleSkipFeedback',
+                this.responseOK,
+                this.errorResponse
+              );
+            })
+          )
+        )
+      );
+    });
+
+    this.takeMedication$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(ScheduleActions.takeMedication),
+        exhaustMap(({ scheduleId }) =>
+          this.scheduleService.takeMedication(scheduleId).pipe(
+            map(() => {
+              return ScheduleActions.takeMedicationSuccess();
+            }),
+            catchError((error) => {
+              return of(
+                ScheduleActions.takeMedicationFailure({ payload: error })
+              );
+            }),
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'scheduleTakeFeedback',
+                this.responseOK,
+                this.errorResponse
+              );
+            })
+          )
+        )
+      );
+    });
 
     this.updateSchedule$ = createEffect(() => {
       return this.actions$.pipe(

@@ -77,6 +77,34 @@ export const getTodayFailure = createAction(
 
 export const logout = createAction('[Schedule Service] Logout');
 
+export const skipMedication = createAction(
+  '[Today Page] Skip Medication',
+  props<{ scheduleId: number }>()
+);
+
+export const skipMedicationSuccess = createAction(
+  '[Today Page] Skip Medication Success'
+);
+
+export const skipMedicationFailure = createAction(
+  '[Today Page] Skip Medication Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+export const takeMedication = createAction(
+  '[Today Page] Take Medication',
+  props<{ scheduleId: number }>()
+);
+
+export const takeMedicationSuccess = createAction(
+  '[Today Page] Take Medication Success'
+);
+
+export const takeMedicationFailure = createAction(
+  '[Today Page] Take Medication Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
 export const updateSchedule = createAction(
   '[EditSchedule Page] Update Schedules',
   props<{ id: string; schedule: ScheduleDTO }>()

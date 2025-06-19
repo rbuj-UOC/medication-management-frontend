@@ -1,4 +1,5 @@
 export class TodayDTO {
+  id!: number;
   start_date: Date;
   medication!: { name: string };
 

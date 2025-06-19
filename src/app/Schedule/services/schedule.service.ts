@@ -65,6 +65,24 @@ export class ScheduleService {
     this.store.dispatch(ScheduleAction.logout());
   }
 
+  skipMedication(scheduleId: number) {
+    return this.http
+      .post<ScheduleDTO>(
+        import.meta.env.NG_APP_MEDICATION_API_URL + 'confirmations',
+        { schedule_id: scheduleId, confirmed: false }
+      )
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  takeMedication(scheduleId: number) {
+    return this.http
+      .post<ScheduleDTO>(
+        import.meta.env.NG_APP_MEDICATION_API_URL + 'confirmations',
+        { schedule_id: scheduleId, confirmed: true }
+      )
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
   updateSchedule(id: string, schedule: ScheduleDTO): Observable<ScheduleDTO> {
     const sch = {
       medicationId: schedule.medication_id,
