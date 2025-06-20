@@ -14,7 +14,7 @@
     <div>No Medications</div>
   } @else if (medications.length > 0) {
     <div>
-      @for (medication of medications; track medication) {
+      @for (medication of medications; track medication.id) {
         <app-medication-card
           [medication]="medication"
           (createMedicationRequest)="createMedication()"

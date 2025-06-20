@@ -6,7 +6,7 @@
     </button>
     @if (schedules.length > 0) {
       <div>
-        @for (schedule of schedules; track schedule) {
+        @for (schedule of schedules; track schedule.id) {
           <app-schedule-card
             [schedule]="schedule"
             (deleteScheduleRequest)="deleteSchedule($event)"
@@ -14,7 +14,7 @@
           ></app-schedule-card>
         }
       </div>
-    } @else if (schedules.length === 0) {
+    } @else {
       <div>No Schedules</div>
     }
   </div>

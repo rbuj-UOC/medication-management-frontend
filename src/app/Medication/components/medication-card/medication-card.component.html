@@ -3,12 +3,14 @@
     <div class="medication-info">
       <div class="medication-title">
         <div>{{ medication.name }}</div>
-        <div>@if (medication.disabled) {
-          <mat-icon>pause</mat-icon>
-        }</div>
+        <div>
+          @if (medication.disabled) {
+            <mat-icon>pause</mat-icon>
+          }
+        </div>
       </div>
       <div>
-        @for (schedule of medication.schedules; track schedule) {
+        @for (schedule of medication.schedules; track schedule.id) {
           <ul class="schedule-list">
             <li>{{ schedule.start_date | date: 'shortTime' }}</li>
           </ul>

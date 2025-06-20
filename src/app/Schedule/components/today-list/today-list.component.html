@@ -2,7 +2,7 @@
   <h1>Today</h1>
   @if (schedules.length > 0 && isMobile === false) {
     <div>
-      @for (schedule of schedules; track schedule) {
+      @for (schedule of schedules; track schedule.id) {
         <mat-card class="schedule-card">
           <mat-card-header>
             <mat-card-title>{{
@@ -27,7 +27,7 @@
 </div>
 @if (schedules.length > 0 && isMobile === true) {
   <div>
-    @for (schedule of schedules; track schedule) {
+    @for (schedule of schedules; track schedule.id) {
       <mat-card class="schedule-card">
         <mat-card-header>
           <mat-card-title>{{
