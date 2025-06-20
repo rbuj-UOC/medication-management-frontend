@@ -1,15 +1,13 @@
 <div class="main-container">
   <h1>Task List</h1>
-  @if (tasks.length === 0) {
-    <div>No Tasks</div>
-  } @else if (tasks.length > 0) {
+  @if (tasks && tasks.length > 0) {
     <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
-      <!-- name Column -->
+      <!-- Key Column -->
       <ng-container matColumnDef="task-key">
         <th mat-header-cell *matHeaderCellDef>Key</th>
         <td mat-cell *matCellDef="let task">{{ task.key }}</td>
       </ng-container>
-      <!-- surname_1 Column -->
+      <!-- Next Column -->
       <ng-container matColumnDef="task-next">
         <th mat-header-cell *matHeaderCellDef>Next</th>
         <td mat-cell *matCellDef="let task">{{ task.next }}</td>
@@ -26,5 +24,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+  } @else {
+    <div>No Tasks</div>
   }
 </div>

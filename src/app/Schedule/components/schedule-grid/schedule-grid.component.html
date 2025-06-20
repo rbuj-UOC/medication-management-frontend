@@ -4,7 +4,7 @@
     <button mat-flat-button color="primary" (click)="createSchedule()">
       ADD
     </button>
-    @if (schedules.length > 0) {
+    @if (schedules && schedules.length > 0) {
       <div>
         @for (schedule of schedules; track schedule.id) {
           <app-schedule-card

@@ -11,9 +11,7 @@
     </button>
   </div>
   <!-- table -->
-  @if (medications.length === 0) {
-    <div>No Medications</div>
-  } @else if (medications.length > 0) {
+  @if (medications && medications.length > 0) {
     <table mat-table [dataSource]="medications" class="mat-elevation-z8">
       <!-- Name Column -->
       <ng-container matColumnDef="medication-name">
@@ -56,5 +54,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+  } @else {
+    <div>No Medications</div>
   }
 </div>

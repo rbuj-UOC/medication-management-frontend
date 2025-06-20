@@ -10,7 +10,7 @@
       ADD
     </button>
   </div>
-  @if (contacts.length > 0) {
+  @if (contacts && contacts.length > 0) {
     <div>
       @for (contact of contacts; track contact.id) {
         <app-contact-card

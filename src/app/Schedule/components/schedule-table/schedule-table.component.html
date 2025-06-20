@@ -10,9 +10,7 @@
   </button>
 </div>
 
-@if (schedules.length === 0) {
-  <div>No Schedules</div>
-} @else if (schedules.length > 0) {
+@if (schedules && schedules.length > 0) {
   <table mat-table [dataSource]="schedules" class="mat-elevation-z8">
     <!-- Name Column -->
     <ng-container matColumnDef="schedule-start_date">
@@ -36,4 +34,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+} @else {
+  <div>No Schedules</div>
 }

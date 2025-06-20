@@ -1,6 +1,6 @@
 <div class="main-container">
   <h1>User List</h1>
-  @if (users.length > 0) {
+  @if (users && users.length > 0) {
     <div>
       @for (user of users; track user.id) {
         <app-user-card
@@ -10,7 +10,7 @@
         ></app-user-card>
       }
     </div>
-  } @else if (users.length === 0) {
+  } @else {
     <div>No contacts</div>
   }
 </div>
