@@ -17,7 +17,7 @@ export class MedicationTableComponent {
   displayedColumns: string[] = [
     'medication-name',
     'medication-schedules',
-    'medication-status',
+    'medication-state',
     'medication-actions'
   ];
 

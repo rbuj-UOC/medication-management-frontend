@@ -31,9 +31,9 @@
           </ul>
         </td>
       </ng-container>
-      <!-- Schedules Column -->
-      <ng-container matColumnDef="medication-status">
-        <th mat-header-cell *matHeaderCellDef>Status</th>
+      <!-- State Column -->
+      <ng-container matColumnDef="medication-state">
+        <th mat-header-cell *matHeaderCellDef>State</th>
         <td mat-cell *matCellDef="let medication">
           {{ medication.disabled === true ? 'Paused' : 'Active' }}
         </td>
