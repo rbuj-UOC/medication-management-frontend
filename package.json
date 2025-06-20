@@ -3,6 +3,7 @@
   "version": "25.6.0-beta.0",
   "scripts": {
     "ng": "ng",
+    "format": "prettier 'src/**/*.{js,ts,mjs,cjs,json}' --write",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
